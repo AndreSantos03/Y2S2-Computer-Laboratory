@@ -126,6 +126,5 @@ int (timer_display_conf)(uint8_t timer, uint8_t conf, enum timer_status_field fi
   }
 
   timer_print_config(timer,field,config);
-
   return 0;
 }
