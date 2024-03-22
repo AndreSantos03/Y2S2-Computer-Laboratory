@@ -1,0 +1,12 @@
+lab2/ex/lab2/.gdbinit
+lab2/.gdbinit
+lab2/output.txt
+lab2/trace.txt
+lab2/.clang-format
+lab2/.vscode/
+lab2/.depend
+lab2/output.txt
+lab2/trace.txt
+*.o
+*.clang-format
+*.vscode
