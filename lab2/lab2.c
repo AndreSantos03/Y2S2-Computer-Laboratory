@@ -47,7 +47,9 @@ int(timer_test_int)(uint8_t time) {
   message msg;
   uint8_t irq_set;
 
-  if (timer_subscribe_int(&irq_set) != 0) return 1;
+  if (timer_subscribe_int(&irq_set) != 0) {
+    return 1;
+  }
  
   while(time > 0) {
     /* Get a request message. */
