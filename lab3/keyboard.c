@@ -1,72 +1,56 @@
-#include <lab3/lcf.h>
+#include <lcom/lcf.h>
+#include <minix/sysutil.h>
 #include <stdint.h>
-#include <i8042.h>
 
-#define TIMEOUT_LIMIT 5
-#define TIMEOUT_WAIT_TIME 1000 //Value to be implemented
+#include "i8042.h"
 
+
+int hook_id_keyboard=1;
+uint8_t output;
 uint8_t scancode;
 
-void kbc_ih() {
+int (keyboard_subscribe_interrupts)(uint8_t *bit_no) {
+    if(bit_no==NULL)return 1;
+    *bit_no= hook_id_keyboard;
+    return sys_irqsetpolicy(IRQ_KEYBOARD, IRQ_REENABLE | IRQ_EXCLUSIVE, &hook_id_keyboard);
+}
 
-    uint8_t attempts_counter = 0;
+int (keyboard_unsubscribe_interrupts)(){
+    return sys_irqrmpolicy(&hook_id_keyboard);
+}
+
+int keyboard_read_status(uint8_t *status){
+    if(util_sys_inb(STATUS_PORT,status)!=0)return 1;
+   return 0; 
+}
+
+int (read_keyboard_output)(uint8_t port, uint8_t *output){
     uint8_t status;
-
-    while(attempts_counter <= TIMEOUT_LIMIT){
-        if (util_sys_inb(KBD_STATUS_REG,&status) !=0){
-            printf("Failed to read the Keyboard Status Registry!\nAttempt Number: %d",attempts_counter);
-        }
-        //errors
-        if(status &  KBD_STAT_TIMEOUT_ERROR || status & KBD_STAT_PARITY_ERROR){
-            printf("Communication error!\nAttempt Number: %d",attempts_counter);
-        }
-        //Success
-        else if(status & KBD_STAT_OUT_BUFFER){
-            util_sys_inb(KBD_OUT_BUF, &scancode);
-            return
-        }
-        attempts_counter ++;
-        // timer() TO BE IMPLEMENTED WHEN LAB 2 IS FINISHED!!!!!
-    }
-}
-
-// Function to read the keyboard status register
- int read_kbd_status(uint8_t *status) {
-    if (util_sys_inb(KBD_STATUS_REG, (uint32_t *)status) != OK) {
-        return 1; // Error reading status register
-    }
-    return 0; // Success
-}
-uint8_t write_command_to_KBC(uint8_t port, uint8_t commandByte) {
-    uint8_t attempts = MAX_ATTEMPTS;
-
-    while (attempts > 0) {
-        if (read_KBC_status(&status) != 0) {
-            printf("Error: Status not available!\n");
+    for(int counter = 0; counter < MAX_ATTEMPTS; counter++){
+        if(keyboard_read_status(&status) != 0){
             return 1;
         }
-
-        if ((status & FULL_IN_BUFFER) == 0) {
-            if (sys_outb(port, commandByte) != 0) {
-                printf("Error: Could not write commandByte!\n");
+        //Verifies errors plus if its a mouse input
+        if(status & ( TIMEOUT_BIT | PARITY_BIT )){
+            printf("Error with retrieving status!\n");
+            return 1;
+        }
+        if(status & MOUSE_BIT){
+            //mouse data
+            return 1;
+        }
+        if ( (status & OUT_BIT) == 1) { 
+            if(util_sys_inb(port,output) != 0){
                 return 1;
             }
-            return 0;  // Success, commandByte written
+            return 0;
         }
-
-        //TO IMPLEMENT WITH TIMER ONCE ITS FINISHED
-        attempts--;
+        tickdelay(micros_to_ticks(DELAY_US));
     }
 
-    // If reached here, all attempts failed
-    printf("Error: Buffer is full after maximum attempts!\n");
     return 1;
-
 }
-static int read_kbd_data(uint8_t *data) {
-    if (util_sys_inb(KBD_OUT_BUF, (uint32_t *)data) != OK) {
-        printf("Failed to read keyboard data.\n");
-        return 1; // Error reading data
-    }
-    return 0; // Success
+
+void (kbc_ih)() {
+    read_keyboard_output(KBD_OUT_BUF,&output);    
 }
