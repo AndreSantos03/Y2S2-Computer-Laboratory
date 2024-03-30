@@ -9,6 +9,8 @@
   "files.associations": {
     "lcf.h": "c",
     "stdint.h": "c",
-    "i8042.h": "c"
+    "i8042.h": "c",
+    "lab3.h": "c",
+    "keyboard.h": "c"
   },
 }

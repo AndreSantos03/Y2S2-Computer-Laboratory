@@ -1,0 +1,22 @@
+@lcflib.a:2019, lcf_start
+  kbd_test_scan()
+  @lab3.c:40, kbd_test_scan
+    printf("cona\n")
+    "cona"
+  @keyboard.c:10, keyboard_subscribe_interrupts
+    sys_irqsetpolicy(IRQ_KEYBOARD, IRQ_REENABLE | IRQ_EXCLUSIVE, &hook_id_keyboard)
+  > sys_irqsetpolicy(1, 3, addr: 0x822c8d4 [1])
+  < sys_irqsetpolicy(1, 3, addr: 0x822c8d4 [10]) -> (ret: 0)
+  @lab3.c:47, kbd_test_scan
+    printf("irq_set %d",irq_set)
+    "irq_set 1"
+  @lab3.c:50, kbd_test_scan
+    driver_receive(ANY, &msg, &ipc_status)
+  > driver_receive(ANY, addr: 0xeffff710, addr: 0xeffff758)
+  < driver_receive(<[HARDWARE: 0b0000000000000000000000000000000000000000000000000000000000000010]>)
+  @lab3.c:54, kbd_test_scan
+    printf("Message\n")
+    "Message"
+  @lab3.c:50, kbd_test_scan
+    driver_receive(ANY, &msg, &ipc_status)
+  > driver_receive(ANY, addr: 0xeffff710, addr: 0xeffff758)

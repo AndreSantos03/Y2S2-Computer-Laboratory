@@ -1,10 +1,12 @@
 #include <lcom/lcf.h>
 
 #include <lcom/lab3.h>
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <i8042.h>
-#include "keyboard.c"
+
+#include "keyboard.h"
 
 extern uint8_t scancode;
 extern uint32_t sys_calls_counter;
@@ -35,11 +37,12 @@ int main(int argc, char *argv[]) {
 
 
 int(kbd_test_scan)() {
-    int ipc_status;
-    message msg;
+  int ipc_status;
+  message msg;
 
-    uint8_t irq_set;
-    if( keyboard_subscribe_interrupts(&irq_set) ) return 1;
+  uint8_t irq_set;
+  if( keyboard_subscribe_interrupts(&irq_set) ) return 1;
+
 
   while(scancode != BREAK_ESC){
     if( driver_receive(ANY, &msg, &ipc_status) != 0){
@@ -55,6 +58,7 @@ int(kbd_test_scan)() {
       }
     }
   }
+  
   if (keyboard_unsubscribe_interrupts() != 0) return 1;
 
   if (kbd_print_no_sysinb(sys_calls_counter) != 0) return 1;
