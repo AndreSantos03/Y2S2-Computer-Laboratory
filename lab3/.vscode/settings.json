@@ -11,6 +11,7 @@
     "stdint.h": "c",
     "i8042.h": "c",
     "lab3.h": "c",
-    "keyboard.h": "c"
+    "keyboard.h": "c",
+    "sysutil.h": "c"
   },
 }

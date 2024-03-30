@@ -69,10 +69,13 @@ int(kbd_test_scan)() {
 
 
 int(kbd_test_poll)() {
-  /* To be completed by the students */
-  printf("%s is not yet implemented!\n", __func__);
+  while (scancode != BREAK_ESC){
+    if(read_keyboard_output(KBD_OUT_BUF,&scancode) == 0 ){
+      kbd_print_scancode(!(scancode & MAKE_CODE), scancode == TWO_BYTES ? 2 : 1, &scancode);
+    }
+  }
 
-  return 1;
+  return keyboard_restore();
 }
 
 int(kbd_test_timed_scan)(uint8_t n) {

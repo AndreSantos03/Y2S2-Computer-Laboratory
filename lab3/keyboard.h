@@ -8,9 +8,14 @@
 int (keyboard_subscribe_interrupts)(uint8_t *bit_no);
 
 int (keyboard_unsubscribe_interrupts)();
+int (keyboard_read_status)(uint8_t *status);
+
+int (read_keyboard_output)(uint8_t port, uint8_t *output);
 
 void (kbc_ih)();
+int (keyboard_write_command)(uint8_t port, uint8_t commandByte);
 
 int (keyboard_restore)();
+
 
 #endif /* _LCOM_KEYBOARD_H_ */
