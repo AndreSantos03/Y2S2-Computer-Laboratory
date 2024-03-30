@@ -8,7 +8,7 @@
 int counter = 0;
 int hook_id = 0;
 
-int timer_set_frequency(uint8_t timer, uint32_t freq) {
+int (timer_set_frequency)(uint8_t timer, uint32_t freq) {
   if (timer < 0 || timer > 2)
     return 1;
   if (freq < 19 || freq > TIMER_FREQ)
@@ -78,7 +78,7 @@ void (timer_int_handler)() {
   counter++;
 }
 
-int timer_get_conf(uint8_t timer, uint8_t *st) {
+int (timer_get_conf)(uint8_t timer, uint8_t *st) {
     if (st == NULL || timer > 2) {
         return 1;
     }

@@ -10,6 +10,7 @@
 
 extern uint8_t scancode;
 extern uint32_t sys_calls_counter;
+extern int counter; //timer
 
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -79,8 +80,52 @@ int(kbd_test_poll)() {
 }
 
 int(kbd_test_timed_scan)(uint8_t n) {
-  /* To be completed by the students */
-  printf("%s is not yet implemented!\n", __func__);
+  int ipc_status;
+  message msg;
 
-  return 1;
+
+  uint8_t irq_set_keyboard;
+  uint8_t irq_set_timer;
+
+  uint8_t time_seconds = 0;
+
+  if( keyboard_subscribe_interrupts(&irq_set_keyboard) ) return 1;
+  if (timer_subscribe_int(&irq_set_timer) != 0) return 1;
+
+  while(scancode != BREAK_ESC && time_seconds < n){
+    if( driver_receive(ANY, &msg, &ipc_status) != 0){
+        continue;
+    }
+    if(is_ipc_notify(ipc_status)){
+      switch(_ENDPOINT_P(msg.m_source)){
+        case HARDWARE:
+          if(msg.m_notify.interrupts & irq_set_timer){
+            timer_int_handler();
+            if(counter % 60 == 0){
+              time_seconds++;
+            }
+          }
+          if(msg.m_notify.interrupts & irq_set_keyboard){
+            kbc_ih();
+            kbd_print_scancode(!(scancode & MAKE_CODE), scancode == TWO_BYTES ? 2 : 1, &scancode);
+
+            //reset timer
+            counter = 0;
+            time_seconds = 0;
+          }
+      }
+    }
+  }
+
+  if(time_seconds >= n){
+    printf("Time without keyboard input exceeded timeout!\n");
+  }
+  
+  if (keyboard_unsubscribe_interrupts() != 0) return 1;
+
+  if (kbd_print_no_sysinb(sys_calls_counter) != 0) return 1;
+
+  if (timer_unsubscribe_int() != 0) return 1; 
+
+  return 0;
 }
