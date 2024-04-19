@@ -1,0 +1,19 @@
+ler_output(onde*){
+
+    - Ler status
+    - há dados a ler?
+        -verificar paridade e timeout
+        -se é rato e BIT(5) é 0 => erro
+        -se é teclado e BIT(5) é 1 => erro
+
+}
+
+*0-> teclado
+1-> rato
+
+_(___ & 2) -> teclado => ler_output(0)
+
+_(___ & 4) -> rato => ler_output(1)
+
+teclado normalmente lê-se 1 byte
+rato 3 bytes

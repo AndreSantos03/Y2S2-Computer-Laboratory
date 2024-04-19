@@ -1,0 +1,33 @@
+| | | | | | | | |
+    |   |     |
+  1   2    3    4
+
+1 -> timer select:
+00 -> timer0
+01 -> timer1
+10 -> timer2
+
+2 -> initial LSB MSB
+01 -> LSB
+10 -> MSB
+11 -> LSB e MSB
+
+3-> Mode
+000
+...
+111
+
+4 -> BCD
+0 -> Binário
+1 -> BCD
+
+tsf_initial: st = (st & 0x30) >> 4
+tsf_mode: st = (st & (BIT(3) | BIT(2) | BIT(1))) >> 1
+tsf_bcd: st &= TIMER_BCD
+
+1,2,3,4 -> tsf_all
+2 -> tsf_initial
+3 -> tsf_mode
+4 -> tsf_base
+
+IMPORTANTE: saber o que é uma union
