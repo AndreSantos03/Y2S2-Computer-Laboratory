@@ -3,11 +3,14 @@
 #include "mouse.h"
 
 
+
 int hook_id_mouse = 4;        
 uint32_t byte;
 uint8_t byte_index = 0; 
 struct packet mouse_packet;
 uint8_t mouse_bytes[3];
+int current_x = 0;
+int current_y=0;
 
 void (mouse_update_packet)(){
 
@@ -21,7 +24,9 @@ void (mouse_update_packet)(){
   mouse_packet.x_ov = mouse_bytes[0] & MOUSE_X_OVERFLOW;
   mouse_packet.y_ov = mouse_bytes[0] & MOUSE_Y_OVERFLOW;
   mouse_packet.delta_x = (mouse_bytes[0] & MOUSE_X_DELTA) ? (0xFF00 | mouse_bytes[1]) : mouse_bytes[1];
+  current_x += mouse_packet.delta_x;
   mouse_packet.delta_y = (mouse_bytes[0] & MOUSE_Y_DELTA) ? (0xFF00 | mouse_bytes[2]) : mouse_bytes[2];
+  current_y += mouse_packet.delta_y;
 }
 
 void sync_mouse() {
