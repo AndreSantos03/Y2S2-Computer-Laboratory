@@ -1,9 +1,6 @@
 #include <lcom/lcf.h>
 #include <stdint.h>
 
-#ifdef LAB3
-uint32_t sys_calls_counter = 0;
-#endif
 
 
 int (util_get_LSB)(uint16_t val, uint8_t *lsb) {
