@@ -9,6 +9,10 @@
 // Any header files included below this line should have been created by you
 
 #include "graphics.h"
+#include "keyboard.h"
+#include "i8042.h"
+
+extern uint8_t scancode;
 
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -43,14 +47,50 @@ int(video_test_init)(uint16_t mode, uint8_t delay) {
     if(vg_exit() != 0)
         return 1;
 
+
     return 0;
 }
 
 int(video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
                           uint16_t width, uint16_t height, uint32_t color) {
 
+
     if(video_init(mode) != 0 ) return 1;
-                
+
+    normalize_color(&color);
+
+    if (draw_rectangle(x, y, width, height, color) != 0) {
+        printf("fucking error man god damn!\n");
+        return 1;
+    }
+    
+
+    int ipc_status;
+    message msg;
+
+    uint8_t irq_set;
+    if( keyboard_subscribe_interrupts(&irq_set) ) return 1;
+
+
+    while(scancode != BREAK_ESC){
+        if( driver_receive(ANY, &msg, &ipc_status) != 0){
+            continue;
+        }
+        if(is_ipc_notify(ipc_status)){
+            switch(_ENDPOINT_P(msg.m_source)){
+                case HARDWARE:
+                if(msg.m_notify.interrupts & irq_set){
+                    kbc_ih();
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (keyboard_unsubscribe_interrupts() != 0) return 1;
+
+    if (vg_exit() != 0) return 1;
+
     return 0;
 }
 
