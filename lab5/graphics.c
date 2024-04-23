@@ -111,6 +111,18 @@ uint32_t direct_mode(uint32_t j, uint32_t i, uint8_t step, uint32_t first) {
     return (red << mode_info.RedFieldPosition) | (green << mode_info.GreenFieldPosition) | (blue << mode_info.BlueFieldPosition);
 }
 
+void draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y){
+    xpm_image_t image;
+
+    uint8_t *image_buffer = xpm_load(xpm, XPM_INDEXED, &image);
+
+    for (int h = 0 ; h < image.height ; h++) {
+        for (int w = 0 ; w < image.width ; w++) {
+            draw_pixel(x + w, y + h, *image_buffer);
+            image_buffer++; 
+        }
+    }
+}
 
 
 uint32_t (Red)(unsigned j, uint8_t step, uint32_t first) {

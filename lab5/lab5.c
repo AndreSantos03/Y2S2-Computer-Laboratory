@@ -157,10 +157,38 @@ int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles, uint32_t first, ui
 }
 
 int(video_test_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y) {
-  /* To be completed */
-  printf("%s(%8p, %u, %u): under construction\n", __func__, xpm, x, y);
 
-  return 1;
+    if(video_init(0x105) != 0 ) return 1;
+
+    draw_xpm(xpm,x,y);
+
+    int ipc_status;
+    message msg;
+
+    uint8_t irq_set;
+    if( keyboard_subscribe_interrupts(&irq_set) ) return 1;
+
+
+    while(scancode != BREAK_ESC){
+        if( driver_receive(ANY, &msg, &ipc_status) != 0){
+            continue;
+        }
+        if(is_ipc_notify(ipc_status)){
+            switch(_ENDPOINT_P(msg.m_source)){
+                case HARDWARE:
+                if(msg.m_notify.interrupts & irq_set){
+                    kbc_ih();
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (keyboard_unsubscribe_interrupts() != 0) return 1;
+
+    if (vg_exit() != 0) return 1;
+
+    return 0;
 }
 
 int(video_test_move)(xpm_map_t xpm, uint16_t xi, uint16_t yi, uint16_t xf, uint16_t yf,
