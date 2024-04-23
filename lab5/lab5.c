@@ -14,6 +14,12 @@
 
 extern uint8_t scancode;
 
+extern vbe_mode_info_t mode_info;
+extern int bytesPerPixel;
+extern int xResolution;
+extern int yResolution;
+extern int bufferSize;
+
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
   lcf_set_language("EN-US");
@@ -95,11 +101,59 @@ int(video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
 }
 
 int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles, uint32_t first, uint8_t step) {
-  /* To be completed */
-  printf("%s(0x%03x, %u, 0x%08x, %d): under construction\n", __func__,
-         mode, no_rectangles, first, step);
 
-  return 1;
+    if(video_init(mode) != 0 ) return 1;
+
+    int numPixX = xResolution / no_rectangles;
+    int numPixY = yResolution / no_rectangles;
+
+  for (int i = 0 ; i < no_rectangles ; i++) {
+    for (int j = 0 ; j < no_rectangles ; j++) {
+      uint32_t color;
+      if (mode_info.MemoryModel == DIRECT_COLOR) {
+
+        uint32_t R = Red(j, step, first);
+        uint32_t G = Green(i, step, first);
+        uint32_t B = Blue(j, i, step, first);
+        color = (R << mode_info.RedFieldPosition) | (G << mode_info.GreenFieldPosition) | (B << mode_info.BlueFieldPosition);
+      } 
+      else{
+        color = (first + (i * no_rectangles + j) * step) % (1 << mode_info.BitsPerPixel);
+      }
+
+      if (draw_rectangle(j * numPixX, i * numPixY, numPixX, numPixY, color)) 
+        return 1;
+
+    }
+  }
+
+    int ipc_status;
+    message msg;
+
+    uint8_t irq_set;
+    if( keyboard_subscribe_interrupts(&irq_set) ) return 1;
+
+
+    while(scancode != BREAK_ESC){
+        if( driver_receive(ANY, &msg, &ipc_status) != 0){
+            continue;
+        }
+        if(is_ipc_notify(ipc_status)){
+            switch(_ENDPOINT_P(msg.m_source)){
+                case HARDWARE:
+                if(msg.m_notify.interrupts & irq_set){
+                    kbc_ih();
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (keyboard_unsubscribe_interrupts() != 0) return 1;
+
+    if (vg_exit() != 0) return 1;
+
+    return 0;
 }
 
 int(video_test_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y) {
