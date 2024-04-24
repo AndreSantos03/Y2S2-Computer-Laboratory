@@ -120,3 +120,8 @@ char* give_guess(const char* guess) {
 
     return result;
 }
+
+
+void draw_mouse(){
+    
+}

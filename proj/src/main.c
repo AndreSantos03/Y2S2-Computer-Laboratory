@@ -17,13 +17,16 @@ extern int xResolution;
 extern int yResolution;
 extern int bufferSize;
 extern uint8_t *mainBuffer;
+
 //keyboard
 extern uint8_t scancode;
+
 //mouse
 extern struct packet mouse_packet;
 extern uint8_t mouse_bytes[3];
 extern int current_x;
 extern int current_y;
+
 //timer
 extern int counter_timer;
 
@@ -63,7 +66,6 @@ int handle_interrupts(){
         case HARDWARE:
           if (msg.m_notify.interrupts & irq_timer) {
             timer_int_handler();
-            printf("passed %d",counter_timer);
           }
           //Keyboard
           if (msg.m_notify.interrupts & irq_keyboard) {
@@ -124,3 +126,4 @@ int (proj_main_loop)(int argc, char **argv) {
     free(result);
     return 0;
 }
+

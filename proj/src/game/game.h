@@ -18,6 +18,7 @@
 
 int initialize_game();
 int get_word(const char *date);
-char* give_guess(const char* guess) ;
+char* give_guess(const char* guess);
+void draw_mouse();
 
 #endif /* __GAME_H */
