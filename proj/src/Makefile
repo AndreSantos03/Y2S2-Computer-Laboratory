@@ -2,6 +2,7 @@
 PROG=proj
 
 .PATH: ${.CURDIR}/controller/
+.PATH: ${.CURDIR}/game/
 
 
 # source code files to be compiled
