@@ -1,5 +1,5 @@
 /* XPM */
-static char * C:\Users\NASA\Downloads\mouse_xpm[] = {
+static char * mouse_xpm[] = {
 "40 60 153 2",
 "  	c None",
 ". 	c #000000",

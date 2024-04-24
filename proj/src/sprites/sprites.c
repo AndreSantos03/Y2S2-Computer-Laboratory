@@ -1,8 +1,11 @@
 #include <lcom/lcf.h>
 
 #include "sprites.h"
+#include "../controller/graphics.h"
 
-Sprite *create_sprite(const char *pic[], int x, int y, int xspeed, int yspeed) {
+Sprite *mouseCursor;
+
+Sprite *create_sprite(xpm_map_t pic) {
     Sprite *sp = (Sprite *) malloc ( sizeof(Sprite));
     xpm_image_t img;
 
@@ -30,7 +33,7 @@ void destroy_sprite(Sprite *sp) {
 int drawSprite(Sprite *sprite, int x, int y){ 
     for (int h = 0 ; h < sprite->height ; h++) {
       for (int w = 0 ; w < sprite->width ; w++) {
-        if (draw_pixel(x + w, y + h, sprite->colors[w + h*width])){
+        if (draw_pixel(x + w, y + h, sprite->map[w + h * sprite->width])){
             return 1;
         } 
       }
@@ -40,9 +43,10 @@ int drawSprite(Sprite *sprite, int x, int y){
 
 void loadSprites(){
     //Load the loaded sprites
-
+    mouseCursor = create_sprite((xpm_map_t) mouse_xpm);
 }
 
 void destroySprites(){
     //Destroy the loaded sprites
+    destroy_sprite(mouseCursor);
 }

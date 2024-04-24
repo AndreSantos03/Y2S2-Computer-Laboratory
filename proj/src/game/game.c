@@ -2,7 +2,10 @@
 
 #include "game.h"
 
-
+//externs
+//mouse
+extern int current_x;
+extern int current_y;
 
 char word[MAX_WORD_LENGTH];
 
@@ -121,7 +124,3 @@ char* give_guess(const char* guess) {
     return result;
 }
 
-
-void draw_mouse(){
-    
-}

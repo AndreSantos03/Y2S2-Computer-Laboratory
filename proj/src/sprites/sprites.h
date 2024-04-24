@@ -3,15 +3,17 @@
 
 #include <lcom/lcf.h>
 
+#include "../images/mouse.xpm"
+
+
 
 typedef struct {
-    int x, y; // current position
-    int width, height; // dimensions
-    int xspeed, yspeed; // current speed
-    char *map; // the pixmap
+    uint16_t x, y; // current position
+    uint16_t width, height; // dimensions
+    uint32_t *map;
 } Sprite;
 
-Sprite *create_sprite(const char *pic[], int x, int y, int xspeed, int yspeed);
+Sprite *create_sprite(xpm_map_t pic);
 void destroy_sprite(Sprite *sp);
 int drawSprite(Sprite *sprite, int x, int y);
 void loadSprites();

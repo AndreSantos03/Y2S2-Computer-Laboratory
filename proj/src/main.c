@@ -3,6 +3,7 @@
 #include "controller/mouse.h"
 #include "controller/keyboard.h"
 #include "game/game.h"
+#include "sprites/sprites.h"
 
 
 bool isGameRunning;
@@ -29,6 +30,8 @@ extern int current_y;
 
 //timer
 extern int counter_timer;
+//sprites
+extern Sprite *mouseCursor;
 
 
 
@@ -66,6 +69,15 @@ int handle_interrupts(){
         case HARDWARE:
           if (msg.m_notify.interrupts & irq_timer) {
             timer_int_handler();
+            
+            printf("new frame\n");
+            //displays
+            clear_screen();
+
+
+            drawSprite(mouseCursor,current_x,current_y);
+            swap_buffers();
+
           }
           //Keyboard
           if (msg.m_notify.interrupts & irq_keyboard) {
@@ -89,6 +101,8 @@ int handle_interrupts(){
     if(mouse_unsubscribe_interrupts()) return 1;
 
     if(timer_unsubscribe_int()) return 1;
+
+    free_buffers();
 
     return 0;
 }
@@ -118,12 +132,13 @@ int main(int argc, char **argv)
 
 int (proj_main_loop)(int argc, char **argv) {
     isGameRunning = true;
-    initialize_game();
-    get_word("2024-04-01");
-    printf("The string is %s\n", word);
-    char* result = give_guess("aduti");
-    printf("guess result is %s\n", result);
-    free(result);
+    handle_interrupts();
+    // initialize_game();
+    // get_word("2024-04-01");
+    // printf("The string is %s\n", word);
+    // char* result = give_guess("aduti");
+    // printf("guess result is %s\n", result);
+    // free(result);
     return 0;
 }
 

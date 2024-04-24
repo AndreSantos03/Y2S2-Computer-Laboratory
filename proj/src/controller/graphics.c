@@ -8,6 +8,8 @@ int yResolution;
 int bufferSize;
 
 uint8_t *mainBuffer;
+uint8_t *secondaryBuffer;
+
 // uint8_t *secondaryBuffer;
 
 struct minix_mem_range mr; 
@@ -46,16 +48,30 @@ int video_init(uint16_t mode){
         return 1;
 
 
- 
+    secondaryBuffer = malloc(sizeof(uint8_t)*bufferSize);
     mainBuffer = vm_map_phys(SELF, (void*) mr.mr_base, bufferSize);
 
-    // secondaryBuffer = malloc(sizeof(uint8_t)*bufferSize);
 
     if(mainBuffer==NULL)
         return 1;
 
     return vbe_set_mode(mode);
 }
+
+void swap_buffers() 
+{
+    memcpy(mainBuffer, secondaryBuffer, bufferSize);
+}
+
+void clear_screen(){
+    memset(secondaryBuffer, 0, xResolution*yResolution*bytesPerPixel); 
+}
+
+void free_buffers(){
+    free(mainBuffer); 
+    free(secondaryBuffer);
+}
+
 
 int draw_rectangle(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color){
     //clip vertically to fit 
@@ -149,3 +165,4 @@ uint32_t (G)(uint32_t first){
 uint32_t (B)(uint32_t first){
   return ((1 << mode_info.BlueMaskSize) - 1) & (first >> mode_info.BlueFieldPosition);
 }
+
