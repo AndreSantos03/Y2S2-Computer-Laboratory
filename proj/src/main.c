@@ -9,7 +9,7 @@ bool isGameRunning;
 
 //EXTERNS 
 //game
-extern char word[MAX_WORD];
+extern char word[MAX_WORD_LENGTH];
 //video
 extern vbe_mode_info_t mode_info;
 extern int bytesPerPixel;
@@ -118,6 +118,9 @@ int (proj_main_loop)(int argc, char **argv) {
     isGameRunning = true;
     initialize_game();
     get_word("2024-04-01");
-    printf("The string is %s", word);
+    printf("The string is %s\n", word);
+    char* result = give_guess("aduti");
+    printf("guess result is %s\n", result);
+    free(result);
     return 0;
 }
