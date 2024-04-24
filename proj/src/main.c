@@ -2,11 +2,14 @@
 #include "controller/graphics.h"
 #include "controller/mouse.h"
 #include "controller/keyboard.h"
+#include "game/game.h"
 
 
 bool isGameRunning;
 
 //EXTERNS 
+//game
+extern char word[MAX_WORD];
 //video
 extern vbe_mode_info_t mode_info;
 extern int bytesPerPixel;
@@ -113,7 +116,8 @@ int main(int argc, char **argv)
 
 int (proj_main_loop)(int argc, char **argv) {
     isGameRunning = true;
-    printf("we got a project baby!\n");
-    handle_interrupts();
+    initialize_game();
+    get_word("2024-04-01");
+    printf("The string is %s", word);
     return 0;
 }
