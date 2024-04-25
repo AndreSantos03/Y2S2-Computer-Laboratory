@@ -5,6 +5,8 @@
 
 Sprite *mouseCursor;
 
+Sprite *letterSprites[26];
+
 Sprite *create_sprite(xpm_map_t pic) {
     Sprite *sp = (Sprite *) malloc ( sizeof(Sprite));
     xpm_image_t img;
@@ -44,9 +46,42 @@ int drawSprite(Sprite *sprite, int x, int y){
 void loadSprites(){
     //Load the loaded sprites
     mouseCursor = create_sprite((xpm_map_t) mouse_xpm);
+
+    //letters
+    letterSprites[0] = create_sprite((xpm_map_t) a_xpm);
+    letterSprites[1] = create_sprite((xpm_map_t) b_xpm);
+    letterSprites[2] = create_sprite((xpm_map_t) c_xpm);
+    letterSprites[3] = create_sprite((xpm_map_t) d_xpm);
+    letterSprites[4] = create_sprite((xpm_map_t) e_xpm);
+    letterSprites[5] = create_sprite((xpm_map_t) f_xpm);
+    letterSprites[6] = create_sprite((xpm_map_t) g_xpm);
+    letterSprites[7] = create_sprite((xpm_map_t) h_xpm);
+    letterSprites[8] = create_sprite((xpm_map_t) i_xpm);
+    letterSprites[9] = create_sprite((xpm_map_t) j_xpm);
+    letterSprites[10] = create_sprite((xpm_map_t) k_xpm);
+    letterSprites[11] = create_sprite((xpm_map_t) l_xpm);
+    letterSprites[12] = create_sprite((xpm_map_t) m_xpm);
+    letterSprites[13] = create_sprite((xpm_map_t) n_xpm);
+    letterSprites[14] = create_sprite((xpm_map_t) o_xpm);
+    letterSprites[15] = create_sprite((xpm_map_t) p_xpm);
+    letterSprites[16] = create_sprite((xpm_map_t) q_xpm);
+    letterSprites[17] = create_sprite((xpm_map_t) r_xpm);
+    letterSprites[18] = create_sprite((xpm_map_t) s_xpm);
+    letterSprites[19] = create_sprite((xpm_map_t) t_xpm);
+    letterSprites[20] = create_sprite((xpm_map_t) u_xpm);
+    letterSprites[21] = create_sprite((xpm_map_t) v_xpm);
+    letterSprites[22] = create_sprite((xpm_map_t) w_xpm);
+    letterSprites[23] = create_sprite((xpm_map_t) x_xpm);
+    letterSprites[24] = create_sprite((xpm_map_t) y_xpm);
+    letterSprites[25] = create_sprite((xpm_map_t) z_xpm);
 }
 
 void destroySprites(){
     //Destroy the loaded sprites
     destroy_sprite(mouseCursor);
+
+    //destroy letters
+    for (int i = 0; i < 26; i++) {
+        destroy_sprite(letterSprites[i]);
+    }
 }
