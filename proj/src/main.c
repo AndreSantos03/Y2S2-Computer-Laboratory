@@ -5,8 +5,12 @@
 #include "game/game.h"
 #include "sprites/sprites.h"
 
+#define MENU 0
+#define GAME 1
 
 bool isGameRunning;
+int state = GAME;
+
 
 //EXTERNS 
 //game
