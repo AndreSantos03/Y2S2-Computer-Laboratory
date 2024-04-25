@@ -27,7 +27,7 @@ extern struct packet mouse_packet;
 extern uint8_t mouse_bytes[3];
 extern int current_x;
 extern int current_y;
-
+extern uint8_t byte_index;
 //timer
 extern int counter_timer;
 //sprites
@@ -37,6 +37,9 @@ extern Sprite *mouseCursor;
 
 
 int handle_interrupts(){
+
+    video_init(0x115);
+    loadSprites();
 
     //set timer frequency to 80hz
     if(timer_set_frequency(0, 60)) return 1;
@@ -70,12 +73,11 @@ int handle_interrupts(){
           if (msg.m_notify.interrupts & irq_timer) {
             timer_int_handler();
             
-            printf("new frame\n");
             //displays
             clear_screen();
 
-
             drawSprite(mouseCursor,current_x,current_y);
+
             swap_buffers();
 
           }
@@ -87,6 +89,10 @@ int handle_interrupts(){
           if (msg.m_notify.interrupts & irq_mouse) {
             mouse_ih();
             sync_mouse();
+            if(byte_index == 3){
+              mouse_update_packet();
+              byte_index = 0;
+            }
           }
           break;
         default:
@@ -103,6 +109,10 @@ int handle_interrupts(){
     if(timer_unsubscribe_int()) return 1;
 
     free_buffers();
+    destroySprites();
+
+    vg_exit();
+
 
     return 0;
 }
@@ -114,11 +124,11 @@ int main(int argc, char **argv)
 
     // enables to log function invocations that are being "wrapped" by LCF
     // [comment this out if you don't want/need it]
-    lcf_trace_calls("/home/lcom/labs/g4/proj/trace.txt");
+    lcf_trace_calls("/home/lcom/labs/g5/proj/src/trace.txt");
 
     // enables to save the output of printf function calls on a file
     // [comment this out if you don't want/need it]
-    lcf_log_output("/home/lcom/labs/g4/proj/output.txt");
+    lcf_log_output("/home/lcom/labs/g5/proj/src/output.txt");
 
     // handles control over to LCF
     // [LCF handles command line arguments and invokes the right function]
@@ -131,14 +141,9 @@ int main(int argc, char **argv)
 }
 
 int (proj_main_loop)(int argc, char **argv) {
+
     isGameRunning = true;
     handle_interrupts();
-    // initialize_game();
-    // get_word("2024-04-01");
-    // printf("The string is %s\n", word);
-    // char* result = give_guess("aduti");
-    // printf("guess result is %s\n", result);
-    // free(result);
     return 0;
 }
 

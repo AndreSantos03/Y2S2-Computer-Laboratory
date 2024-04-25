@@ -64,6 +64,7 @@ void swap_buffers()
 }
 
 void clear_screen(){
+    if(secondaryBuffer == NULL)return;
     memset(secondaryBuffer, 0, xResolution*yResolution*bytesPerPixel); 
 }
 
@@ -106,7 +107,7 @@ int draw_pixel(uint16_t x, uint16_t y, uint32_t color){
     int pixelPosition = x + xResolution * y;
     int memOffset = pixelPosition * bytesPerPixel;
 
-    if(memcpy(&mainBuffer[memOffset], &color, bytesPerPixel) == NULL) return 1;
+    if(memcpy(&secondaryBuffer[memOffset], &color, bytesPerPixel) == NULL) return 1;
 
     return 0;
 }

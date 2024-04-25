@@ -11,7 +11,7 @@ Sprite *create_sprite(xpm_map_t pic) {
 
     if( sp == NULL ) return NULL;
 
-    sp->map = (uint32_t *) xpm_load(pic, XPM_INDEXED, &img);
+    sp->map = (uint32_t *) xpm_load(pic, XPM_8_8_8_8, &img);
 
     if( sp->map == NULL ) {
         free(sp);
