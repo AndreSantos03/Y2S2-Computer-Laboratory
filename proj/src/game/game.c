@@ -1,7 +1,6 @@
 #include <lcom/lcf.h>
 
 #include "game.h"
-#include "../sprites/sprites.h"
 
 //externs
 extern int xResolution;
@@ -137,7 +136,12 @@ char* give_guess(const char* guess) {
 
 int draw_game(){
 
-    if(drawSprite(&letterSprites[0],400,400)) return 1;
+    for (int i = 0; i < 26; i++) {
+        printf("Position of letterSprites[%d] is %p\n", i, letterSprites[i]);
+    }
+
+
+    // if(drawSprite(&letterSprites[2],400,400)) return 1;
 /* 
     int spaceBetweenLetters = (xResolution / (MAX_WORD_LENGTH - 1)) - 30;
     for (int i = 0; i < MAX_WORD_LENGTH - 1; i++) {

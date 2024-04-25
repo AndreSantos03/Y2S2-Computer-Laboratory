@@ -2,6 +2,7 @@
 #define __GAME_H 
 
 #include <lcom/lcf.h>
+#include "../sprites/sprites.h"
 
 
 
