@@ -131,7 +131,7 @@ uint32_t direct_mode(uint32_t j, uint32_t i, uint8_t step, uint32_t first) {
 int draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y){
     xpm_image_t image;
 
-    uint8_t *image_buffer = xpm_load(xpm, XPM_INDEXED, &image);
+    uint8_t *image_buffer = xpm_load(xpm, XPM_8_8_8_8, &image);
 
     for (int h = 0 ; h < image.height ; h++) {
         for (int w = 0 ; w < image.width ; w++) {

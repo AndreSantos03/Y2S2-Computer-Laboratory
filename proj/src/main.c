@@ -80,10 +80,10 @@ int handle_interrupts(){
             //displays
             clear_screen();
 
+            if(draw_game()) return 1;
             drawSprite(mouseCursor,current_x,current_y);
 
             swap_buffers();
-
           }
           //Keyboard
           if (msg.m_notify.interrupts & irq_keyboard) {
@@ -147,6 +147,9 @@ int main(int argc, char **argv)
 int (proj_main_loop)(int argc, char **argv) {
 
     isGameRunning = true;
+    initialize_game();
+    get_word("2024-01-01");
+    printf("word is : %s \n",word);
     handle_interrupts();
     return 0;
 }

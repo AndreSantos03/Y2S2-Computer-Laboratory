@@ -1,11 +1,16 @@
 #include <lcom/lcf.h>
 
 #include "game.h"
+#include "../sprites/sprites.h"
 
 //externs
+extern int xResolution;
+extern int yResolution;
 //mouse
 extern int current_x;
 extern int current_y;
+//sprites
+extern Sprite *letterSprites;
 
 char word[MAX_WORD_LENGTH];
 
@@ -58,7 +63,13 @@ int get_word(const char *date) {
     for (int i = 0; i < WORDS_AMMOUNT; i++) {
         if (strcmp(entries[i].date, date) == 0) {
             strcpy(word, entries[i].word);
-            word[MAX_WORD_LENGTH - 1] = '\0'; // Add null terminator
+
+            // Convert all characters in word to uppercase
+            for (int j = 0; word[j] != '\0'; j++) {
+                word[j] = toupper((unsigned char)(word[j]));
+            }
+
+            word[MAX_WORD_LENGTH - 1] = '\0'; 
             found = 1;
             break;
 
@@ -124,3 +135,17 @@ char* give_guess(const char* guess) {
     return result;
 }
 
+int draw_game(){
+
+    if(drawSprite(&letterSprites[0],400,400)) return 1;
+/* 
+    int spaceBetweenLetters = (xResolution / (MAX_WORD_LENGTH - 1)) - 30;
+    for (int i = 0; i < MAX_WORD_LENGTH - 1; i++) {
+
+        int index = word[i] - 'A';
+        int xPos = (xResolution / 4) + (spaceBetweenLetters * i);
+
+        drawSprite(&letterSprites[index], xPos, 60);
+    } */
+    return 0;
+}

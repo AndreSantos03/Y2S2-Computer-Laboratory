@@ -16,6 +16,7 @@ Sprite *create_sprite(xpm_map_t pic) {
     sp->map = (uint32_t *) xpm_load(pic, XPM_8_8_8_8, &img);
 
     if( sp->map == NULL ) {
+        printf("this bitch is null\n");
         free(sp);
         return NULL;
     }
@@ -48,8 +49,8 @@ void loadSprites(){
     mouseCursor = create_sprite((xpm_map_t) mouse_xpm);
 
     //letters
-    letterSprites[0] = create_sprite((xpm_map_t) a_xpm);
-    letterSprites[1] = create_sprite((xpm_map_t) b_xpm);
+    letterSprites[0] = create_sprite((xpm_map_t) b_xpm);
+    letterSprites[1] = create_sprite((xpm_map_t) a_xpm);
     letterSprites[2] = create_sprite((xpm_map_t) c_xpm);
     letterSprites[3] = create_sprite((xpm_map_t) d_xpm);
     letterSprites[4] = create_sprite((xpm_map_t) e_xpm);
@@ -80,7 +81,7 @@ void destroySprites(){
     //Destroy the loaded sprites
     destroy_sprite(mouseCursor);
 
-    //destroy letters
+
     for (int i = 0; i < 26; i++) {
         destroy_sprite(letterSprites[i]);
     }
