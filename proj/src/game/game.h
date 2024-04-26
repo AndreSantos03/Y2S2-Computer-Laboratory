@@ -5,7 +5,7 @@
 #include "../sprites/sprites.h"
 #include "../controller/graphics.h"
 #include "../controller/keyboard.h"
-
+#include "../controller/i8042.h"
 
 #include <stdio.h>
 #include <stdlib.h>

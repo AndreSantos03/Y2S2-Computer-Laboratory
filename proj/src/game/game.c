@@ -179,11 +179,22 @@ int draw_game(){
 }
 
 void keyboard_handler_game(){ 
+    //backspace
+    if(scancode == BREAK_BACK){
+        if(current_letter != 0) current_letter--;
+
+
+        attempts[current_word][current_letter] = '\0';
+    }
+
     //checks to see if the keyboard input is a letter breakcode
     int letter_index = get_letter_index(scancode);
     if(letter_index != -1){
+        //check to see if its filled
+        if(current_letter == MAX_WORD_LENGTH - 1) return;
+
+
         char letter = 'A' + letter_index;
-        printf("letter is %c\n",letter);
         attempts[current_word][current_letter] = letter;
         current_letter++;
     }
