@@ -1,2 +1,12 @@
 inside
 word is : CIGAR 
+letter is M
+letter is N
+letter is M
+letter is N
+letter is M
+letter is N
+letter is M
+letter is N
+letter is M
+letter is N

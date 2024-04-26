@@ -88,6 +88,7 @@ int handle_interrupts(){
           //Keyboard
           if (msg.m_notify.interrupts & irq_keyboard) {
             kbc_ih();
+            keyboard_handler_game();
           }
           //mouse
           if (msg.m_notify.interrupts & irq_mouse) {

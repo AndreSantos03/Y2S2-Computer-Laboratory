@@ -8,10 +8,18 @@ extern int yResolution;
 //mouse
 extern int current_x;
 extern int current_y;
+
+//keyboard
+extern uint8_t scancode;
+
 //sprites
 extern Sprite *letterSprites[26];
 
 char word[MAX_WORD_LENGTH];
+char attempts[GUESS_ATTEMPTS][MAX_WORD_LENGTH] = {{'\0'}};
+
+int current_word = 0;
+int current_letter = 0;
 
 typedef struct {
     char date[11];
@@ -80,6 +88,7 @@ int get_word(const char *date) {
         return 1; 
     }
 
+
     return 0; 
 }
 
@@ -135,22 +144,48 @@ char* give_guess(const char* guess) {
 }
 
 int draw_game(){
+    int spaceBetweenWords = ((yResolution * 0.8)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.2 of the bottom empty
 
 
-    int spaceBetweenLetters = (xResolution/(2 * (MAX_WORD_LENGTH - 1)));
-    for (int i = 0; i < MAX_WORD_LENGTH - 1; i++) {
+    //draw guess attempt
+    for(int row = 0; row < GUESS_ATTEMPTS;row++){
 
-        
-        int index = word[i] - 'A';
-        int xPos = (xResolution / 4) + (spaceBetweenLetters * i);
-        int yPos = 8;
 
-        Sprite *letterSprite = letterSprites[index];
-        //draw the letter
-        drawSprite(letterSprite, xPos, yPos);
+        int yPos = spaceBetweenWords * row + 10; //10 is the offset for the beggining
 
-        //draw the rectangle box
-        draw_border(xPos-7,yPos-2,letterSprite->width+10,letterSprite->height+10,0xFFFFFF,4);        
+        //draw line
+        int spaceBetweenLetters = (xResolution/(2 * (MAX_WORD_LENGTH - 1)));
+        for (int col = 0; col < MAX_WORD_LENGTH - 1; col++) {
+
+            int xPos = (xResolution / 4) + (spaceBetweenLetters * col);
+
+            char letter = attempts[row][col];
+            
+            //checks to see if the the attempts has been written
+            if(letter != '\0'){
+                int index = attempts[row][col] - 'A';
+
+                Sprite *letterSprite = letterSprites[index];
+                //draw the letter
+                drawSprite(letterSprite, xPos, yPos);
+            }
+
+
+            //draw the rectangle box
+            draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);        
+        }
     }
     return 0;
 }
+
+void keyboard_handler_game(){ 
+    //checks to see if the keyboard input is a letter breakcode
+    int letter_index = get_letter_index(scancode);
+    if(letter_index != -1){
+        char letter = 'A' + letter_index;
+        printf("letter is %c\n",letter);
+        attempts[current_word][current_letter] = letter;
+        current_letter++;
+    }
+}
+
