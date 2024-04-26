@@ -1,43 +1,7 @@
 inside
 word is : CIGAR 
-letter is D
-letter is A
-letter is D
-letter is W
-letter is D
-letter is A
-letter is W
-letter is D
-letter is A
-letter is M
-letter is E
-letter is M
-letter is A
-letter is D
-letter is T
-letter is E
-letter is T
-letter is A
-letter is S
-letter is T
-letter is E
-letter is T
-letter is A
-letter is S
-letter is T
-letter is E
-letter is T
-letter is A
-letter is S
-letter is C
-letter is L
-letter is A
-letter is R
-letter is O
-letter is T
-letter is G
-letter is G
-letter is R
-letter is A
-letter is Z
-letter is I
+ char guess C   and charWord C
+ char guess I   and charWord I
+ char guess G   and charWord G
+ char guess R   and charWord A
+ char guess A   and charWord R

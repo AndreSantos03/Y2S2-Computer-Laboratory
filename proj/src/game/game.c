@@ -17,6 +17,7 @@ extern Sprite *letterSprites[26];
 
 char word[MAX_WORD_LENGTH];
 char attempts[GUESS_ATTEMPTS][MAX_WORD_LENGTH] = {{'\0'}};
+char results[GUESS_ATTEMPTS][MAX_WORD_LENGTH] = {{'\0'}};
 
 int current_word = 0;
 int current_letter = 0;
@@ -93,54 +94,31 @@ int get_word(const char *date) {
 }
 
 
-char* give_guess(const char* guess) {
-    char* result = (char*)malloc(MAX_WORD_LENGTH * sizeof(char));
+void give_guess() {
     
-    char upperCurrentWord[MAX_WORD_LENGTH];
-    char upperGuess[MAX_WORD_LENGTH];
-
-    strcpy(upperCurrentWord, word);
-    strcpy(upperGuess, guess);
-    for (int i = 0; upperCurrentWord[i]; i++) {
-        upperCurrentWord[i] = toupper((unsigned char)upperCurrentWord[i]);
-    }
-    for (int i = 0; upperGuess[i]; i++) {
-        upperGuess[i] = toupper((unsigned char)upperGuess[i]);
-    }
-
-    printf("%s upper current\n" , upperCurrentWord);
-    printf("%s upper guess\n" , upperGuess);
 
     //create letter frequency table
     int letterFrequency[26] = {0};
-    for (int i = 0; upperCurrentWord[i]; i++) {
-        letterFrequency[upperCurrentWord[i] - 'A']++;
+    for (int i = 0; word[i]; i++) {
+        letterFrequency[word[i] - 'A']++;
     }
 
-    char squares[MAX_WORD_LENGTH] = "";
-    for (int i = 0; upperGuess[i]; i++) {
-        char charGuess = upperGuess[i];
-        char charWord = upperCurrentWord[i];
+    for (int i = 0; word[i]; i++) {
+        char charGuess = attempts[current_word][i];
+        char charWord = word[i];
+        printf(" char guess %c   and charWord %c\n",charGuess,charWord);
+        char color;
         if (charGuess == charWord) {
-            strcat(squares, "G ");
+            color = 'G';
             letterFrequency[charGuess - 'A']--;
         } else if (letterFrequency[charGuess - 'A'] > 0) {
-            strcat(squares, "Y ");
+            color = 'Y';
             letterFrequency[charGuess - 'A']--;
         } else {
-            strcat(squares, "R ");
+            color = 'R';
         }
+        results[current_word][i] = color;
     }
-
-    // Replace spaces with dashes
-    char* token = strtok(squares, " ");
-    strcpy(result, token);
-    while ((token = strtok(NULL, " ")) != NULL) {
-        strcat(result, "-");
-        strcat(result, token);
-    }
-
-    return result;
 }
 
 int draw_game(){
@@ -160,7 +138,31 @@ int draw_game(){
             int xPos = (xResolution / 4) + (spaceBetweenLetters * col);
 
             char letter = attempts[row][col];
-            
+            char colorResult = results[row][col];
+
+            //checks to see if result has been given
+            if(colorResult != '\0'){
+                uint32_t colorHex;
+                switch (colorResult)
+                {
+                case 'G':
+                    colorHex = 0x00FF00;
+                    break;
+                case 'R':
+                    colorHex = 0xFF0000; // Red color
+                    break;
+                case 'Y':
+                    colorHex = 0xFFFF00; // Yellow color
+                    break;
+                default:
+                    colorHex = 0x000000; // Black color
+                    break;
+                }
+                draw_rectangle(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,colorHex);
+            }
+
+
+
             //checks to see if the the attempts has been written
             if(letter != '\0'){
                 int index = attempts[row][col] - 'A';
@@ -185,6 +187,14 @@ void keyboard_handler_game(){
 
 
         attempts[current_word][current_letter] = '\0';
+    }
+
+    //enter
+    if(scancode == BREAK_ENTER){
+        if(current_letter != MAX_WORD_LENGTH - 1)return;
+        give_guess();
+        current_word++;
+        current_letter = 0;
     }
 
     //checks to see if the keyboard input is a letter breakcode
