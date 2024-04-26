@@ -137,13 +137,20 @@ char* give_guess(const char* guess) {
 int draw_game(){
 
 
-    int spaceBetweenLetters = (xResolution / (MAX_WORD_LENGTH - 1)) - 30;
+    int spaceBetweenLetters = (xResolution/(2 * (MAX_WORD_LENGTH - 1)));
     for (int i = 0; i < MAX_WORD_LENGTH - 1; i++) {
 
+        
         int index = word[i] - 'A';
         int xPos = (xResolution / 4) + (spaceBetweenLetters * i);
+        int yPos = 8;
 
-        drawSprite(letterSprites[index], xPos, 60);
+        Sprite *letterSprite = letterSprites[index];
+        //draw the letter
+        drawSprite(letterSprite, xPos, yPos);
+
+        //draw the rectangle box
+        draw_border(xPos-7,yPos-2,letterSprite->width+10,letterSprite->height+10,0xFFFFFF,4);        
     }
     return 0;
 }

@@ -3,7 +3,7 @@
 
 #include <lcom/lcf.h>
 #include "../sprites/sprites.h"
-
+#include "../controller/graphics.h"
 
 
 #include <stdio.h>
@@ -16,6 +16,7 @@
 #define MAX_LINE_LENGTH 1024
 #define WORDS_AMMOUNT 318
 #define MAX_WORD_LENGTH 6
+
 
 int initialize_game();
 int get_word(const char *date);
