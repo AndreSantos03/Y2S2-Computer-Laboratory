@@ -1,0 +1,95 @@
+@lcflib.a:2019, lcf_start
+  proj_main_loop(argc, argv)
+> proj_main_loop(0, [NULL])
+  @/home/lcom/labs/g5/proj/src/game//game.c:55, get_word
+    printf("inside\n")
+    "inside"
+  @main.c:152, proj_main_loop
+    printf("word is : %s \n",word)
+    "word is : CIGAR "
+  @/home/lcom/labs/g5/proj/src/controller//graphics.c:35, video_init
+    vbe_get_mode_info(mode, &mode_info)
+  > vbe_get_mode_info(0x115, addr: 0x824e0a4)
+  < vbe_get_mode_info(0x115, addr: 0x824e0a4 [0xe0000000, 800x600, 8:8:8 (24) <1.37329 MiB>]) -> (ret: 0)
+  @/home/lcom/labs/g5/proj/src/controller//graphics.c:47, video_init
+    sys_privctl(SELF, SYS_PRIV_ADD_MEM, &mr)
+  > sys_privctl(SELF, SYS_PRIV_ADD_MEM, addr: 0x824e1b0 [0xe0000000 - 0xe015f900 <1.37329 MiB>])
+  < sys_privctl(SELF, SYS_PRIV_ADD_MEM, &mr) -> (ret: 0)
+  @/home/lcom/labs/g5/proj/src/controller//graphics.c:52, video_init
+    vm_map_phys(SELF, (void*) mr.mr_base, bufferSize)
+  < vm_map_phys(SELF, addr: 0xe0000000, 1.37329 MiB) -> (ret: 0xef89b000)
+  @/home/lcom/labs/g5/proj/src/controller//graphics.c:29, vbe_set_mode
+    sys_int86(&reg86)
+  > sys_int86(addr: 0xeffff6e8 [AX: 4f02, BX: 4115, CX: 0000, DX: 0000, ES: 0000, DI: 0000])
+  < sys_int86(addr: 0xeffff6e8 [AX: 004f, BX: 4115, CX: 0000, DX: 0000, ES: 0000, DI: 0000]) -> (ret: 0)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x82301d8, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x82301d8, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x82a6000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x82304a0, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x82304a0, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x82a8000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x823054c, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x823054c, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x82aa000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x82305f8, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x82305f8, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x82ac000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x82306a4, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x82306a4, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x82ae000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230750, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230750, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x82b0000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x82307fc, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x82307fc, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x82b2000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x82308a8, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x82308a8, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x8415000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230954, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230954, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x8417000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230a00, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230a00, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x8419000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230aac, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230aac, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x841b000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230b58, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230b58, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x841d000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230c04, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230c04, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x841f000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230cb0, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230cb0, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x8421000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230d5c, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230d5c, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x8423000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230e08, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230e08, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x8425000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230eb4, XPM_8_8_8_8, addr: 0xeffff6f0)
+  < xpm_load(addr: 0x8230eb4, XPM_8_8_8_8, addr: 0xeffff6f0 [30x40 : 4800 bytes]) -> (ret: 0x8427000)
+  @/home/lcom/labs/g5/proj/src/sprites//sprites.c:16, create_sprite
+    xpm_load(pic, XPM_8_8_8_8, &img)
+  > xpm_load(addr: 0x8230f60, XPM_8_8_8_8, addr: 0xeffff6f0)
