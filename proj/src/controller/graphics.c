@@ -104,6 +104,10 @@ int draw_pixel(uint16_t x, uint16_t y, uint32_t color){
     if(x >= xResolution || y >= yResolution) 
         return 1;
 
+    // Check if the color is black (-16777216)
+    if (color == 0xFF000000) // -16777216 in decimal is 0xFF000000 in hex (black)
+        return 0; // Pixel is black, no need to draw
+
     int pixelPosition = x + xResolution * y;
     int memOffset = pixelPosition * bytesPerPixel;
 
