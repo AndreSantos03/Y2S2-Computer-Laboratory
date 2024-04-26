@@ -32,7 +32,7 @@ void (mouse_update_packet)(){
   //check if mouse is outside the screen
   mouse_packet.delta_x = (mouse_bytes[0] & MOUSE_X_DELTA) ? (0xFF00 | mouse_bytes[1]) : mouse_bytes[1];
 
-  if(current_x + mouse_packet.delta_x >= 0 && !current_x + mouse_packet.delta_x <= xResolution){
+  if(current_x + mouse_packet.delta_x >= 0 && current_x + mouse_packet.delta_x <= xResolution){
     current_x += mouse_packet.delta_x;
 
   }

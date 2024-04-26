@@ -9,7 +9,7 @@ extern int yResolution;
 extern int current_x;
 extern int current_y;
 //sprites
-extern Sprite *letterSprites;
+extern Sprite *letterSprites[26];
 
 char word[MAX_WORD_LENGTH];
 
@@ -136,7 +136,7 @@ char* give_guess(const char* guess) {
 
 int draw_game(){
 
-    if(drawSprite(&letterSprites[0],400,400)) return 1;
+    if(drawSprite(letterSprites[2],400,400)) return 1;
 /* 
     int spaceBetweenLetters = (xResolution / (MAX_WORD_LENGTH - 1)) - 30;
     for (int i = 0; i < MAX_WORD_LENGTH - 1; i++) {
