@@ -42,7 +42,7 @@ int(kbd_test_scan)() {
   message msg;
 
   uint8_t irq_set;
-  if( keyboard_subscribe_interrupts(&irq_set) ) return 1;
+  if(keyboard_subscribe_interrupts(&irq_set) ) return 1;
 
 
   while(scancode != BREAK_ESC){
@@ -54,7 +54,8 @@ int(kbd_test_scan)() {
         case HARDWARE:
           if(msg.m_notify.interrupts & irq_set){
             kbc_ih();
-            kbd_print_scancode(!(scancode & MAKE_CODE), scancode == TWO_BYTES ? 2 : 1, &scancode);
+            kbd_print_scancode(!(scancode & MAKE_C//-/O
+            1DE), scancode == TWO_BYTES ? 2 : 1, &scancode);
           }
       }
     }

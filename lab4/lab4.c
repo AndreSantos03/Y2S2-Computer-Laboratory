@@ -308,3 +308,29 @@ int (mouse_test_gesture)(uint8_t x_len, uint8_t tolerance) {
 
   return 0;
 }
+
+int (mouse_test_remote)(uint16_t period, uint8_t cnt){
+  //Rato fica em modo polling by default pela LCF
+
+  while(cnt > 0){
+    if(write_mouse(MOUSE_READ_DATA) != 0) return 1;
+    mouse_ih();
+    sync_mouse();
+    if(byte_index == 3){
+      mouse_update_packet();
+      mouse_print_packet(&mouse_packet);
+      byte_index = 0;
+      cnt--;
+      tickdelay(micros_to_ticks(period * 1000));
+    }
+  }
+
+  if(write_mouse(MOUSE_STREAM_MODE) != 0) return 1;
+  if(write_mouse(DISABLE_DATA_REP) != 0) return 1;
+
+  uint8_t command = minix_get_dflt_kbc_cmd_byte();
+  if(write_mouse_cmd(KBC_CMD_REG,KBC_CMD_WRITE) != 0) return 1;
+  if(write_mouse_cmd(KBC_CMD_WRITE,command) != 0) return 1;
+
+  return 0;
+}

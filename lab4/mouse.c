@@ -23,6 +23,8 @@ void (mouse_update_packet)(){
   mouse_packet.rb = mouse_bytes[0] & MOUSE_RB;
   mouse_packet.x_ov = mouse_bytes[0] & MOUSE_X_OVERFLOW;
   mouse_packet.y_ov = mouse_bytes[0] & MOUSE_Y_OVERFLOW;
+  /*Como o x e o y são 9-bit 2'complement caso não haja deslocamento negativo, podemos colocar simplesmente
+  o valor que está no array. Caso haja preciso de preservar apenas os ultimos 8-bits pois o MSB é para o sinal!*/
   mouse_packet.delta_x = (mouse_bytes[0] & MOUSE_X_DELTA) ? (0xFF00 | mouse_bytes[1]) : mouse_bytes[1];
   current_x += mouse_packet.delta_x;
   mouse_packet.delta_y = (mouse_bytes[0] & MOUSE_Y_DELTA) ? (0xFF00 | mouse_bytes[2]) : mouse_bytes[2];

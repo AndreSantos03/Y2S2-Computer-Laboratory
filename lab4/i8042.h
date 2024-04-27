@@ -46,7 +46,8 @@
 #define MOUSE_WRITE_BYTE 0xD4
 #define ENABLE_DATA_REP 0xF4
 #define DISABLE_DATA_REP 0xF5
-
+#define MOUSE_STREAM_MODE 0xEA
+#define MOUSE_READ_DATA 0xEB
 
 #define ACK 0xFA    
 #define NACK 0xFE
