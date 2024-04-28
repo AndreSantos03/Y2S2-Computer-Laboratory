@@ -1,2 +1,0 @@
-cona
-irq_set 1Message
