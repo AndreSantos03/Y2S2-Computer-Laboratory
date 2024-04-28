@@ -91,3 +91,62 @@ int keyboard_restore() {
 
     return 0;
 }
+
+int get_letter_index(int break_code) {
+    switch (break_code) {
+        case BREAK_A:
+            return 0;
+        case BREAK_B:
+            return 1;
+        case BREAK_C:
+            return 2;
+        case BREAK_D:
+            return 3;
+        case BREAK_E:
+            return 4;
+        case BREAK_F:
+            return 5;
+        case BREAK_G:
+            return 6;
+        case BREAK_H:
+            return 7;
+        case BREAK_I:
+            return 8;
+        case BREAK_J:
+            return 9;
+        case BREAK_K:
+            return 10;
+        case BREAK_L:
+            return 11;
+        case BREAK_M:
+            return 12;
+        case BREAK_N:
+            return 13;
+        case BREAK_O:
+            return 14;
+        case BREAK_P:
+            return 15;
+        case BREAK_Q:
+            return 16;
+        case BREAK_R:
+            return 17;
+        case BREAK_S:
+            return 18;
+        case BREAK_T:
+            return 19;
+        case BREAK_U:
+            return 20;
+        case BREAK_V:
+            return 21;
+        case BREAK_W:
+            return 22;
+        case BREAK_X:
+            return 23;
+        case BREAK_Y:
+            return 24;
+        case BREAK_Z:
+            return 25;
+        default:
+            return -1;
+    }
+}

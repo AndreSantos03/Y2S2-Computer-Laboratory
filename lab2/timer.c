@@ -41,15 +41,15 @@ int (timer_set_frequency)(uint8_t timer, uint32_t freq) {
     return 1;
   }
 
+  if (sys_outb(TIMER_CTRL, controlWord) != 0) {
+    return 1;
+  }
+
   if (sys_outb(timer_register, control_LSB) != 0) {
     return 1;
   }
 
   if (sys_outb(timer_register, control_MSB) != 0) {
-    return 1;
-  }
-
-  if (sys_outb(TIMER_CTRL, controlWord) != 0) {
     return 1;
   }
 
@@ -79,7 +79,7 @@ void (timer_int_handler)() {
 }
 
 int (timer_get_conf)(uint8_t timer, uint8_t *st) {
-    if (st == NULL || timer > 2) {
+    if (st == NULL || timer > 2 || timer < 0) {
         return 1;
     }
 
@@ -105,7 +105,7 @@ int (timer_display_conf)(uint8_t timer, uint8_t conf, enum timer_status_field fi
   }
   else if(field == tsf_initial){
     conf = (conf >> 4);
-    conf = conf & 0x03; //in order to make everything 0 and keep the last 2 bits of conf as is
+    conf = conf & 0x03; 
     if (conf == 1) {
       timerConfig.in_mode = LSB_only;
     }
@@ -125,8 +125,7 @@ int (timer_display_conf)(uint8_t timer, uint8_t conf, enum timer_status_field fi
     timerConfig.count_mode = conf;
   }
   else if (field == tsf_base){
-    conf = conf & BIT(1);
-    timerConfig.bcd = conf;
+    timerConfig.bcd = conf & TIMER_BCD;
   }
   else{
     return 1;

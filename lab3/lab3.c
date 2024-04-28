@@ -89,8 +89,8 @@ int(kbd_test_timed_scan)(uint8_t n) {
 
   uint8_t time_seconds = 0;
 
-  if( keyboard_subscribe_interrupts(&irq_set_keyboard) ) return 1;
-  if (timer_subscribe_int(&irq_set_timer) != 0) return 1;
+  if(keyboard_subscribe_interrupts(&irq_set_keyboard) != 0) return 1;
+  if(timer_subscribe_int(&irq_set_timer) != 0) return 1;
 
   while(scancode != BREAK_ESC && time_seconds < n){
     if( driver_receive(ANY, &msg, &ipc_status) != 0){

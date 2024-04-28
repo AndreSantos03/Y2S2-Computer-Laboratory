@@ -17,5 +17,7 @@ int (keyboard_write_command)(uint8_t port, uint8_t commandByte);
 
 int (keyboard_restore)();
 
+int get_letter_index(int break_code);
+
 
 #endif /* _LCOM_KEYBOARD_H_ */

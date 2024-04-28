@@ -28,5 +28,6 @@ int (util_sys_inb)(int port, uint8_t *value) {
   uint32_t i;
   int r = sys_inb(port, &i);
   *value = (uint8_t)(i & 0xFF);
+  sys_calls_counter++;
   return r;
 }

@@ -1,0 +1,7 @@
+inside
+word is : CIGAR 
+ char guess C   and charWord C
+ char guess I   and charWord I
+ char guess G   and charWord G
+ char guess R   and charWord A
+ char guess A   and charWord R

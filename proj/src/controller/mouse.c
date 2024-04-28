@@ -1,6 +1,7 @@
 #include <lcom/lcf.h>
 #include <minix/sysutil.h>
 #include "mouse.h"
+#include "graphics.h"
 
 
 
@@ -11,6 +12,10 @@ struct packet mouse_packet;
 uint8_t mouse_bytes[3];
 int current_x = 0;
 int current_y=0;
+
+//graphics externs
+extern int xResolution;
+extern int yResolution;
 
 void (mouse_update_packet)(){
 
@@ -23,10 +28,20 @@ void (mouse_update_packet)(){
   mouse_packet.rb = mouse_bytes[0] & MOUSE_RB;
   mouse_packet.x_ov = mouse_bytes[0] & MOUSE_X_OVERFLOW;
   mouse_packet.y_ov = mouse_bytes[0] & MOUSE_Y_OVERFLOW;
+  
+  //check if mouse is outside the screen
   mouse_packet.delta_x = (mouse_bytes[0] & MOUSE_X_DELTA) ? (0xFF00 | mouse_bytes[1]) : mouse_bytes[1];
-  current_x += mouse_packet.delta_x;
+
+  if(current_x + mouse_packet.delta_x >= 0 && current_x + mouse_packet.delta_x <= xResolution){
+    current_x += mouse_packet.delta_x;
+
+  }
+
   mouse_packet.delta_y = (mouse_bytes[0] & MOUSE_Y_DELTA) ? (0xFF00 | mouse_bytes[2]) : mouse_bytes[2];
-  current_y += mouse_packet.delta_y;
+  if(current_y - mouse_packet.delta_y >= 0 && current_y - mouse_packet.delta_y <= yResolution){
+    current_y -= mouse_packet.delta_y;
+
+  }
 }
 
 void sync_mouse() {

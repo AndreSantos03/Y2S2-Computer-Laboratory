@@ -1,0 +1,76 @@
+Teclado tem 2 ports:
+
+-0x60: Data port (ler e escrever dados)
+-0x64: Ler status/Escrever CMD
+
+Status - registo de 8 bits
+
+bit 0 - OBF (Output Buffer Full)
+se tiver a 0 -> empty, 1 -> full (dados a ler)
+
+bit 1 - IBF (Input Buffer Full)
+se tiver a 0 -> empty (posso escrever), 1 -> full
+
+bit 2,3,4 - não interessa para LCOM
+
+bit 5 - AUX - 0 para o teclado, 1 para o rato
+
+bit 6 - Timeout
+se tiver a 0 - sem erros, 1 - erro TIMEOUT
+
+bit 7 - Parity
+se tiver a 0 - sem erros, 1 - erro paridade
+
+--Ler o status--
+util_sys_inb(0x64,status)
+
+--Escrever comando--(port,cmd)
+while(nº tentativas)
+1-ler status
+2-so escrevo se o IBF estiver vazio
+3-escrever comando sys_outb(0x64,cmd)
+delay
+
+--Ler dados--
+while(nº tentativas)
+1-ler status
+2-so faço leitura se OBF é 1 (está cheio)
+3-Há errors de timeout?
+4-Há Errors de paridade?
+delay
+
+-2 tipos de scancode:
+-makecode - pressionar tecla -> MSB = 0
+-breakcode - libertar tecla -> MSB = 1
+
+kdb_test_scan()
+1-subscribe da interrupção
+2-while(scancode != BREAK_ESC) //0x81
+    -driver_receive
+    -is_ipc_notify
+        -case HARDWARE:
+            -se for int_teclado:
+                -kbc_ih() <- implementar, ler um scancode
+                -kbc_print_scancode(make,size,bytes)
+                (make é do tipo bool:true se for breakcode,false se for makecode)
+
+3-unsubscribe da interrupção
+4-kbd_print_no_sys_inb()
+
+
+kbd_print_scancode(bool make, int size, *bytes):
+
+make|false -> break code (scancode & 0x80 == 1)\ !scancode & BIT(7)
+    |true -> make code (scancode & 0x80 == 0)  /
+
+size (1 e 2 bits)
+
+2º teste do teclado (s/ usar interrupts)
+
+while(!ESC){
+    st<-getOBF()   (OUTPUT BUFFER FULL)
+    se (st & BIT(0)){
+        LER (verificar TIMEOUT E PARITY)
+    }
+    print
+}
