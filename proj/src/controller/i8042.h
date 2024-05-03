@@ -4,7 +4,38 @@
 #define MAX_ATTEMPTS 10
 #define DELAY_US    20000
 
+//keyboard break codes
 #define BREAK_ESC 0x81
+#define BREAK_BACK 0xE
+#define BREAK_ENTER 0x1C
+#define BREAK_A 0x9E
+#define BREAK_B 0xB0
+#define BREAK_C 0xAE
+#define BREAK_D 0xA0
+#define BREAK_E 0x92
+#define BREAK_F 0xA1
+#define BREAK_G 0xA2
+#define BREAK_H 0xA3
+#define BREAK_I 0x97
+#define BREAK_J 0xA4
+#define BREAK_K 0xA5
+#define BREAK_L 0xA6
+#define BREAK_M 0xB2
+#define BREAK_N 0xB1
+#define BREAK_O 0x98
+#define BREAK_P 0x99
+#define BREAK_Q 0x90
+#define BREAK_R 0x93
+#define BREAK_S 0x9F
+#define BREAK_T 0x94
+#define BREAK_U 0x96
+#define BREAK_V 0xAF
+#define BREAK_W 0x91
+#define BREAK_X 0xAD
+#define BREAK_Y 0x95
+#define BREAK_Z 0xAC
+
+
 
 #define IRQ_KEYBOARD 1
 #define IRQ_REENABLE 0x001

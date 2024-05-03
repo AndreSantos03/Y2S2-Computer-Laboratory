@@ -98,11 +98,41 @@ int draw_horizontal_line(uint16_t x, uint16_t y, uint16_t len, uint32_t color){
     return 0;
 }
 
+int draw_vertical_line(uint16_t x, uint16_t y, uint16_t len, uint32_t color){
+    if(yResolution < y + len){
+        len = yResolution - x;
+    }
+
+    for(int i = y; i< len + y ; i++){
+        if(draw_pixel(x, i, color))return 1;
+    }
+
+    return 0;
+}
+
+
+int draw_border(uint16_t x, uint16_t y, uint16_t xLen, uint16_t yLen, uint32_t color,uint16_t width){
+    for(int i = 0; i < width;i++){
+        if(draw_vertical_line(x + i-1,y,yLen,color)) return 1;
+
+        if(draw_vertical_line(x+xLen - i,y,yLen,color)) return 1;
+
+        if(draw_horizontal_line(x,y + i - 1,xLen,color)) return 1;
+
+        if(draw_horizontal_line(x,y+yLen - i,xLen,color)) return 1;
+    }
+
+    return 0;
+}
+
 int draw_pixel(uint16_t x, uint16_t y, uint32_t color){
 
     //checks to see if pixel is outisde the screen
     if(x >= xResolution || y >= yResolution) 
         return 1;
+
+    if (color == 0xFF000000) 
+        return 0; 
 
     int pixelPosition = x + xResolution * y;
     int memOffset = pixelPosition * bytesPerPixel;
