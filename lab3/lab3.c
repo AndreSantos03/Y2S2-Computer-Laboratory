@@ -8,6 +8,8 @@
 
 #include "keyboard.h"
 
+uint8_t scancodes[2];
+uint8_t scancodeIndex = 0;
 extern uint8_t scancode;
 extern uint32_t sys_calls_counter;
 extern int counter; //timer
@@ -54,8 +56,17 @@ int(kbd_test_scan)() {
         case HARDWARE:
           if(msg.m_notify.interrupts & irq_set){
             kbc_ih();
-            kbd_print_scancode(!(scancode & MAKE_C//-/O
-            1DE), scancode == TWO_BYTES ? 2 : 1, &scancode);
+            if (scancode == 0xE0) {
+              scancodes[scancodeIndex] = scancode;
+              scancodeIndex++;
+            }
+            else {
+              scancodes[scancodeIndex] = scancode;
+              scancodeIndex = 0;
+            }
+            if (scancode != 0xE0) {
+              kbd_print_scancode(!(scancode & MAKE_CODE), scancodes[0] == 0xE0 ? 2 : 1, scancodes);
+            }
           }
       }
     }

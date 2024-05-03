@@ -15,7 +15,7 @@ int (keyboard_unsubscribe_interrupts)(){
 
 int (keyboard_read_status)(uint8_t *status){
     if(util_sys_inb(STATUS_PORT,status)!=0)return 1;
-   return 0; 
+   return 0;
 }
 
 int (read_keyboard_output)(uint8_t port, uint8_t *output){
@@ -48,7 +48,7 @@ int (read_keyboard_output)(uint8_t port, uint8_t *output){
 }
 
 void (kbc_ih)() {
-    read_keyboard_output(KBD_OUT_BUF,&scancode);    
+    read_keyboard_output(KBD_OUT_BUF,&scancode);
 }
 
 int (keyboard_write_command)(uint8_t port, uint8_t commandByte){

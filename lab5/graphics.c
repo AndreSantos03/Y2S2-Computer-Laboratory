@@ -30,7 +30,7 @@ int vbe_set_mode(uint16_t mode)
 
 int video_init(uint16_t mode){
 
-    if(vbe_get_mode_info(mode, &mode_info))return 1;    
+    if(vbe_get_mode_info(mode, &mode_info))return 1; 
 
     bytesPerPixel = (mode_info.BitsPerPixel +7)/8;
 
@@ -104,7 +104,7 @@ void normalize_color(uint32_t *color){
 }
 
 uint32_t direct_mode(uint32_t j, uint32_t i, uint8_t step, uint32_t first) {
-     uint32_t red = ((1 << mode_info.RedMaskSize) - 1) & ((i + j) * step + (first >> mode_info.RedFieldPosition)) % (1 << mode_info.RedMaskSize);
+    uint32_t red = ((1 << mode_info.RedMaskSize) - 1) & ((i + j) * step + (first >> mode_info.RedFieldPosition)) % (1 << mode_info.RedMaskSize);
     uint32_t green = ((1 << mode_info.GreenMaskSize) - 1) & ((i + j) * step + (first >> mode_info.GreenFieldPosition)) % (1 << mode_info.GreenMaskSize);
     uint32_t blue = ((1 << mode_info.BlueMaskSize) - 1) & ((i + j) * step + (first >> mode_info.BlueFieldPosition)) % (1 << mode_info.BlueMaskSize);
 
