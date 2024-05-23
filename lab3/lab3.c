@@ -63,9 +63,9 @@ int(kbd_test_scan)() {
             else {
               scancodes[scancodeIndex] = scancode;
               scancodeIndex = 0;
-            }
-            if (scancode != 0xE0) {
               kbd_print_scancode(!(scancode & MAKE_CODE), scancodes[0] == 0xE0 ? 2 : 1, scancodes);
+              scancodes[0] = 0;
+              scancodes [1] = 0;
             }
           }
       }
