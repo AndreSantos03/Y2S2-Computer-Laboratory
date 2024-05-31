@@ -2,6 +2,7 @@
 #include "controller/graphics.h"
 #include "controller/mouse.h"
 #include "controller/keyboard.h"
+#include "controller/rtc.h"
 #include "game/game.h"
 #include "sprites/sprites.h"
 
@@ -60,10 +61,9 @@ int handle_interrupts(){
 
     //SUBSCRIBES
     if(keyboard_subscribe_interrupts(&irq_keyboard)) return 1;
-
     if(mouse_subscribe_interrupts(&irq_mouse)) return 1;
-
     if(timer_subscribe_int(&irq_timer)) return 1;
+    if (rtc_subscribe_interrupts()) return 1;
 
     while(isGameRunning && scancode != BREAK_ESC){
       if( driver_receive(ANY, &msg, &ipc_status) != 0 ){
@@ -108,10 +108,9 @@ int handle_interrupts(){
 
   //UNSUBSCRIBES
     if(keyboard_unsubscribe_interrupts()) return 1;
-
     if(mouse_unsubscribe_interrupts()) return 1;
-
     if(timer_unsubscribe_int()) return 1;
+    if (rtc_unsubscribe_interrupts()) return 1;
 
     free_buffers();
     destroySprites();
@@ -149,8 +148,22 @@ int (proj_main_loop)(int argc, char **argv) {
 
     isGameRunning = true;
     initialize_game();
-    get_word("2024-01-01");
-    printf("word is : %s \n",word);
+
+    if(rtc_update_time() != 0){
+      printf("Failed to update RTC time \n");
+      return 1;
+    }
+
+    //Format the data
+    char date_str[11];
+    snprintf(date_str,11,"%04u-%02u-%02u",2000 + info.year, info.month, info.day);
+
+    if(get_word(date_str) != 0){
+      printf("Failed to get word for date: %s\n", date_str);
+      return 1;
+    }
+
+    printf("Word for %s is: %s\n",date_str,word);
     handle_interrupts();
     return 0;
 }

@@ -1,7 +1,12 @@
 inside
-word is : CIGAR 
- char guess C   and charWord C
- char guess I   and charWord I
- char guess G   and charWord G
- char guess R   and charWord A
- char guess A   and charWord R
+Word for 2024-05-31 is: HERON
+ char guess A   and charWord H
+ char guess R   and charWord E
+ char guess I   and charWord R
+ char guess S   and charWord O
+ char guess E   and charWord N
+ char guess H   and charWord H
+ char guess E   and charWord E
+ char guess R   and charWord R
+ char guess O   and charWord O
+ char guess N   and charWord N
