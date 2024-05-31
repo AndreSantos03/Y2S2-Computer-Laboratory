@@ -21,6 +21,7 @@ char results[GUESS_ATTEMPTS][MAX_WORD_LENGTH] = {{'\0'}};
 
 int current_word = 0;
 int current_letter = 0;
+int currentCount = 0; // Make currentCount a global variable
 
 typedef struct {
     char date[11];
@@ -104,7 +105,7 @@ void give_guess() {
         letterFrequency[word[i] - 'A']++;
     }
 
-    int correctCount = 0;
+    currentCount = 0; // Update the global currentCount variable
     for (int i = 0; word[i]; i++) {
         char charGuess = attempts[current_word][i];
         char charWord = word[i];
@@ -113,7 +114,7 @@ void give_guess() {
         if (charGuess == charWord) {
             color = 'G';
             letterFrequency[charGuess - 'A']--;
-            correctCount++;
+            currentCount++;
         } else if (letterFrequency[charGuess - 'A'] > 0) {
             color = 'Y';
             letterFrequency[charGuess - 'A']--;
@@ -123,10 +124,14 @@ void give_guess() {
         results[current_word][i] = color;
     }
 
-    if(correctCount == MAX_WORD_LENGTH - 1){
+    if(currentCount == MAX_WORD_LENGTH - 1){
         gameActive = false;
+        drawText("YOU WON", (xResolution - 8 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 10);
     } else if (current_word == GUESS_ATTEMPTS - 1){
         gameActive = false;
+        drawText("YOU LOSE", (xResolution - 9 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 10);
+        drawText(word, (xResolution - strlen(word) * letterSprites[0]->width) / 2, yResolution - 2 * letterSprites[0]->height - 20);
+
     }
 }
 
@@ -136,7 +141,6 @@ int draw_game(){
 
     //draw guess attempt
     for(int row = 0; row < GUESS_ATTEMPTS;row++){
-
 
         int yPos = spaceBetweenWords * row + 10; //10 is the offset for the beggining
 
@@ -181,11 +185,21 @@ int draw_game(){
                 drawSprite(letterSprite, xPos, yPos);
             }
 
-
             //draw the rectangle box
             draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);        
         }
     }
+
+    // Draw the win/lose message if the game is over
+    if (!gameActive) {
+        if (currentCount == MAX_WORD_LENGTH - 1) {
+            drawText("YOU WON", (xResolution - 8 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 10);
+        } else {
+            drawText("YOU LOSE", (xResolution - 9 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 10);
+            drawText(word, (xResolution - strlen(word) * letterSprites[0]->width) / 2, yResolution - 2 * letterSprites[0]->height - 20);
+        }
+    }
+
     return 0;
 }
 
@@ -218,4 +232,3 @@ void keyboard_handler_game(){
         current_letter++;
     }
 }
-

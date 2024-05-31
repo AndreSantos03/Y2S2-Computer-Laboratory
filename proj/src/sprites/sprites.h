@@ -45,6 +45,6 @@ int drawSprite(Sprite *sprite, int x, int y);
 void loadSprites();
 void destroySprites();
 int draw_letter(char letter,int x, int y);
-
+int drawText(const char *text, int x, int y);
 
 #endif
