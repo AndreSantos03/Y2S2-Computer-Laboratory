@@ -29,7 +29,7 @@ typedef struct {
 
 WordEntry entries[WORDS_AMMOUNT];
 
-
+bool gameActive = true;
 
 
 int initialize_game(){
@@ -96,6 +96,7 @@ int get_word(const char *date) {
 
 void give_guess() {
     
+    if(!gameActive) return;
 
     //create letter frequency table
     int letterFrequency[26] = {0};
@@ -103,6 +104,7 @@ void give_guess() {
         letterFrequency[word[i] - 'A']++;
     }
 
+    int correctCount = 0;
     for (int i = 0; word[i]; i++) {
         char charGuess = attempts[current_word][i];
         char charWord = word[i];
@@ -111,6 +113,7 @@ void give_guess() {
         if (charGuess == charWord) {
             color = 'G';
             letterFrequency[charGuess - 'A']--;
+            correctCount++;
         } else if (letterFrequency[charGuess - 'A'] > 0) {
             color = 'Y';
             letterFrequency[charGuess - 'A']--;
@@ -118,6 +121,12 @@ void give_guess() {
             color = 'R';
         }
         results[current_word][i] = color;
+    }
+
+    if(correctCount == MAX_WORD_LENGTH - 1){
+        gameActive = false;
+    } else if (current_word == GUESS_ATTEMPTS - 1){
+        gameActive = false;
     }
 }
 
@@ -180,12 +189,12 @@ int draw_game(){
     return 0;
 }
 
-void keyboard_handler_game(){ 
+void keyboard_handler_game(){
+
+    if(!gameActive) return; 
     //backspace
     if(scancode == BREAK_BACK){
         if(current_letter != 0) current_letter--;
-
-
         attempts[current_word][current_letter] = '\0';
     }
 
@@ -193,8 +202,10 @@ void keyboard_handler_game(){
     if(scancode == BREAK_ENTER){
         if(current_letter != MAX_WORD_LENGTH - 1)return;
         give_guess();
-        current_word++;
-        current_letter = 0;
+        if(gameActive){
+            current_word++;
+            current_letter = 0;
+        }
     }
 
     //checks to see if the keyboard input is a letter breakcode
@@ -202,8 +213,6 @@ void keyboard_handler_game(){
     if(letter_index != -1){
         //check to see if its filled
         if(current_letter == MAX_WORD_LENGTH - 1) return;
-
-
         char letter = 'A' + letter_index;
         attempts[current_word][current_letter] = letter;
         current_letter++;
