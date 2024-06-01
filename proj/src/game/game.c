@@ -226,7 +226,7 @@ void give_guess() {
 }
 
 int draw_game(){
-    int spaceBetweenWords = ((yResolution * 0.8)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.2 of the bottom empty
+    int spaceBetweenWords = ((yResolution * 0.5)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.2 of the bottom empty
 
     //draw guess attempt
     for(int row = 0; row < GUESS_ATTEMPTS;row++){
@@ -275,9 +275,13 @@ int draw_game(){
             }
 
             //draw the rectangle box
-            draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);        
+            draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);     
+
+
         }
     }
+
+    //DRAW MOUSE KEYBOARD
 
     // Draw the win/lose message if the game is over
     if (!gameActive) {
