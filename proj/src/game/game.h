@@ -14,6 +14,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <math.h>
 
 
 #define MAX_LINE_LENGTH 1024
@@ -41,6 +42,7 @@ void give_guess();
 int draw_game();
 int draw_menu();
 int draw_menu2();
+void draw_mouse_keyboard();
 void mouse_handler_menu();
 void mouse_handler_game();
 void keyboard_handler_game();

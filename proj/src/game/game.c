@@ -38,6 +38,8 @@ int words6_count = sizeof(words6) / sizeof(words6[0]);
 char **currentWords;
 int currentWordsCount;
 
+
+
 typedef struct {
     char date[11];
     char word[MAX_LINE_LENGTH];
@@ -55,6 +57,9 @@ char* menu2Options[MENU2_OPTIONS] = {"III", "IV", "V", "VI"};
 int selectedOption = -1;
 bool optionSelected = false;
 
+//mouse handler global variables
+bool isDraggingLetter = false;
+int indexDraggedLetter = 0;
 
 int initialize_game1(){
 
@@ -226,7 +231,7 @@ void give_guess() {
 }
 
 int draw_game(){
-    int spaceBetweenWords = ((yResolution * 0.5)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.2 of the bottom empty
+    int spaceBetweenWords = ((yResolution * 0.6)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.4 of the bottom empty
 
     //draw guess attempt
     for(int row = 0; row < GUESS_ATTEMPTS;row++){
@@ -280,8 +285,15 @@ int draw_game(){
 
         }
     }
+    //DRAW DRAGGED LETTER
+    if(isDraggingLetter){
+        drawSprite(letterSprites[indexDraggedLetter],current_x,current_y);
+    }
+
 
     //DRAW MOUSE KEYBOARD
+    draw_mouse_keyboard();
+
 
     // Draw the win/lose message if the game is over
     if (!gameActive) {
@@ -387,6 +399,37 @@ int draw_menu2() {
     return 0;
 }
 
+void draw_mouse_keyboard(){
+    int startingX = xResolution * 0.1;
+    int xOffset = xResolution * 0.8 / 13;
+
+    int firstRowY = yResolution * 0.65;
+    int secondRowY = yResolution * 0.75;
+
+    int xPos = startingX;
+    int yPos = firstRowY;
+
+    //draw the alphabet
+    for(int i = 0; i <= 25;i++){   
+
+        Sprite *letterSprite = letterSprites[i];
+
+        drawSprite(letterSprite,xPos,yPos);
+        
+        //L is in the 12th position and is the last letter of the first row
+        if(i == 12){
+            xPos = startingX;
+            yPos = secondRowY;
+        }
+        else{
+            xPos += xOffset;
+        }
+    }
+
+    // draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);     
+
+}
+
 
 void mouse_handler_menu() {
     if (mouse_packet.lb) {
@@ -422,6 +465,34 @@ void mouse_handler_game() {
                     initialize_game2();
                 }
             }
+
+            //check for click in the visual keyboard
+            //check if the mouse position is inbound of the keyboard
+            if(current_y >= yResolution * 0.65 && current_y <= yResolution * 0.8 ){
+                if(current_x >= xResolution * 0.1 && current_x <= xResolution * 0.8){
+                    //spaced used by each letter
+                    float sectionWidth =  xResolution * 0.8 / 13;
+
+                    //calculate the index of the letter we clicked
+                    //the 15 is a small offset to give space before the letter
+                    indexDraggedLetter = (int)floor((current_x + 15- xResolution * 0.1) / sectionWidth);
+                    
+                    //check if we're clicking the second row
+                    if(current_y >= 0.75 * yResolution){
+                        indexDraggedLetter +=13;
+                    }
+
+                    isDraggingLetter = true;
+                     
+                }
+            }
+        }
+    } 
+    //no left click
+    else{
+        //check if we dropped the letter
+        if(isDraggingLetter){
+            isDraggingLetter = false;
         }
     }
 }
