@@ -493,6 +493,22 @@ void mouse_handler_game() {
         //check if we dropped the letter
         if(isDraggingLetter){
             isDraggingLetter = false;
+            //calculate the click range vertically
+            int yBottom = ((yResolution * 0.6)/ GUESS_ATTEMPTS * current_guess );
+            int yTop = ((yResolution * 0.6)/ GUESS_ATTEMPTS * (current_guess + 1));
+            //check if the drop is a valid y position
+            if(current_y >= yBottom && current_y <=yTop){
+                //cjecl of the drop is in a valid x position
+                if(current_x >= xResolution * 0.25 && current_x <= xResolution * 0.75){
+                    int spaceBetweenLetters = (xResolution/(2 * current_word_length));
+                    //30 is offset to give lee way on the left side
+                    int guessIndex = (current_x - xResolution * 0.25 + 30) / spaceBetweenLetters;
+                    printf("guess index %d\n",guessIndex);
+                    //put letter onto attempt
+                    attempts[current_guess][guessIndex] = 'A' + indexDraggedLetter;
+                }
+            }
+        
         }
     }
 }
