@@ -14,7 +14,7 @@ int rtc_output(uint8_t command, uint8_t *output){
 
 int rtc_is_updating(){
     uint8_t res;
-    if(rtc_output(REGISTER_UPDATING, &res)) return 1;
+    if(rtc_output(UPDATE_STATUS_CMD, &res)) return 1;
         return res & UPDATING;
 }
 

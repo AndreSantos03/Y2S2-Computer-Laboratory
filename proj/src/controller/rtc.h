@@ -30,6 +30,10 @@ typedef struct {
     uint8_t seconds;
 } rtc_info;
 
+extern int rtc_hook_id;
+extern rtc_info info;
+extern uint8_t binary;
+
 int rtc_output(uint8_t command, uint8_t *output);
 int rtc_is_updating();
 int rtc_is_binary();

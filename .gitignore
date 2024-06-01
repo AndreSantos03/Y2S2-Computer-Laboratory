@@ -1,7 +1,0 @@
-*.depend
-*.o
-**/.clang-format
-**/.vscode/
-**/output.txt
-**/trace.txt
-**/.gdbinit

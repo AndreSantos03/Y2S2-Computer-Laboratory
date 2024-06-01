@@ -4,8 +4,9 @@
 #include "../controller/graphics.h"
 
 Sprite *mouseCursor;
-
 Sprite *letterSprites[26] = { NULL };
+Sprite *youWonSprite;
+Sprite *youLoseSprite;
 
 Sprite *create_sprite(xpm_map_t pic) {
     Sprite *sp = (Sprite *) malloc ( sizeof(Sprite));
@@ -16,7 +17,7 @@ Sprite *create_sprite(xpm_map_t pic) {
     sp->map = (uint32_t *) xpm_load(pic, XPM_8_8_8_8, &img);
 
     if( sp->map == NULL ) {
-        printf("this bitch is null\n");
+        printf("The sprite is null\n");
         free(sp);
         return NULL;
     }
@@ -75,6 +76,7 @@ void loadSprites(){
     letterSprites[23] = create_sprite((xpm_map_t) x_xpm);
     letterSprites[24] = create_sprite((xpm_map_t) y_xpm);
     letterSprites[25] = create_sprite((xpm_map_t) z_xpm);
+
 }
 
 void destroySprites(){
@@ -85,4 +87,22 @@ void destroySprites(){
     for (int i = 0; i < 26; i++) {
         destroy_sprite(letterSprites[i]);
     }
+
+    destroy_sprite(youWonSprite);
+    destroy_sprite(youLoseSprite);
+}
+
+int drawText(const char *text, int x, int y){
+    int offset = 0;
+    for(const char *p = text; *p != '\0'; p++){
+        if(*p >= 'A' && *p <= 'Z'){
+            int index = *p - 'A';
+            drawSprite(letterSprites[index], x + offset, y);
+            offset += letterSprites[index]->width;
+        } else if(*p == ' '){
+            offset += letterSprites[0]->width;
+        }
+    }
+
+    return 0;
 }
