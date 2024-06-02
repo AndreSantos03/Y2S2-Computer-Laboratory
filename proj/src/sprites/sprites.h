@@ -31,7 +31,16 @@
 #include "../images/letters/y.xpm"
 #include "../images/letters/z.xpm"
 
-
+#include "../images/numbers/0.xpm"
+#include "../images/numbers/1.xpm"
+#include "../images/numbers/2.xpm"
+#include "../images/numbers/3.xpm"
+#include "../images/numbers/4.xpm"
+#include "../images/numbers/5.xpm"
+#include "../images/numbers/6.xpm"
+#include "../images/numbers/7.xpm"
+#include "../images/numbers/8.xpm"
+#include "../images/numbers/9.xpm"
 
 typedef struct {
     uint16_t x, y; // current position
@@ -44,7 +53,7 @@ void destroy_sprite(Sprite *sp);
 int drawSprite(Sprite *sprite, int x, int y);
 void loadSprites();
 void destroySprites();
-int draw_letter(char letter,int x, int y);
+int draw_letter(char letter, int x, int y);
 int drawText(const char *text, int x, int y);
 
 #endif

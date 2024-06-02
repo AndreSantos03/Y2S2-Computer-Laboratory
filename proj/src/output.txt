@@ -1,12 +1,1 @@
-inside
- char guess A   and charWord F
- char guess R   and charWord I
- char guess I   and charWord N
- char guess S   and charWord E
- char guess E   and charWord R
- char guess F   and charWord F
- char guess I   and charWord I
- char guess N   and charWord N
- char guess E   and charWord E
- char guess R   and charWord R
-Time taken to win: 0 ms
+Failed to load sprite image: ,µöø6µÓ)Ó)Ó)Ó)Ó)Æ∑Õ∑Ï∑∏*∏I∏h∏á∏á∏¶∏≈∏‰∏π"πAπ`ππ∂∂’∂ûπÓ)Ó)Ó)Ó)Ó)Ó)Ó)Ó)Ó)Ó)Ó)Ó)Ó)Ó),µöø6µÓ)Ó)Ó)Ó)Ó)Ó)Ó)2∑2∑2∑2∑2∑2∑2∑2∑2∑2∑2∑Q∑Q∑Q∑Q∑Q∑Q∑Q∑p∑p∑p∑p∑p∑è∑è∑è∑è∑è∑è∑è∑Ó)Ó)Ó)Ó),µöø6µÓ)Ó)Ó)Ó)Ó)BµBµBµaµaµaµaµaµaµaµÄµüµBµæµæµ›µ¸µ∂:∂Y∂Y∂Y∂x∂ó∂∂∂’∂Ù∂∑Ó)Ó)Ó)Ó)Ó)Ó)Ó)
