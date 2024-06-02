@@ -97,6 +97,7 @@ bool isDraggingLetter = false;
 int indexDraggedLetter = 0;
 
 bool isDraggingHint = false;
+bool usedHint = false;
 int hintX, hintY;
 int hintLetterPos = -1;
 
@@ -150,8 +151,7 @@ int initialize_game1(){
     }
 
 
-     seconds = 0; // Reset timer counter
-    timer_start_value =  seconds;
+    seconds = 0; // Reset timer counter
 
     gameActive = true;
     return 0;
@@ -190,11 +190,10 @@ void initialize_game2() {
     }
 
     if (!gameActive) {
-        shuffle_words(currentWords, currentWordsCount);
+        //shuffle_words(currentWords, currentWordsCount);
     }
     
-     seconds = 0; // Reset timer counter
-    timer_start_value =  seconds;
+    seconds = 0; // Reset timer counter
 
     gameActive = true;
     strcpy(word, currentWords[current_word]);
@@ -288,7 +287,7 @@ int draw_game(){
     //convert seconds to number
     char numberStr[16];
     sprintf(numberStr, "%d", seconds);
-    drawText( numberStr,xResolution * 0.04,  yResolution* 0.1);
+    drawText(numberStr ,xResolution * 0.04,  yResolution* 0.1);
 
 
     int spaceBetweenWords = ((yResolution * 0.6)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.4 of the bottom empty
@@ -356,9 +355,15 @@ int draw_game(){
 
     draw_hint_button();
 
+
+
     // Draw the win/lose message if the game is over
     if (!gameActive) {
         clear_screen();
+        char timeStr[16];
+        int minutes = seconds / 60;
+        int remainingSeconds = seconds % 60;
+        sprintf(timeStr, "TIME TAKEN: %dMIN %02dSEC", minutes, remainingSeconds);
         if (game2Won) {
             drawText("YOU WON THIS GAME MODE", (xResolution - strlen("YOU WON THIS GAME MODE") * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 300);
         } else if (gameWon) {
@@ -368,6 +373,7 @@ int draw_game(){
             drawText("YOU LOSE", (xResolution - 9 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 300);
             drawText(word, (xResolution - strlen(word) * letterSprites[0]->width) / 2, yResolution - 2 * letterSprites[0]->height - 150);
         }
+        drawText(timeStr, (xResolution - strlen(timeStr) * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 250);
         drawText("PRESS ENTER TO CONTINUE", (xResolution - strlen("PRESS ENTER TO CONTINUE") * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 10);
         return 0;
     }
@@ -518,7 +524,7 @@ void mouse_handler_game() {
     if (mouse_packet.lb) {
         if (!gameWon) {
 
-            if (!isDraggingHint && current_x >= hintX && current_x <= hintX + 30 && current_y >= hintY && current_y <= hintY + 30) {
+            if (!isDraggingHint && current_x >= hintX && current_x <= hintX + 30 && current_y >= hintY && current_y <= hintY + 30 && (!usedHint)) {
                 isDraggingHint = true;
             }
 
@@ -561,7 +567,7 @@ void mouse_handler_game() {
     } 
     //no left click
     else{
-        if (isDraggingHint) {
+        if (isDraggingHint && (!usedHint)) {
             isDraggingHint = false;
 
             // Check if the hint is dropped on the current guess
@@ -572,6 +578,7 @@ void mouse_handler_game() {
                     int spaceBetweenLetters = (xResolution / (2 * current_word_length));
                     hintLetterPos = (current_x - xResolution * 0.25 + 30) / spaceBetweenLetters;
                     attempts[current_guess][hintLetterPos] = word[hintLetterPos]; // Place the correct letter
+                    usedHint = true;
                 }
             }
         }

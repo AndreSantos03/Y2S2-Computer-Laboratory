@@ -35,38 +35,3 @@ Loaded sprite: width=30, height=40
 Loaded sprite: width=30, height=40
 Loaded sprite: width=30, height=40
 Loaded sprite: width=30, height=40
- char guess F   and charWord F
- char guess I   and charWord I
- char guess N   and charWord N
- char guess E   and charWord E
- char guess R   and charWord R
-Time taken to win: 6 s
- char guess L   and charWord F
- char guess I   and charWord I
- char guess F   and charWord N
- char guess T   and charWord E
- char guess S   and charWord R
- char guess M   and charWord F
- char guess I   and charWord I
- char guess N   and charWord N
- char guess D   and charWord E
- char guess Y   and charWord R
- char guess F   and charWord F
- char guess I   and charWord I
- char guess N   and charWord N
- char guess E   and charWord E
- char guess R   and charWord R
-Time taken to win: 269 s
- char guess C   and charWord B
- char guess A   and charWord A
- char guess T   and charWord T
- char guess P   and charWord B
- char guess A   and charWord A
- char guess T   and charWord T
- char guess R   and charWord B
- char guess A   and charWord A
- char guess T   and charWord T
- char guess B   and charWord B
- char guess A   and charWord A
- char guess T   and charWord T
-Time taken to win: 1236 s

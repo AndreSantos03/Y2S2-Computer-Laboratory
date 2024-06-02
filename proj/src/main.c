@@ -6,6 +6,7 @@ bool isGameRunning;
 //game
 extern char word[MAX_WORD_LENGTH];
 extern GameState gameState;
+extern bool gameActive;
 //video
 extern vbe_mode_info_t mode_info;
 extern int bytesPerPixel;
@@ -65,32 +66,32 @@ int handle_interrupts(){
           case HARDWARE:
             if (msg.m_notify.interrupts & irq_timer) {
               timer_int_handler();
-              if(counter_timer%60==0){
+              if(counter_timer%60==0 && gameActive){
                 seconds++;
               }
               
               if (previousState != gameState) {
-                            if (gameState == MENU || gameState == SELECT_LETTERS) {
-                                vg_exit();
-                                video_init(0x115);
-                            } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
-                                vg_exit();
-                                video_init(0x14C);
-                            }
-                            previousState = gameState;
-                        }
+                if (gameState == MENU || gameState == SELECT_LETTERS) {
+                  vg_exit();
+                  video_init(0x115);
+                } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
+                  vg_exit();
+                  video_init(0x14C);
+                }
+                previousState = gameState;
+                }
 
-                        clear_screen();
-                        if (gameState == MENU) {
-                            draw_menu();
-                        } else if (gameState == SELECT_LETTERS) {
-                            draw_menu2();
-                        } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
-                            draw_game();
-                        }
+                clear_screen();
+                if (gameState == MENU) {
+                  draw_menu();
+                } else if (gameState == SELECT_LETTERS) {
+                  draw_menu2();
+                } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
+                  draw_game();
+                }
 
-                        drawSprite(mouseCursor, current_x, current_y);
-                        swap_buffers();
+                drawSprite(mouseCursor, current_x, current_y);
+                swap_buffers();
             }
             //Keyboard
             if (msg.m_notify.interrupts & irq_keyboard) {
