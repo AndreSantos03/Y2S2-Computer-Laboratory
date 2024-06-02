@@ -10,25 +10,30 @@
 
 Sprite *mouseCursor;
 Sprite *letterSprites[26] = { NULL };
+Sprite *numberSprites[10] = { NULL };
 Sprite *youWonSprite;
 Sprite *youLoseSprite;
 
 Sprite *create_sprite(xpm_map_t pic) {
-    Sprite *sp = (Sprite *) malloc ( sizeof(Sprite));
+    Sprite *sp = (Sprite *) malloc(sizeof(Sprite));
     xpm_image_t img;
 
-    if( sp == NULL ) return NULL;
+    if (sp == NULL) {
+        printf("Failed to allocate memory for sprite\n");
+        return NULL;
+    }
 
     sp->map = (uint32_t *) xpm_load(pic, XPM_8_8_8_8, &img);
-
-    if( sp->map == NULL ) {
-        printf("The sprite is null\n");
+    if (sp->map == NULL) {
+        printf("Failed to load sprite map\n");
+        printf("Attempting to load sprite with dimensions: width=%d, height=%d\n", img.width, img.height);
         free(sp);
         return NULL;
     }
 
-    sp->width = img.width; 
-    sp->height=img.height;
+    sp->width = img.width;
+    sp->height = img.height;
+    printf("Loaded sprite: width=%d, height=%d\n", sp->width, sp->height);
     return sp;
 }
 
@@ -53,6 +58,19 @@ int drawSprite(Sprite *sprite, int x, int y){
 void loadSprites(){
     //Load the loaded sprites
     mouseCursor = create_sprite((xpm_map_t) mouse_xpm);
+
+
+    //numbers
+    numberSprites[0] = create_sprite((xpm_map_t) digit_0_xpm);
+    numberSprites[1] = create_sprite((xpm_map_t) digit_1_xpm);
+    numberSprites[2] = create_sprite((xpm_map_t) digit_2_xpm);
+    numberSprites[3] = create_sprite((xpm_map_t) digit_3_xpm);
+    numberSprites[4] = create_sprite((xpm_map_t) digit_4_xpm);
+    numberSprites[5] = create_sprite((xpm_map_t) digit_5_xpm);
+    numberSprites[6] = create_sprite((xpm_map_t) digit_6_xpm);
+    numberSprites[7] = create_sprite((xpm_map_t) digit_7_xpm);
+    numberSprites[8] = create_sprite((xpm_map_t) digit_8_xpm);
+    numberSprites[9] = create_sprite((xpm_map_t) digit_9_xpm);
 
     //letters
     letterSprites[0] = create_sprite((xpm_map_t) a_xpm);
@@ -93,21 +111,28 @@ void destroySprites(){
         destroy_sprite(letterSprites[i]);
     }
 
+    for(int i = 0; i < 10;i++){
+        destroy_sprite(numberSprites[i]);
+    }
+
     destroy_sprite(youWonSprite);
     destroy_sprite(youLoseSprite);
 }
 
-int drawText(const char *text, int x, int y){
+int drawText(const char *text, int x, int y) {
     int offset = 0;
-    for(const char *p = text; *p != '\0'; p++){
-        if(*p >= 'A' && *p <= 'Z'){
+    for (const char *p = text; *p != '\0'; p++) {
+        if (*p >= 'A' && *p <= 'Z') {
             int index = *p - 'A';
             drawSprite(letterSprites[index], x + offset, y);
             offset += letterSprites[index]->width;
-        } else if(*p == ' '){
+        } else if (*p >= '0' && *p <= '9') {
+            int index = *p - '0';
+            drawSprite(numberSprites[index], x + offset, y);
+            offset += numberSprites[index]->width;
+        } else if (*p == ' ') {
             offset += letterSprites[0]->width;
         }
     }
-
     return 0;
 }

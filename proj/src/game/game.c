@@ -283,6 +283,14 @@ void give_guess() {
 
 int draw_game(){
 
+    //draw timer 
+    drawText("TIMER", xResolution * 0.04,  yResolution* 0.02);
+    //convert seconds to number
+    char numberStr[16];
+    sprintf(numberStr, "%d", seconds);
+    drawText( numberStr,xResolution * 0.04,  yResolution* 0.1);
+
+
     int spaceBetweenWords = ((yResolution * 0.6)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.4 of the bottom empty
 
     //draw guess attempt
@@ -485,7 +493,6 @@ void draw_mouse_keyboard(){
         }
     }
 
-    // draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);     
 
 }
 
