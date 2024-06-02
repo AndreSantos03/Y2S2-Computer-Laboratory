@@ -97,6 +97,7 @@ bool isDraggingLetter = false;
 int indexDraggedLetter = 0;
 
 bool isDraggingHint = false;
+bool usedHint = false;
 int hintX, hintY;
 int hintLetterPos = -1;
 
@@ -523,7 +524,7 @@ void mouse_handler_game() {
     if (mouse_packet.lb) {
         if (!gameWon) {
 
-            if (!isDraggingHint && current_x >= hintX && current_x <= hintX + 30 && current_y >= hintY && current_y <= hintY + 30) {
+            if (!isDraggingHint && current_x >= hintX && current_x <= hintX + 30 && current_y >= hintY && current_y <= hintY + 30 && (!usedHint)) {
                 isDraggingHint = true;
             }
 
@@ -566,7 +567,7 @@ void mouse_handler_game() {
     } 
     //no left click
     else{
-        if (isDraggingHint) {
+        if (isDraggingHint && (!usedHint)) {
             isDraggingHint = false;
 
             // Check if the hint is dropped on the current guess
@@ -577,6 +578,7 @@ void mouse_handler_game() {
                     int spaceBetweenLetters = (xResolution / (2 * current_word_length));
                     hintLetterPos = (current_x - xResolution * 0.25 + 30) / spaceBetweenLetters;
                     attempts[current_guess][hintLetterPos] = word[hintLetterPos]; // Place the correct letter
+                    usedHint = true;
                 }
             }
         }

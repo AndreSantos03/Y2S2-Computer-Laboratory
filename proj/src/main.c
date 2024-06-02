@@ -71,27 +71,27 @@ int handle_interrupts(){
               }
               
               if (previousState != gameState) {
-                            if (gameState == MENU || gameState == SELECT_LETTERS) {
-                                vg_exit();
-                                video_init(0x115);
-                            } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
-                                vg_exit();
-                                video_init(0x14C);
-                            }
-                            previousState = gameState;
-                        }
+                if (gameState == MENU || gameState == SELECT_LETTERS) {
+                  vg_exit();
+                  video_init(0x115);
+                } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
+                  vg_exit();
+                  video_init(0x14C);
+                }
+                previousState = gameState;
+                }
 
-                        clear_screen();
-                        if (gameState == MENU) {
-                            draw_menu();
-                        } else if (gameState == SELECT_LETTERS) {
-                            draw_menu2();
-                        } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
-                            draw_game();
-                        }
+                clear_screen();
+                if (gameState == MENU) {
+                  draw_menu();
+                } else if (gameState == SELECT_LETTERS) {
+                  draw_menu2();
+                } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
+                  draw_game();
+                }
 
-                        drawSprite(mouseCursor, current_x, current_y);
-                        swap_buffers();
+                drawSprite(mouseCursor, current_x, current_y);
+                swap_buffers();
             }
             //Keyboard
             if (msg.m_notify.interrupts & irq_keyboard) {

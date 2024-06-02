@@ -40,4 +40,4 @@ Loaded sprite: width=30, height=40
  char guess N   and charWord N
  char guess E   and charWord E
  char guess R   and charWord R
-Time taken to win: 7 s
+Time taken to win: 16 s
