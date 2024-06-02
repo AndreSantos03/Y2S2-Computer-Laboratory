@@ -87,7 +87,7 @@ GameState gameState = MENU;
 bool gameWon = false;
 bool game2Won = false;
 
-char* menuOptions[MENU_OPTIONS] = {"GAME MODE I", "GAME MODE II"};
+char* menuOptions[MENU_OPTIONS] = {"DAILY WORD", "RANDOM WORD"};
 char* menu2Options[MENU2_OPTIONS] = {"III", "IV", "V", "VI"};
 int selectedOption = -1;
 bool optionSelected = false;
@@ -100,9 +100,8 @@ bool isDraggingHint = false;
 int hintX, hintY;
 int hintLetterPos = -1;
 
-int timer_hook_id = 0;
-int timer_counter = 0;
-int timer_start_value = 0;
+extern int seconds;
+int timer_start_value;
 
 int initialize_game1(){
     
@@ -151,8 +150,8 @@ int initialize_game1(){
     }
 
 
-    timer_counter = 0; // Reset timer counter
-    timer_start_value = timer_counter;
+     seconds = 0; // Reset timer counter
+    timer_start_value =  seconds;
 
     gameActive = true;
     return 0;
@@ -194,8 +193,8 @@ void initialize_game2() {
         shuffle_words(currentWords, currentWordsCount);
     }
     
-    timer_counter = 0; // Reset timer counter
-    timer_start_value = timer_counter;
+     seconds = 0; // Reset timer counter
+    timer_start_value =  seconds;
 
     gameActive = true;
     strcpy(word, currentWords[current_word]);
@@ -265,8 +264,7 @@ void give_guess() {
     if(currentCount == current_word_length) {
         gameActive = false;
         gameWon = true;
-        int timer_elapsed = timer_counter - timer_start_value;
-        printf("Time taken to win: %d ms\n", timer_elapsed);
+        printf("Time taken to win: %d s\n",  seconds);
 
         if (gameState == GAME_MODE_2) {
             if (current_word == currentWordsCount) {
@@ -284,6 +282,7 @@ void give_guess() {
 }
 
 int draw_game(){
+
     int spaceBetweenWords = ((yResolution * 0.6)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.4 of the bottom empty
 
     //draw guess attempt

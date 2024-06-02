@@ -39,7 +39,6 @@
 #include "../images/letters/y.xpm"
 #include "../images/letters/z.xpm"
 
-<<<<<<< HEAD
 #include "../images/numbers/0.xpm"
 #include "../images/numbers/1.xpm"
 #include "../images/numbers/2.xpm"
@@ -50,13 +49,12 @@
 #include "../images/numbers/7.xpm"
 #include "../images/numbers/8.xpm"
 #include "../images/numbers/9.xpm"
-=======
+
 
 /**
  * @struct Sprite
  * @brief Represents a sprite image.
  */
->>>>>>> fa49e626ba25b86fda3c974b234bf58d700014e7
 
 typedef struct {
     uint16_t x, y;          ///< Position of the sprite.
@@ -110,9 +108,7 @@ void loadSprites();
  * This function frees the memory allocated for all loaded sprites.
  */
 void destroySprites();
-<<<<<<< HEAD
-int draw_letter(char letter, int x, int y);
-=======
+
 
 /**
  * @brief Draws text on the screen using letter sprites.
@@ -125,7 +121,6 @@ int draw_letter(char letter, int x, int y);
  * @param y Y-coordinate of the top-left corner of the text.
  * @return 0 on success.
  */
->>>>>>> fa49e626ba25b86fda3c974b234bf58d700014e7
 int drawText(const char *text, int x, int y);
 
 #endif
