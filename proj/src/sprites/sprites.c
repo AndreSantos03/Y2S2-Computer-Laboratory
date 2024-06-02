@@ -8,7 +8,7 @@
 #include "sprites.h"
 #include "../controller/graphics.h"
 
-Sprite *mouseCursor;
+Sprite *mouseCursor; 
 Sprite *letterSprites[26] = { NULL };
 Sprite *numberSprites[10] = { NULL };
 Sprite *youWonSprite;

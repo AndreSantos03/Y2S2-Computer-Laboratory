@@ -6,6 +6,7 @@ bool isGameRunning;
 //game
 extern char word[MAX_WORD_LENGTH];
 extern GameState gameState;
+extern bool gameActive;
 //video
 extern vbe_mode_info_t mode_info;
 extern int bytesPerPixel;
@@ -65,7 +66,7 @@ int handle_interrupts(){
           case HARDWARE:
             if (msg.m_notify.interrupts & irq_timer) {
               timer_int_handler();
-              if(counter_timer%60==0){
+              if(counter_timer%60==0 && gameActive){
                 seconds++;
               }
               

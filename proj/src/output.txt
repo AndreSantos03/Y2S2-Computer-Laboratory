@@ -1,25 +1,43 @@
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=30
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
+Loaded sprite: width=30, height=40
  char guess F   and charWord F
  char guess I   and charWord I
  char guess N   and charWord N
  char guess E   and charWord E
  char guess R   and charWord R
 Time taken to win: 7 s
- char guess F   and charWord F
- char guess I   and charWord I
- char guess N   and charWord N
- char guess E   and charWord E
- char guess R   and charWord R
-Time taken to win: 13 s
- char guess C   and charWord L
- char guess A   and charWord O
- char guess T   and charWord G
- char guess D   and charWord L
- char guess O   and charWord O
- char guess G   and charWord G
- char guess H   and charWord L
- char guess O   and charWord O
- char guess G   and charWord G
- char guess L   and charWord L
- char guess O   and charWord O
- char guess G   and charWord G
-Time taken to win: 34 s
