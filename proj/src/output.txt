@@ -35,3 +35,12 @@ Loaded sprite: width=30, height=40
 Loaded sprite: width=30, height=40
 Loaded sprite: width=30, height=40
 Loaded sprite: width=30, height=40
+<<<<<<< HEAD
+=======
+ char guess F   and charWord F
+ char guess I   and charWord I
+ char guess N   and charWord N
+ char guess E   and charWord E
+ char guess R   and charWord R
+Time taken to win: 16 s
+>>>>>>> 686a870b9f9b182947ba0a138eb84700f81cae15
