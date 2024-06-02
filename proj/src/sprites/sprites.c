@@ -1,4 +1,8 @@
-#include <lcom/lcf.h>
+/**
+ * @file sprites.c
+ * @brief Contains function implementations for managing sprites.
+ */
+
 
 #include "sprites.h"
 #include "../controller/graphics.h"

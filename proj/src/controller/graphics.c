@@ -1,4 +1,3 @@
-#include <lcom/lcf.h>
 #include "graphics.h"
 
 vbe_mode_info_t mode_info;

@@ -1,7 +1,4 @@
-#include <lcom/lcf.h>
-#include <minix/sysutil.h>
 #include "mouse.h"
-#include "graphics.h"
 
 
 
