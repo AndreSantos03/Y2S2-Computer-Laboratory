@@ -1,16 +1,18 @@
-#WORDGUESSER
+# WORDGUESSER
 
 ![Main Menu](image.png)
 
-Word Guesser is based on the famous Wordle(https://www.nytimes.com/games/wordle/index.html) game.
-To keep it simple in this game you have to guess a word. As you keep guessing some letters might have different background colors.
-Red means that that letter doesn't belong to the word, if it is yellow it means that the letter belongs to the word, but it's on the wrong place, if it is green it means the letters it's on the right spot.
+Word Guesser is based on the famous [Wordle](https://www.nytimes.com/games/wordle/index.html) game.
+To keep it simple in this game, you have to guess a word. As you keep guessing, some letters might have different background colors.
+- **Red** means that the letter doesn't belong to the word.
+- **Yellow** means that the letter belongs to the word, but it's in the wrong place.
+- **Green** means the letter is in the right spot.
 
-The player wins if he gets the word under 5 tries.
+The player wins if they guess the word in under 5 tries.
 
-##The game contains 2 gamemodes!
-The first is "Daily word". Here there will be a word that will change each day.
-The other one is "Random word". Where the user can choose the length of the word to guess and the word will change as you keep playing.
+## The game contains 2 gamemodes!
+1. **Daily word**: Here, there will be a word that changes each day.
+2. **Random word**: The user can choose the length of the word to guess, and the word will change as you keep playing.
 
 ![Guess with some yellow letters](image-1.png)
 
@@ -18,13 +20,11 @@ The other one is "Random word". Where the user can choose the length of the word
 
 ![Easy! (The word was finer)](image-3.png)
 
-
-
 LCOM Project for group T&lt;m&gt;&lt;n&gt;G&lt;p&gt;&lt;q&gt;.
 
 Group members:
 
-1. &lt;André&gt; &lt;Santos&gt; (&lt;up202108658@fe.up.pt&gt;)
-2. &lt;Tiago&gt; &lt;Oliveira&gt; (&lt;up202009302@fe.up.pt&gt;)
-3. &lt;Tiago&gt; &lt;Martins&gt; (&lt;up202206640@fe.up.pt&gt;)
-4. &lt;first name&gt; &lt;family name&gt; (&lt;email address&gt;)
+1. André Santos (<up202108658@fe.up.pt>)
+2. Tiago Oliveira (<up202009302@fe.up.pt>)
+3. Tiago Martins (<up202206640@fe.up.pt>)
+4. &lt;First Name&gt; &lt;Family Name&gt; (&lt;email address&gt;)
