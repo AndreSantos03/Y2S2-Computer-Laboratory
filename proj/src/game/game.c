@@ -66,7 +66,7 @@ int hintX, hintY;
 int hintLetterPos = -1;
 
 int initialize_game1(){
-
+    
     memset(attempts, '\0', sizeof(attempts));
     memset(results, '\0', sizeof(results));
 
@@ -649,8 +649,8 @@ void shuffle_words(char *words[], int count) {
 void draw_hint_button() {
     hintX = xResolution - 50; // Hint button's x position
     hintY = 20; // Hint button's y position
-    draw_rectangle(hintX, hintY, 40, 50, 0xFFFF00); // Yellow rectangle for hint button
-    drawText("HINT", hintX + 5, hintY + 5);
+    draw_rectangle(hintX, hintY, 35, 40, 0xFFFF00); // Yellow rectangle for hint button
+    drawText("H", hintX, hintY);
     if (isDraggingHint) {
         drawText("X", current_x, current_y);
     }

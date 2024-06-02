@@ -51,6 +51,8 @@ int handle_interrupts(){
     if(timer_subscribe_int(&irq_timer)) return 1;
     if(rtc_subscribe_interrupts()) return 1;
 
+    GameState previousState = gameState;
+
     while(isGameRunning){
       if( driver_receive(ANY, &msg, &ipc_status) != 0 ){
         printf("Error");
@@ -63,18 +65,28 @@ int handle_interrupts(){
             if (msg.m_notify.interrupts & irq_timer) {
               timer_int_handler();
               
-              //displays
-              clear_screen();
-              if (gameState == MENU) {
-                draw_menu();
-              }  else if (gameState == SELECT_LETTERS) {
-                draw_menu2();
-              } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
-                draw_game();
-              }
-              
-              drawSprite(mouseCursor, current_x, current_y);
-              swap_buffers();
+              if (previousState != gameState) {
+                            if (gameState == MENU || gameState == SELECT_LETTERS) {
+                                vg_exit();
+                                video_init(0x115);
+                            } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
+                                vg_exit();
+                                video_init(0x14C);
+                            }
+                            previousState = gameState;
+                        }
+
+                        clear_screen();
+                        if (gameState == MENU) {
+                            draw_menu();
+                        } else if (gameState == SELECT_LETTERS) {
+                            draw_menu2();
+                        } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
+                            draw_game();
+                        }
+
+                        drawSprite(mouseCursor, current_x, current_y);
+                        swap_buffers();
             }
             //Keyboard
             if (msg.m_notify.interrupts & irq_keyboard) {

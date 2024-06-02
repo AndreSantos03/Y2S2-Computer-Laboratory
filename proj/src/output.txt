@@ -1,1 +1,26 @@
 inside
+ char guess F   and charWord F
+ char guess I   and charWord I
+ char guess N   and charWord N
+ char guess E   and charWord E
+ char guess R   and charWord R
+ char guess A   and charWord L
+ char guess W   and charWord I
+ char guess F   and charWord O
+ char guess D   and charWord N
+ char guess W   and charWord L
+ char guess A   and charWord I
+ char guess W   and charWord O
+ char guess F   and charWord N
+ char guess E   and charWord L
+ char guess A   and charWord I
+ char guess E   and charWord O
+ char guess F   and charWord N
+ char guess A   and charWord L
+ char guess W   and charWord I
+ char guess F   and charWord O
+ char guess A   and charWord N
+ char guess A   and charWord L
+ char guess W   and charWord I
+ char guess F   and charWord O
+ char guess A   and charWord N
