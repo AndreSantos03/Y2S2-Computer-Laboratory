@@ -1,25 +1,41 @@
+ char guess L   and charWord F
+ char guess I   and charWord I
+ char guess F   and charWord N
+ char guess T   and charWord E
+ char guess S   and charWord R
+ char guess M   and charWord F
+ char guess I   and charWord I
+ char guess N   and charWord N
+ char guess D   and charWord E
+ char guess Y   and charWord R
  char guess F   and charWord F
  char guess I   and charWord I
  char guess N   and charWord N
  char guess E   and charWord E
  char guess R   and charWord R
-Time taken to win: 7 s
- char guess F   and charWord F
- char guess I   and charWord I
- char guess N   and charWord N
- char guess E   and charWord E
- char guess R   and charWord R
-Time taken to win: 13 s
- char guess C   and charWord L
- char guess A   and charWord O
- char guess T   and charWord G
- char guess D   and charWord L
- char guess O   and charWord O
- char guess G   and charWord G
- char guess H   and charWord L
- char guess O   and charWord O
- char guess G   and charWord G
- char guess L   and charWord L
- char guess O   and charWord O
- char guess G   and charWord G
-Time taken to win: 34 s
+Time taken to win: 1514 s
+ char guess E   and charWord F
+ char guess S   and charWord I
+ char guess G   and charWord N
+ char guess F   and charWord E
+ char guess E   and charWord R
+ char guess S   and charWord F
+ char guess D   and charWord I
+ char guess R   and charWord N
+ char guess G   and charWord E
+ char guess S   and charWord R
+ char guess S   and charWord F
+ char guess E   and charWord I
+ char guess G   and charWord N
+ char guess S   and charWord E
+ char guess E   and charWord R
+ char guess S   and charWord F
+ char guess E   and charWord I
+ char guess G   and charWord N
+ char guess S   and charWord E
+ char guess E   and charWord R
+ char guess S   and charWord F
+ char guess E   and charWord I
+ char guess G   and charWord N
+ char guess S   and charWord E
+ char guess E   and charWord R
