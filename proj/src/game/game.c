@@ -649,7 +649,7 @@ void shuffle_words(char *words[], int count) {
 void draw_hint_button() {
     hintX = xResolution - 50; // Hint button's x position
     hintY = 20; // Hint button's y position
-    draw_rectangle(hintX, hintY, 30, 30, 0xFFFF00); // Yellow rectangle for hint button
+    draw_rectangle(hintX, hintY, 40, 50, 0xFFFF00); // Yellow rectangle for hint button
     drawText("HINT", hintX + 5, hintY + 5);
     if (isDraggingHint) {
         drawText("X", current_x, current_y);
