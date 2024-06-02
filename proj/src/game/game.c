@@ -50,7 +50,7 @@ GameState gameState = MENU;
 bool gameWon = false;
 bool game2Won = false;
 
-char* menuOptions[MENU_OPTIONS] = {"GAME MODE I", "GAME MODE II"};
+char* menuOptions[MENU_OPTIONS] = {"DAILY WORD", "RANDOM WORD"};
 char* menu2Options[MENU2_OPTIONS] = {"III", "IV", "V", "VI"};
 int selectedOption = -1;
 bool optionSelected = false;
@@ -225,59 +225,62 @@ void give_guess() {
     current_letter = 0;
 }
 
-int draw_game(){
-    int spaceBetweenWords = ((yResolution * 0.8)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.2 of the bottom empty
+int draw_game() {
+    int spaceBetweenWords = ((yResolution * 0.8) / GUESS_ATTEMPTS); // splits the screen between attempts and leaves 0.2 of the bottom empty
 
-    //draw guess attempt
-    for(int row = 0; row < GUESS_ATTEMPTS;row++){
+    // Draw guess attempts
+    for (int row = 0; row < GUESS_ATTEMPTS; row++) {
+        int yPos = spaceBetweenWords * row + 10; // 10 is the offset for the beginning
 
-        int yPos = spaceBetweenWords * row + 10; //10 is the offset for the beggining
-
-        //draw line
-        int spaceBetweenLetters = (xResolution/(2 * current_word_length));
+        // Draw line
+        int spaceBetweenLetters = (xResolution / (2 * current_word_length));
         for (int col = 0; col < current_word_length; col++) {
-
             int xPos = (xResolution / 4) + (spaceBetweenLetters * col);
 
             char letter = attempts[row][col];
             char colorResult = results[row][col];
 
-            //checks to see if result has been given
-            if(colorResult != '\0'){
+            // Checks to see if result has been given
+            if (colorResult != '\0') {
                 uint32_t colorHex;
-                switch (colorResult)
-                {
-                case 'G':
-                    colorHex = 0x00FF00; // Green color
-                    break;
-                case 'R':
-                    colorHex = 0xFF0000; // Red color
-                    break;
-                case 'Y':
-                    colorHex = 0xFFFF00; // Yellow color
-                    break;
-                default:
-                    colorHex = 0x000000; // Black color
-                    break;
+                switch (colorResult) {
+                    case 'G':
+                        colorHex = 0x00FF00; // Green color
+                        break;
+                    case 'R':
+                        colorHex = 0xFF0000; // Red color
+                        break;
+                    case 'Y':
+                        colorHex = 0xFFFF00; // Yellow color
+                        break;
+                    default:
+                        colorHex = 0x000000; // Black color
+                        break;
                 }
-                draw_rectangle(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,colorHex);
+                draw_rectangle(xPos - 8, yPos - 2, BORDER_WIDTH, BORDER_HEIGHT, colorHex);
             }
 
-
-
-            //checks to see if the attempts has been written
-            if(letter != '\0'){
+            // Checks to see if the attempts has been written
+            if (letter != '\0') {
                 int index = attempts[row][col] - 'A';
 
                 Sprite *letterSprite = letterSprites[index];
-                //draw the letter
+                // Draw the letter
                 drawSprite(letterSprite, xPos, yPos);
             }
 
-            //draw the rectangle box
-            draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);        
+            // Draw the rectangle box
+            draw_border(xPos - 8, yPos - 2, BORDER_WIDTH, BORDER_HEIGHT, 0xFFFFFF, 3);
         }
     }
+
+    // Draw the HINT button
+    int hintButtonWidth = 100;
+    int hintButtonHeight = 50;
+    int xPosHintButton = 20;
+    int yPosHintButton = 20;
+    draw_rectangle(xPosHintButton, yPosHintButton, hintButtonWidth, hintButtonHeight, 0xFF00FF); // Pink background for hint button
+    drawText("HINT", xPosHintButton + 10, yPosHintButton + 10);
 
     // Draw the win/lose message if the game is over
     if (!gameActive) {
@@ -289,7 +292,7 @@ int draw_game(){
         } else {
             drawText("YOU LOSE", (xResolution - 9 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 300);
             drawText(word, (xResolution - strlen(word) * letterSprites[0]->width) / 2, yResolution - 2 * letterSprites[0]->height - 150);
-        } //deviamos de mostrar a palavra no game mode 2?
+        }
         drawText("PRESS ENTER TO CONTINUE", (xResolution - strlen("PRESS ENTER TO CONTINUE") * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 10);
         return 0;
     }
@@ -298,11 +301,12 @@ int draw_game(){
     int buttonHeight = 50;
     int xPosButton = (xResolution - buttonWidth) / 2;
     int yPosButton = yResolution - buttonHeight - 20;
-    draw_rectangle(xPosButton-10, yPosButton, buttonWidth + 16, buttonHeight, 0xFF0000); // Red background for button
+    draw_rectangle(xPosButton - 10, yPosButton, buttonWidth + 16, buttonHeight, 0xFF0000); // Red background for button
     drawText("RESTART", (xResolution - strlen("RESTART") * letterSprites[0]->width) / 2, yPosButton + (buttonHeight - letterSprites[0]->height) / 2);
 
     return 0;
 }
+
 
 int draw_menu() {
     int spaceBetweenOptions = (yResolution / (MENU_OPTIONS + 2)); // Space between options, with some padding
