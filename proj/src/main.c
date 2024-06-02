@@ -1,3 +1,11 @@
+/**
+ * @file main.c
+ * @brief Main file where the game starts.
+ * 
+ * File that contains the main function and also functions that handle interrupts.
+ */
+
+
 #include "game/game.h"
 
 bool isGameRunning;
@@ -26,6 +34,17 @@ extern Sprite *mouseCursor;
 
 
 
+
+/**
+ * @brief Handles all game interrupts.
+ * 
+ * This function initializes the video mode, loads sprites, sets the timer frequency,
+ * and subscribes to various interrupts (keyboard, mouse, timer, RTC). It also contains
+ * the main game loop, which handles drawing the game screen and responding to hardware
+ * interrupts. At the end, it unsubscribes from interrupts and cleans up resources.
+ * 
+ * @return int 0 on success, 1 on failure.
+ */
 
 int handle_interrupts(){
 
@@ -134,6 +153,20 @@ int handle_interrupts(){
   return 0;
 }
 
+
+
+/**
+ * @brief Main entry point of the game.
+ * 
+ * This function sets up the language for LCF messages, enables tracing of function invocations,
+ * redirects printf outputs to a file, and starts the LCF control flow. Finally, it performs
+ * cleanup tasks before exiting.
+ * 
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments.
+ * @return int 0 on success, 1 on failure.
+ */
+
 int main(int argc, char **argv)
 {
     // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -141,7 +174,7 @@ int main(int argc, char **argv)
 
     // enables to log function invocations that are being "wrapped" by LCF
     // [comment this out if you don't want/need it]
-    //lcf_trace_calls("/home/lcom/labs/g5/proj/src/trace.txt");
+    lcf_trace_calls("/home/lcom/labs/proj/src/trace.txt");
 
     // enables to save the output of printf function calls on a file
     // [comment this out if you don't want/need it]
@@ -157,10 +190,19 @@ int main(int argc, char **argv)
     return 0;
 }
 
-int (proj_main_loop)(int argc, char **argv) {
+/**
+ * @brief Main game function.
+ * 
+ * This function initializes the game state and calls the function to handle interrupts.
+ * 
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments.
+ * @return int 0 on success, 1 on failure.
+ */
 
+int (proj_main_loop)(int argc, char **argv) {
     isGameRunning = true;
-    handle_interrupts();
+    if (handle_interrupts()) return 1;
     return 0;
 }
 

@@ -1,0 +1,287 @@
+\hypertarget{game_8h}{}\doxysection{src/game/game.h File Reference}
+\label{game_8h}\index{src/game/game.h@{src/game/game.h}}
+
+
+Game header file, contains declarations.  
+
+
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../sprites/sprites.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../controller/mouse.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../controller/graphics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../controller/keyboard.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../controller/i8042.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../controller/rtc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../controller/i8254.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+Include dependency graph for game.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{game_8h_af0f2173e3b202ddf5756531b4471dcb2}\label{game_8h_af0f2173e3b202ddf5756531b4471dcb2}} 
+\#define {\bfseries MAX\+\_\+\+LINE\+\_\+\+LENGTH}~1024
+\item 
+\mbox{\Hypertarget{game_8h_af01b49b772a977796fa969f89ab1c26d}\label{game_8h_af01b49b772a977796fa969f89ab1c26d}} 
+\#define {\bfseries WORDS\+\_\+\+AMMOUNT}~318
+\item 
+\mbox{\Hypertarget{game_8h_aec7b4994021c554c1761ea31d016b680}\label{game_8h_aec7b4994021c554c1761ea31d016b680}} 
+\#define {\bfseries MAX\+\_\+\+WORD\+\_\+\+LENGTH}~6
+\item 
+\mbox{\Hypertarget{game_8h_aaef05698db0ca0ccc701ba09e0a682f7}\label{game_8h_aaef05698db0ca0ccc701ba09e0a682f7}} 
+\#define {\bfseries GUESS\+\_\+\+ATTEMPTS}~5
+\item 
+\mbox{\Hypertarget{game_8h_a508c36d9f15f466ef2d0d92626df3655}\label{game_8h_a508c36d9f15f466ef2d0d92626df3655}} 
+\#define {\bfseries MENU\+\_\+\+OPTIONS}~2
+\item 
+\mbox{\Hypertarget{game_8h_aba60875d02d1bd72f77d73d03959f90d}\label{game_8h_aba60875d02d1bd72f77d73d03959f90d}} 
+\#define {\bfseries MENU2\+\_\+\+OPTIONS}~4
+\item 
+\mbox{\Hypertarget{game_8h_a4221b0a24a1716cf086b820f988e4285}\label{game_8h_a4221b0a24a1716cf086b820f988e4285}} 
+\#define {\bfseries BORDER\+\_\+\+WIDTH}~45
+\item 
+\mbox{\Hypertarget{game_8h_a8d1345c22c668be330e8ff3ee4fb2463}\label{game_8h_a8d1345c22c668be330e8ff3ee4fb2463}} 
+\#define {\bfseries BORDER\+\_\+\+HEIGHT}~50
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{game_8h_a7899b65f1ea0f655e4bbf8d2a5714285}\label{game_8h_a7899b65f1ea0f655e4bbf8d2a5714285}} 
+enum {\bfseries Game\+State} \{ {\bfseries MENU}
+, {\bfseries SELECT\+\_\+\+LETTERS}
+, {\bfseries GAME\+\_\+\+MODE\+\_\+1}
+, {\bfseries GAME\+\_\+\+MODE\+\_\+2}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{game_8h_a855513ae68f44ef645c9b45fd3a708e7}{initialize\+\_\+game1}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the game for Game Mode 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a35cd2636d93162c19ecadaef2d7c49a6}{initialize\+\_\+game2}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the game for Game Mode 2. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{game_8h_a75d37ecbe7bc651784bb0e90a9ab95ec}{get\+\_\+word}} (const char $\ast$date)
+\begin{DoxyCompactList}\small\item\em Retrieves the word for a given date. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a2428084532323fa5d3d59ee04f23fd34}{give\+\_\+guess}} ()
+\begin{DoxyCompactList}\small\item\em Processes the current guess. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{game_8h_a7d771989b41395d6d703f523c6fc22eb}{draw\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Draws the current game state on the screen. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{game_8h_ac112ffda346ef49396de1be5e9ac0979}{draw\+\_\+menu2}} ()
+\begin{DoxyCompactList}\small\item\em Draws the secondary menu for selecting the number of letters per word. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a1b983f580353959811cb3eb9d84d6016}{draw\+\_\+mouse\+\_\+keyboard}} ()
+\begin{DoxyCompactList}\small\item\em Draws the on-\/screen keyboard and mouse. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a63a108f78697ff06819efdef01432403}{mouse\+\_\+handler\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Handles mouse input in the main menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a1031bed5bc98fee1a35c778b2f90e4f6}{mouse\+\_\+handler\+\_\+game}} ()
+\begin{DoxyCompactList}\small\item\em Handles mouse input during the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a7124d216ccb3202ca9f34884a6059874}{keyboard\+\_\+handler\+\_\+game}} ()
+\begin{DoxyCompactList}\small\item\em Handles keyboard input during the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a69577a629392c76ab51b075d280c3238}{keyboard\+\_\+handler\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Handles keyboard input in the main menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_aef10b2982db8e33c7d47e503fbccd2ad}{keyboard\+\_\+handler\+\_\+menu2}} ()
+\begin{DoxyCompactList}\small\item\em Handles keyboard input in the secondary menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a28defeccb695ece2e1a3776e8717787b}{shuffle\+\_\+words}} (char $\ast$words\mbox{[}$\,$\mbox{]}, int count)
+\begin{DoxyCompactList}\small\item\em Shuffles an array of words. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_ab1ad212f1a0a9fe118a8631c09b0c6e5}{draw\+\_\+hint\+\_\+button}} ()
+\begin{DoxyCompactList}\small\item\em Draws the hint button on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Game header file, contains declarations. 
+
+This file contains all the declarations and includes necessary for the implementations in \mbox{\hyperlink{game_8c}{game.\+c}} 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{game_8h_ab1ad212f1a0a9fe118a8631c09b0c6e5}\label{game_8h_ab1ad212f1a0a9fe118a8631c09b0c6e5}} 
+\index{game.h@{game.h}!draw\_hint\_button@{draw\_hint\_button}}
+\index{draw\_hint\_button@{draw\_hint\_button}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{draw\_hint\_button()}{draw\_hint\_button()}}
+{\footnotesize\ttfamily void draw\+\_\+hint\+\_\+button (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the hint button on the screen. 
+
+This function renders the hint button at a fixed position on the screen. If the hint button is being dragged, it also renders the dragging indicator. \mbox{\Hypertarget{game_8h_a7d771989b41395d6d703f523c6fc22eb}\label{game_8h_a7d771989b41395d6d703f523c6fc22eb}} 
+\index{game.h@{game.h}!draw\_menu@{draw\_menu}}
+\index{draw\_menu@{draw\_menu}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{draw\_menu()}{draw\_menu()}}
+{\footnotesize\ttfamily int draw\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the current game state on the screen. 
+
+This function renders the game board, including the guessed letters, the results (colors), and any dragged letters or hint buttons. It also displays the win/lose message if the game is over.
+
+\begin{DoxyReturn}{Returns}
+0 on success.
+\end{DoxyReturn}
+Draws the main menu on the screen.
+
+This function renders the main menu options and highlights the option that the mouse is hovering over. It also displays instructions for selecting an option.
+
+\begin{DoxyReturn}{Returns}
+0 on success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8h_ac112ffda346ef49396de1be5e9ac0979}\label{game_8h_ac112ffda346ef49396de1be5e9ac0979}} 
+\index{game.h@{game.h}!draw\_menu2@{draw\_menu2}}
+\index{draw\_menu2@{draw\_menu2}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{draw\_menu2()}{draw\_menu2()}}
+{\footnotesize\ttfamily int draw\+\_\+menu2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the secondary menu for selecting the number of letters per word. 
+
+This function renders the options for selecting the number of letters per word and highlights the option that the mouse is hovering over.
+
+\begin{DoxyReturn}{Returns}
+0 on success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8h_a1b983f580353959811cb3eb9d84d6016}\label{game_8h_a1b983f580353959811cb3eb9d84d6016}} 
+\index{game.h@{game.h}!draw\_mouse\_keyboard@{draw\_mouse\_keyboard}}
+\index{draw\_mouse\_keyboard@{draw\_mouse\_keyboard}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{draw\_mouse\_keyboard()}{draw\_mouse\_keyboard()}}
+{\footnotesize\ttfamily void draw\+\_\+mouse\+\_\+keyboard (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the on-\/screen keyboard and mouse. 
+
+This function renders the visual representation of the keyboard and mouse, including the positions of the letters and any dragged letters. \mbox{\Hypertarget{game_8h_a75d37ecbe7bc651784bb0e90a9ab95ec}\label{game_8h_a75d37ecbe7bc651784bb0e90a9ab95ec}} 
+\index{game.h@{game.h}!get\_word@{get\_word}}
+\index{get\_word@{get\_word}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{get\_word()}{get\_word()}}
+{\footnotesize\ttfamily int get\+\_\+word (\begin{DoxyParamCaption}\item[{const char $\ast$}]{date }\end{DoxyParamCaption})}
+
+
+
+Retrieves the word for a given date. 
+
+This function searches for the word associated with the provided date in the list of entries and sets it as the current word. The word is converted to uppercase.
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & The date string in the format \char`\"{}\+YYYY-\/\+MM-\/\+DD\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 if the word for the date is not found or if the date is NULL. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8h_a2428084532323fa5d3d59ee04f23fd34}\label{game_8h_a2428084532323fa5d3d59ee04f23fd34}} 
+\index{game.h@{game.h}!give\_guess@{give\_guess}}
+\index{give\_guess@{give\_guess}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{give\_guess()}{give\_guess()}}
+{\footnotesize\ttfamily void give\+\_\+guess (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Processes the current guess. 
+
+This function compares the current guess with the target word, updates the results array with feedback for each letter, and checks if the game has been won or lost. It also updates the game state accordingly. \mbox{\Hypertarget{game_8h_a855513ae68f44ef645c9b45fd3a708e7}\label{game_8h_a855513ae68f44ef645c9b45fd3a708e7}} 
+\index{game.h@{game.h}!initialize\_game1@{initialize\_game1}}
+\index{initialize\_game1@{initialize\_game1}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{initialize\_game1()}{initialize\_game1()}}
+{\footnotesize\ttfamily int initialize\+\_\+game1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the game for Game Mode 1. 
+
+This function resets the game state for Game Mode 1, loads the word list from a CSV file, updates the real-\/time clock, and selects the word for the current date. It also initializes the game timer.
+
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8h_a35cd2636d93162c19ecadaef2d7c49a6}\label{game_8h_a35cd2636d93162c19ecadaef2d7c49a6}} 
+\index{game.h@{game.h}!initialize\_game2@{initialize\_game2}}
+\index{initialize\_game2@{initialize\_game2}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{initialize\_game2()}{initialize\_game2()}}
+{\footnotesize\ttfamily void initialize\+\_\+game2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the game for Game Mode 2. 
+
+This function resets the game state for Game Mode 2, selects the appropriate word list based on the current word length, shuffles the words, and starts the game timer.
+
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8h_a7124d216ccb3202ca9f34884a6059874}\label{game_8h_a7124d216ccb3202ca9f34884a6059874}} 
+\index{game.h@{game.h}!keyboard\_handler\_game@{keyboard\_handler\_game}}
+\index{keyboard\_handler\_game@{keyboard\_handler\_game}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{keyboard\_handler\_game()}{keyboard\_handler\_game()}}
+{\footnotesize\ttfamily void keyboard\+\_\+handler\+\_\+game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard input during the game. 
+
+This function processes keyboard input, allowing the player to submit guesses (Enter), delete letters (Backspace), and return to the menu or start a new game (Escape or Enter after game over). \mbox{\Hypertarget{game_8h_a69577a629392c76ab51b075d280c3238}\label{game_8h_a69577a629392c76ab51b075d280c3238}} 
+\index{game.h@{game.h}!keyboard\_handler\_menu@{keyboard\_handler\_menu}}
+\index{keyboard\_handler\_menu@{keyboard\_handler\_menu}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{keyboard\_handler\_menu()}{keyboard\_handler\_menu()}}
+{\footnotesize\ttfamily void keyboard\+\_\+handler\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard input in the main menu. 
+
+This function processes keyboard input in the main menu and exits the game if the Escape key is pressed. \mbox{\Hypertarget{game_8h_aef10b2982db8e33c7d47e503fbccd2ad}\label{game_8h_aef10b2982db8e33c7d47e503fbccd2ad}} 
+\index{game.h@{game.h}!keyboard\_handler\_menu2@{keyboard\_handler\_menu2}}
+\index{keyboard\_handler\_menu2@{keyboard\_handler\_menu2}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{keyboard\_handler\_menu2()}{keyboard\_handler\_menu2()}}
+{\footnotesize\ttfamily void keyboard\+\_\+handler\+\_\+menu2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard input in the secondary menu. 
+
+This function processes keyboard input in the secondary menu and returns to the main menu if the Escape key is pressed. \mbox{\Hypertarget{game_8h_a1031bed5bc98fee1a35c778b2f90e4f6}\label{game_8h_a1031bed5bc98fee1a35c778b2f90e4f6}} 
+\index{game.h@{game.h}!mouse\_handler\_game@{mouse\_handler\_game}}
+\index{mouse\_handler\_game@{mouse\_handler\_game}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{mouse\_handler\_game()}{mouse\_handler\_game()}}
+{\footnotesize\ttfamily void mouse\+\_\+handler\+\_\+game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles mouse input during the game. 
+
+This function processes mouse clicks and drags during the game, allowing the player to select letters from the visual keyboard and place them in the current guess. It also handles clicks on the \char`\"{}\+Restart\char`\"{} button and the hint button. \mbox{\Hypertarget{game_8h_a63a108f78697ff06819efdef01432403}\label{game_8h_a63a108f78697ff06819efdef01432403}} 
+\index{game.h@{game.h}!mouse\_handler\_menu@{mouse\_handler\_menu}}
+\index{mouse\_handler\_menu@{mouse\_handler\_menu}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{mouse\_handler\_menu()}{mouse\_handler\_menu()}}
+{\footnotesize\ttfamily void mouse\+\_\+handler\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles mouse input in the main menu. 
+
+This function processes mouse clicks in the main menu and transitions to the appropriate game state based on the selected option. \mbox{\Hypertarget{game_8h_a28defeccb695ece2e1a3776e8717787b}\label{game_8h_a28defeccb695ece2e1a3776e8717787b}} 
+\index{game.h@{game.h}!shuffle\_words@{shuffle\_words}}
+\index{shuffle\_words@{shuffle\_words}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{shuffle\_words()}{shuffle\_words()}}
+{\footnotesize\ttfamily void shuffle\+\_\+words (\begin{DoxyParamCaption}\item[{char $\ast$}]{words\mbox{[}$\,$\mbox{]},  }\item[{int}]{count }\end{DoxyParamCaption})}
+
+
+
+Shuffles an array of words. 
+
+This function randomly shuffles an array of words using the Fisher-\/\+Yates shuffle algorithm.
+
+
+\begin{DoxyParams}{Parameters}
+{\em words} & An array of word strings to shuffle. \\
+\hline
+{\em count} & The number of words in the array. \\
+\hline
+\end{DoxyParams}

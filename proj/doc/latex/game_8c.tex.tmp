@@ -1,0 +1,450 @@
+\hypertarget{game_8c}{}\doxysection{src/game/game.c File Reference}
+\label{game_8c}\index{src/game/game.c@{src/game/game.c}}
+
+
+Game source file, contains implementations.  
+
+
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
+Include dependency graph for game.\+c\+:
+% FIG 0
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structWordEntry}{Word\+Entry}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{game_8c_a855513ae68f44ef645c9b45fd3a708e7}{initialize\+\_\+game1}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the game for Game Mode 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a35cd2636d93162c19ecadaef2d7c49a6}{initialize\+\_\+game2}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the game for Game Mode 2. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{game_8c_a75d37ecbe7bc651784bb0e90a9ab95ec}{get\+\_\+word}} (const char $\ast$date)
+\begin{DoxyCompactList}\small\item\em Retrieves the word for a given date. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a2428084532323fa5d3d59ee04f23fd34}{give\+\_\+guess}} ()
+\begin{DoxyCompactList}\small\item\em Processes the current guess. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{game_8c_a3cef68220fcc611902108d6f0159e50f}\label{game_8c_a3cef68220fcc611902108d6f0159e50f}} 
+int {\bfseries draw\+\_\+game} ()
+\item 
+int \mbox{\hyperlink{game_8c_a7d771989b41395d6d703f523c6fc22eb}{draw\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Draws the current game state on the screen. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{game_8c_ac112ffda346ef49396de1be5e9ac0979}{draw\+\_\+menu2}} ()
+\begin{DoxyCompactList}\small\item\em Draws the secondary menu for selecting the number of letters per word. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a1b983f580353959811cb3eb9d84d6016}{draw\+\_\+mouse\+\_\+keyboard}} ()
+\begin{DoxyCompactList}\small\item\em Draws the on-\/screen keyboard and mouse. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a63a108f78697ff06819efdef01432403}{mouse\+\_\+handler\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Handles mouse input in the main menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a1031bed5bc98fee1a35c778b2f90e4f6}{mouse\+\_\+handler\+\_\+game}} ()
+\begin{DoxyCompactList}\small\item\em Handles mouse input during the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a7124d216ccb3202ca9f34884a6059874}{keyboard\+\_\+handler\+\_\+game}} ()
+\begin{DoxyCompactList}\small\item\em Handles keyboard input during the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a69577a629392c76ab51b075d280c3238}{keyboard\+\_\+handler\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Handles keyboard input in the main menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_aef10b2982db8e33c7d47e503fbccd2ad}{keyboard\+\_\+handler\+\_\+menu2}} ()
+\begin{DoxyCompactList}\small\item\em Handles keyboard input in the secondary menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a28defeccb695ece2e1a3776e8717787b}{shuffle\+\_\+words}} (char $\ast$words\mbox{[}$\,$\mbox{]}, int count)
+\begin{DoxyCompactList}\small\item\em Shuffles an array of words. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_ab1ad212f1a0a9fe118a8631c09b0c6e5}{draw\+\_\+hint\+\_\+button}} ()
+\begin{DoxyCompactList}\small\item\em Draws the hint button on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{game_8c_a761a0a99bd88e4e143c042db7608aea3}\label{game_8c_a761a0a99bd88e4e143c042db7608aea3}} 
+bool {\bfseries is\+Game\+Running}
+\item 
+\mbox{\Hypertarget{game_8c_ac6eaeb4c0876cf6cd899f41fe3c25ff5}\label{game_8c_ac6eaeb4c0876cf6cd899f41fe3c25ff5}} 
+int {\bfseries x\+Resolution}
+\item 
+\mbox{\Hypertarget{game_8c_aa2f350dd0bda750656d5db5f5e37b2b3}\label{game_8c_aa2f350dd0bda750656d5db5f5e37b2b3}} 
+int {\bfseries y\+Resolution}
+\item 
+\mbox{\Hypertarget{game_8c_ae4610f386ef84d80439f954fd321856d}\label{game_8c_ae4610f386ef84d80439f954fd321856d}} 
+int {\bfseries current\+\_\+x}
+\item 
+\mbox{\Hypertarget{game_8c_ab2be4afa6b51964c04e0a4d13a099324}\label{game_8c_ab2be4afa6b51964c04e0a4d13a099324}} 
+int {\bfseries current\+\_\+y}
+\item 
+\mbox{\Hypertarget{game_8c_a3b2e64ffb96c650d6525c99be01c7331}\label{game_8c_a3b2e64ffb96c650d6525c99be01c7331}} 
+struct packet {\bfseries mouse\+\_\+packet}
+\item 
+\mbox{\Hypertarget{game_8c_aa1de7a5557e9d96b83cf03f73c92163f}\label{game_8c_aa1de7a5557e9d96b83cf03f73c92163f}} 
+uint8\+\_\+t {\bfseries scancode}
+\item 
+\mbox{\Hypertarget{game_8c_a517abe01c6e91ee7cc38b6c87bd5811a}\label{game_8c_a517abe01c6e91ee7cc38b6c87bd5811a}} 
+\mbox{\hyperlink{structSprite}{Sprite}} $\ast$ {\bfseries letter\+Sprites} \mbox{[}26\mbox{]}
+\item 
+\mbox{\Hypertarget{game_8c_adbd2927a32caa3ee992685898bae3b1c}\label{game_8c_adbd2927a32caa3ee992685898bae3b1c}} 
+char {\bfseries word} \mbox{[}MAX\+\_\+\+WORD\+\_\+\+LENGTH\mbox{]}
+\item 
+\mbox{\Hypertarget{game_8c_abbf9db93cb3cc790bbb21744c0c38071}\label{game_8c_abbf9db93cb3cc790bbb21744c0c38071}} 
+char {\bfseries attempts} \mbox{[}GUESS\+\_\+\+ATTEMPTS\mbox{]}\mbox{[}MAX\+\_\+\+WORD\+\_\+\+LENGTH\mbox{]} = \{\{\textquotesingle{}\textbackslash{}0\textquotesingle{}\}\}
+\item 
+\mbox{\Hypertarget{game_8c_a5b8fdcac1d52a9bbe3baae46506fb7f5}\label{game_8c_a5b8fdcac1d52a9bbe3baae46506fb7f5}} 
+char {\bfseries results} \mbox{[}GUESS\+\_\+\+ATTEMPTS\mbox{]}\mbox{[}MAX\+\_\+\+WORD\+\_\+\+LENGTH\mbox{]} = \{\{\textquotesingle{}\textbackslash{}0\textquotesingle{}\}\}
+\item 
+\mbox{\Hypertarget{game_8c_adc6e99338d817cf7f83cdfe535377b52}\label{game_8c_adc6e99338d817cf7f83cdfe535377b52}} 
+int {\bfseries current\+\_\+guess} = 0
+\item 
+\mbox{\Hypertarget{game_8c_ab9cc53eefc2f544e1dc6792bc9bd2ac9}\label{game_8c_ab9cc53eefc2f544e1dc6792bc9bd2ac9}} 
+int {\bfseries current\+\_\+word} = 0
+\item 
+\mbox{\Hypertarget{game_8c_a0167d301ce8147d259d3b02a29192c4b}\label{game_8c_a0167d301ce8147d259d3b02a29192c4b}} 
+int {\bfseries current\+\_\+word\+\_\+length} = 0
+\item 
+\mbox{\Hypertarget{game_8c_aab1270ef441f09d0dd3e145462440879}\label{game_8c_aab1270ef441f09d0dd3e145462440879}} 
+int {\bfseries current\+\_\+letter} = 0
+\item 
+\mbox{\Hypertarget{game_8c_a48d2e7eaa840f59bc965117851b19774}\label{game_8c_a48d2e7eaa840f59bc965117851b19774}} 
+int {\bfseries current\+Count} = 0
+\item 
+char $\ast$ {\bfseries words3} \mbox{[}$\,$\mbox{]}
+\item 
+char $\ast$ {\bfseries words4} \mbox{[}$\,$\mbox{]}
+\item 
+char $\ast$ {\bfseries words5} \mbox{[}$\,$\mbox{]}
+\item 
+char $\ast$ {\bfseries words6} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{game_8c_a1126c11d5230e90677135f696e7e8c86}\label{game_8c_a1126c11d5230e90677135f696e7e8c86}} 
+int {\bfseries words3\+\_\+count} = sizeof(words3) / sizeof(words3\mbox{[}0\mbox{]})
+\item 
+\mbox{\Hypertarget{game_8c_a9724f0274708e5e05a84c1a417adaebf}\label{game_8c_a9724f0274708e5e05a84c1a417adaebf}} 
+int {\bfseries words4\+\_\+count} = sizeof(words4) / sizeof(words4\mbox{[}0\mbox{]})
+\item 
+\mbox{\Hypertarget{game_8c_a23fccbb2cc4a4e2e1ccb49a1b93610fb}\label{game_8c_a23fccbb2cc4a4e2e1ccb49a1b93610fb}} 
+int {\bfseries words5\+\_\+count} = sizeof(words5) / sizeof(words5\mbox{[}0\mbox{]})
+\item 
+\mbox{\Hypertarget{game_8c_a41147dde4eb298a294ea56239f45513d}\label{game_8c_a41147dde4eb298a294ea56239f45513d}} 
+int {\bfseries words6\+\_\+count} = sizeof(words6) / sizeof(words6\mbox{[}0\mbox{]})
+\item 
+\mbox{\Hypertarget{game_8c_a206a103bb76198ec99c7181f20ca7f45}\label{game_8c_a206a103bb76198ec99c7181f20ca7f45}} 
+char $\ast$$\ast$ {\bfseries current\+Words}
+\item 
+\mbox{\Hypertarget{game_8c_a452116597c71257ed7a46a4006dc0d0e}\label{game_8c_a452116597c71257ed7a46a4006dc0d0e}} 
+int {\bfseries current\+Words\+Count}
+\item 
+\mbox{\Hypertarget{game_8c_a670951cbfc972e7f35f853ecadd7b36d}\label{game_8c_a670951cbfc972e7f35f853ecadd7b36d}} 
+\mbox{\hyperlink{structWordEntry}{Word\+Entry}} {\bfseries entries} \mbox{[}WORDS\+\_\+\+AMMOUNT\mbox{]}
+\item 
+\mbox{\Hypertarget{game_8c_a4361aa42f2e08e5ceb49425b6675f7bf}\label{game_8c_a4361aa42f2e08e5ceb49425b6675f7bf}} 
+bool {\bfseries game\+Active} = false
+\item 
+\mbox{\Hypertarget{game_8c_a2706ed05d331ef3b53c728a6868bda26}\label{game_8c_a2706ed05d331ef3b53c728a6868bda26}} 
+Game\+State {\bfseries game\+State} = MENU
+\item 
+\mbox{\Hypertarget{game_8c_a71132b35aeca18656186cf39ae7077a8}\label{game_8c_a71132b35aeca18656186cf39ae7077a8}} 
+bool {\bfseries game\+Won} = false
+\item 
+\mbox{\Hypertarget{game_8c_a31b903b85b4a480de8227cc6750ef534}\label{game_8c_a31b903b85b4a480de8227cc6750ef534}} 
+bool {\bfseries game2\+Won} = false
+\item 
+\mbox{\Hypertarget{game_8c_a5c9f8f5ab16417ff7449e708437e24e2}\label{game_8c_a5c9f8f5ab16417ff7449e708437e24e2}} 
+char $\ast$ {\bfseries menu\+Options} \mbox{[}MENU\+\_\+\+OPTIONS\mbox{]} = \{\char`\"{}GAME MODE I\char`\"{}, \char`\"{}GAME MODE II\char`\"{}\}
+\item 
+\mbox{\Hypertarget{game_8c_ab70abe26f36913c7c798f0c14102660c}\label{game_8c_ab70abe26f36913c7c798f0c14102660c}} 
+char $\ast$ {\bfseries menu2\+Options} \mbox{[}MENU2\+\_\+\+OPTIONS\mbox{]} = \{\char`\"{}III\char`\"{}, \char`\"{}IV\char`\"{}, \char`\"{}V\char`\"{}, \char`\"{}VI\char`\"{}\}
+\item 
+\mbox{\Hypertarget{game_8c_a4d4b64d77e8e94c0269a555600d585b1}\label{game_8c_a4d4b64d77e8e94c0269a555600d585b1}} 
+int {\bfseries selected\+Option} = -\/1
+\item 
+\mbox{\Hypertarget{game_8c_a8c3a5c562ca33feeca987f8b8b3b921d}\label{game_8c_a8c3a5c562ca33feeca987f8b8b3b921d}} 
+bool {\bfseries option\+Selected} = false
+\item 
+\mbox{\Hypertarget{game_8c_aa558a68f314099145c54d9e18be0a731}\label{game_8c_aa558a68f314099145c54d9e18be0a731}} 
+bool {\bfseries is\+Dragging\+Letter} = false
+\item 
+\mbox{\Hypertarget{game_8c_ac4bd87069643effd997c8c3f80cf6ba8}\label{game_8c_ac4bd87069643effd997c8c3f80cf6ba8}} 
+int {\bfseries index\+Dragged\+Letter} = 0
+\item 
+\mbox{\Hypertarget{game_8c_a3c6ccee8629b09bde6256ec8d5c51adf}\label{game_8c_a3c6ccee8629b09bde6256ec8d5c51adf}} 
+bool {\bfseries is\+Dragging\+Hint} = false
+\item 
+\mbox{\Hypertarget{game_8c_a117b2935abef7f5245c964fc037bb77d}\label{game_8c_a117b2935abef7f5245c964fc037bb77d}} 
+int {\bfseries hintX}
+\item 
+\mbox{\Hypertarget{game_8c_af34e71e7bb72ca8432b305af83fdc0ab}\label{game_8c_af34e71e7bb72ca8432b305af83fdc0ab}} 
+int {\bfseries hintY}
+\item 
+\mbox{\Hypertarget{game_8c_a81965b08ef9b4f3a769ac538dcce7926}\label{game_8c_a81965b08ef9b4f3a769ac538dcce7926}} 
+int {\bfseries hint\+Letter\+Pos} = -\/1
+\item 
+\mbox{\Hypertarget{game_8c_a96e6321e488d93a8134897510c435eb7}\label{game_8c_a96e6321e488d93a8134897510c435eb7}} 
+int {\bfseries timer\+\_\+hook\+\_\+id} = 0
+\item 
+\mbox{\Hypertarget{game_8c_a0f08eb193e0aedb134a1481913b6a823}\label{game_8c_a0f08eb193e0aedb134a1481913b6a823}} 
+int {\bfseries timer\+\_\+counter} = 0
+\item 
+\mbox{\Hypertarget{game_8c_a83f37ef543b6a8ba22bd33851ebb5255}\label{game_8c_a83f37ef543b6a8ba22bd33851ebb5255}} 
+int {\bfseries timer\+\_\+start\+\_\+value} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Game source file, contains implementations. 
+
+This file contains implementations of all the declarations in \mbox{\hyperlink{game_8h}{game.\+h}} 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{game_8c_ab1ad212f1a0a9fe118a8631c09b0c6e5}\label{game_8c_ab1ad212f1a0a9fe118a8631c09b0c6e5}} 
+\index{game.c@{game.c}!draw\_hint\_button@{draw\_hint\_button}}
+\index{draw\_hint\_button@{draw\_hint\_button}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{draw\_hint\_button()}{draw\_hint\_button()}}
+{\footnotesize\ttfamily void draw\+\_\+hint\+\_\+button (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the hint button on the screen. 
+
+This function renders the hint button at a fixed position on the screen. If the hint button is being dragged, it also renders the dragging indicator. \mbox{\Hypertarget{game_8c_a7d771989b41395d6d703f523c6fc22eb}\label{game_8c_a7d771989b41395d6d703f523c6fc22eb}} 
+\index{game.c@{game.c}!draw\_menu@{draw\_menu}}
+\index{draw\_menu@{draw\_menu}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{draw\_menu()}{draw\_menu()}}
+{\footnotesize\ttfamily int draw\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the current game state on the screen. 
+
+This function renders the game board, including the guessed letters, the results (colors), and any dragged letters or hint buttons. It also displays the win/lose message if the game is over.
+
+\begin{DoxyReturn}{Returns}
+0 on success.
+\end{DoxyReturn}
+Draws the main menu on the screen.
+
+This function renders the main menu options and highlights the option that the mouse is hovering over. It also displays instructions for selecting an option.
+
+\begin{DoxyReturn}{Returns}
+0 on success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8c_ac112ffda346ef49396de1be5e9ac0979}\label{game_8c_ac112ffda346ef49396de1be5e9ac0979}} 
+\index{game.c@{game.c}!draw\_menu2@{draw\_menu2}}
+\index{draw\_menu2@{draw\_menu2}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{draw\_menu2()}{draw\_menu2()}}
+{\footnotesize\ttfamily int draw\+\_\+menu2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the secondary menu for selecting the number of letters per word. 
+
+This function renders the options for selecting the number of letters per word and highlights the option that the mouse is hovering over.
+
+\begin{DoxyReturn}{Returns}
+0 on success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8c_a1b983f580353959811cb3eb9d84d6016}\label{game_8c_a1b983f580353959811cb3eb9d84d6016}} 
+\index{game.c@{game.c}!draw\_mouse\_keyboard@{draw\_mouse\_keyboard}}
+\index{draw\_mouse\_keyboard@{draw\_mouse\_keyboard}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{draw\_mouse\_keyboard()}{draw\_mouse\_keyboard()}}
+{\footnotesize\ttfamily void draw\+\_\+mouse\+\_\+keyboard (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the on-\/screen keyboard and mouse. 
+
+This function renders the visual representation of the keyboard and mouse, including the positions of the letters and any dragged letters. \mbox{\Hypertarget{game_8c_a75d37ecbe7bc651784bb0e90a9ab95ec}\label{game_8c_a75d37ecbe7bc651784bb0e90a9ab95ec}} 
+\index{game.c@{game.c}!get\_word@{get\_word}}
+\index{get\_word@{get\_word}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{get\_word()}{get\_word()}}
+{\footnotesize\ttfamily int get\+\_\+word (\begin{DoxyParamCaption}\item[{const char $\ast$}]{date }\end{DoxyParamCaption})}
+
+
+
+Retrieves the word for a given date. 
+
+This function searches for the word associated with the provided date in the list of entries and sets it as the current word. The word is converted to uppercase.
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & The date string in the format \char`\"{}\+YYYY-\/\+MM-\/\+DD\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 if the word for the date is not found or if the date is NULL. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8c_a2428084532323fa5d3d59ee04f23fd34}\label{game_8c_a2428084532323fa5d3d59ee04f23fd34}} 
+\index{game.c@{game.c}!give\_guess@{give\_guess}}
+\index{give\_guess@{give\_guess}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{give\_guess()}{give\_guess()}}
+{\footnotesize\ttfamily void give\+\_\+guess (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Processes the current guess. 
+
+This function compares the current guess with the target word, updates the results array with feedback for each letter, and checks if the game has been won or lost. It also updates the game state accordingly. \mbox{\Hypertarget{game_8c_a855513ae68f44ef645c9b45fd3a708e7}\label{game_8c_a855513ae68f44ef645c9b45fd3a708e7}} 
+\index{game.c@{game.c}!initialize\_game1@{initialize\_game1}}
+\index{initialize\_game1@{initialize\_game1}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{initialize\_game1()}{initialize\_game1()}}
+{\footnotesize\ttfamily int initialize\+\_\+game1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the game for Game Mode 1. 
+
+This function resets the game state for Game Mode 1, loads the word list from a CSV file, updates the real-\/time clock, and selects the word for the current date. It also initializes the game timer.
+
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8c_a35cd2636d93162c19ecadaef2d7c49a6}\label{game_8c_a35cd2636d93162c19ecadaef2d7c49a6}} 
+\index{game.c@{game.c}!initialize\_game2@{initialize\_game2}}
+\index{initialize\_game2@{initialize\_game2}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{initialize\_game2()}{initialize\_game2()}}
+{\footnotesize\ttfamily void initialize\+\_\+game2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the game for Game Mode 2. 
+
+This function resets the game state for Game Mode 2, selects the appropriate word list based on the current word length, shuffles the words, and starts the game timer.
+
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{game_8c_a7124d216ccb3202ca9f34884a6059874}\label{game_8c_a7124d216ccb3202ca9f34884a6059874}} 
+\index{game.c@{game.c}!keyboard\_handler\_game@{keyboard\_handler\_game}}
+\index{keyboard\_handler\_game@{keyboard\_handler\_game}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{keyboard\_handler\_game()}{keyboard\_handler\_game()}}
+{\footnotesize\ttfamily void keyboard\+\_\+handler\+\_\+game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard input during the game. 
+
+This function processes keyboard input, allowing the player to submit guesses (Enter), delete letters (Backspace), and return to the menu or start a new game (Escape or Enter after game over). \mbox{\Hypertarget{game_8c_a69577a629392c76ab51b075d280c3238}\label{game_8c_a69577a629392c76ab51b075d280c3238}} 
+\index{game.c@{game.c}!keyboard\_handler\_menu@{keyboard\_handler\_menu}}
+\index{keyboard\_handler\_menu@{keyboard\_handler\_menu}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{keyboard\_handler\_menu()}{keyboard\_handler\_menu()}}
+{\footnotesize\ttfamily void keyboard\+\_\+handler\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard input in the main menu. 
+
+This function processes keyboard input in the main menu and exits the game if the Escape key is pressed. \mbox{\Hypertarget{game_8c_aef10b2982db8e33c7d47e503fbccd2ad}\label{game_8c_aef10b2982db8e33c7d47e503fbccd2ad}} 
+\index{game.c@{game.c}!keyboard\_handler\_menu2@{keyboard\_handler\_menu2}}
+\index{keyboard\_handler\_menu2@{keyboard\_handler\_menu2}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{keyboard\_handler\_menu2()}{keyboard\_handler\_menu2()}}
+{\footnotesize\ttfamily void keyboard\+\_\+handler\+\_\+menu2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard input in the secondary menu. 
+
+This function processes keyboard input in the secondary menu and returns to the main menu if the Escape key is pressed. \mbox{\Hypertarget{game_8c_a1031bed5bc98fee1a35c778b2f90e4f6}\label{game_8c_a1031bed5bc98fee1a35c778b2f90e4f6}} 
+\index{game.c@{game.c}!mouse\_handler\_game@{mouse\_handler\_game}}
+\index{mouse\_handler\_game@{mouse\_handler\_game}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{mouse\_handler\_game()}{mouse\_handler\_game()}}
+{\footnotesize\ttfamily void mouse\+\_\+handler\+\_\+game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles mouse input during the game. 
+
+This function processes mouse clicks and drags during the game, allowing the player to select letters from the visual keyboard and place them in the current guess. It also handles clicks on the \char`\"{}\+Restart\char`\"{} button and the hint button. \mbox{\Hypertarget{game_8c_a63a108f78697ff06819efdef01432403}\label{game_8c_a63a108f78697ff06819efdef01432403}} 
+\index{game.c@{game.c}!mouse\_handler\_menu@{mouse\_handler\_menu}}
+\index{mouse\_handler\_menu@{mouse\_handler\_menu}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{mouse\_handler\_menu()}{mouse\_handler\_menu()}}
+{\footnotesize\ttfamily void mouse\+\_\+handler\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles mouse input in the main menu. 
+
+This function processes mouse clicks in the main menu and transitions to the appropriate game state based on the selected option. \mbox{\Hypertarget{game_8c_a28defeccb695ece2e1a3776e8717787b}\label{game_8c_a28defeccb695ece2e1a3776e8717787b}} 
+\index{game.c@{game.c}!shuffle\_words@{shuffle\_words}}
+\index{shuffle\_words@{shuffle\_words}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{shuffle\_words()}{shuffle\_words()}}
+{\footnotesize\ttfamily void shuffle\+\_\+words (\begin{DoxyParamCaption}\item[{char $\ast$}]{words\mbox{[}$\,$\mbox{]},  }\item[{int}]{count }\end{DoxyParamCaption})}
+
+
+
+Shuffles an array of words. 
+
+This function randomly shuffles an array of words using the Fisher-\/\+Yates shuffle algorithm.
+
+
+\begin{DoxyParams}{Parameters}
+{\em words} & An array of word strings to shuffle. \\
+\hline
+{\em count} & The number of words in the array. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{game_8c_a429495498bd366f2237dc8c418d18ef4}\label{game_8c_a429495498bd366f2237dc8c418d18ef4}} 
+\index{game.c@{game.c}!words3@{words3}}
+\index{words3@{words3}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{words3}{words3}}
+{\footnotesize\ttfamily char$\ast$ words3\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}CAT"{}}, \textcolor{stringliteral}{"{}DOG"{}}, \textcolor{stringliteral}{"{}BAT"{}}, \textcolor{stringliteral}{"{}HAT"{}}, \textcolor{stringliteral}{"{}RAT"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}FOX"{}}, \textcolor{stringliteral}{"{}PIG"{}}, \textcolor{stringliteral}{"{}COW"{}}, \textcolor{stringliteral}{"{}OWL"{}}, \textcolor{stringliteral}{"{}BUG"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}ANT"{}}, \textcolor{stringliteral}{"{}BEE"{}}, \textcolor{stringliteral}{"{}FIN"{}}, \textcolor{stringliteral}{"{}HEN"{}}, \textcolor{stringliteral}{"{}JAM"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}MAP"{}}, \textcolor{stringliteral}{"{}NUT"{}}, \textcolor{stringliteral}{"{}POT"{}}, \textcolor{stringliteral}{"{}SUN"{}}, \textcolor{stringliteral}{"{}TUB"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}WEB"{}}, \textcolor{stringliteral}{"{}YAK"{}}, \textcolor{stringliteral}{"{}ZOO"{}}, \textcolor{stringliteral}{"{}RUG"{}}, \textcolor{stringliteral}{"{}BOX"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}LOG"{}}, \textcolor{stringliteral}{"{}VAN"{}}, \textcolor{stringliteral}{"{}JET"{}}, \textcolor{stringliteral}{"{}CAB"{}}, \textcolor{stringliteral}{"{}BUN"{}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{game_8c_abd76b1ad909b990605428db30ea00a41}\label{game_8c_abd76b1ad909b990605428db30ea00a41}} 
+\index{game.c@{game.c}!words4@{words4}}
+\index{words4@{words4}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{words4}{words4}}
+{\footnotesize\ttfamily char$\ast$ words4\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}TREE"{}}, \textcolor{stringliteral}{"{}LION"{}}, \textcolor{stringliteral}{"{}BEAR"{}}, \textcolor{stringliteral}{"{}FROG"{}}, \textcolor{stringliteral}{"{}FISH"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}DUCK"{}}, \textcolor{stringliteral}{"{}GOAT"{}}, \textcolor{stringliteral}{"{}WOLF"{}}, \textcolor{stringliteral}{"{}SEAL"{}}, \textcolor{stringliteral}{"{}CRAB"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}SWAN"{}}, \textcolor{stringliteral}{"{}DEER"{}}, \textcolor{stringliteral}{"{}MULE"{}}, \textcolor{stringliteral}{"{}CROW"{}}, \textcolor{stringliteral}{"{}PIKE"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}DOVE"{}}, \textcolor{stringliteral}{"{}HARE"{}}, \textcolor{stringliteral}{"{}BASS"{}}, \textcolor{stringliteral}{"{}MOLE"{}}, \textcolor{stringliteral}{"{}BULL"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}KIWI"{}}, \textcolor{stringliteral}{"{}LARK"{}}, \textcolor{stringliteral}{"{}PUMA"{}}, \textcolor{stringliteral}{"{}TOAD"{}}, \textcolor{stringliteral}{"{}TUNA"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}COOK"{}}, \textcolor{stringliteral}{"{}WASP"{}}, \textcolor{stringliteral}{"{}MINK"{}}, \textcolor{stringliteral}{"{}YAKS"{}}, \textcolor{stringliteral}{"{}ZEBU"{}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{game_8c_a808bf5f08a888359ac4e0663c9b5f4b5}\label{game_8c_a808bf5f08a888359ac4e0663c9b5f4b5}} 
+\index{game.c@{game.c}!words5@{words5}}
+\index{words5@{words5}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{words5}{words5}}
+{\footnotesize\ttfamily char$\ast$ words5\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}HOUSE"{}}, \textcolor{stringliteral}{"{}APPLE"{}}, \textcolor{stringliteral}{"{}GRAPE"{}}, \textcolor{stringliteral}{"{}TABLE"{}}, \textcolor{stringliteral}{"{}CHAIR"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}HORSE"{}}, \textcolor{stringliteral}{"{}MOUSE"{}}, \textcolor{stringliteral}{"{}EAGLE"{}}, \textcolor{stringliteral}{"{}SNAKE"{}}, \textcolor{stringliteral}{"{}CLOUD"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}SHEEP"{}}, \textcolor{stringliteral}{"{}PLANT"{}}, \textcolor{stringliteral}{"{}STONE"{}}, \textcolor{stringliteral}{"{}BREAD"{}}, \textcolor{stringliteral}{"{}PEACH"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}LUNCH"{}}, \textcolor{stringliteral}{"{}TRUCK"{}}, \textcolor{stringliteral}{"{}SWORD"{}}, \textcolor{stringliteral}{"{}FRUIT"{}}, \textcolor{stringliteral}{"{}WHEEL"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}PLANE"{}}, \textcolor{stringliteral}{"{}TIGER"{}}, \textcolor{stringliteral}{"{}SHARK"{}}, \textcolor{stringliteral}{"{}ZEBRA"{}}, \textcolor{stringliteral}{"{}LADLE"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}BRICK"{}}, \textcolor{stringliteral}{"{}NURSE"{}}, \textcolor{stringliteral}{"{}TRAIN"{}}, \textcolor{stringliteral}{"{}CANDY"{}}, \textcolor{stringliteral}{"{}GLASS"{}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{game_8c_ae63675c592b397857f17d9288f967182}\label{game_8c_ae63675c592b397857f17d9288f967182}} 
+\index{game.c@{game.c}!words6@{words6}}
+\index{words6@{words6}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{words6}{words6}}
+{\footnotesize\ttfamily char$\ast$ words6\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}ORANGE"{}}, \textcolor{stringliteral}{"{}BANANA"{}}, \textcolor{stringliteral}{"{}CHERRY"{}}, \textcolor{stringliteral}{"{}PEACH"{}}, \textcolor{stringliteral}{"{}BOTTLE"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}PURPLE"{}}, \textcolor{stringliteral}{"{}YELLOW"{}}, \textcolor{stringliteral}{"{}GREENS"{}}, \textcolor{stringliteral}{"{}WINTER"{}}, \textcolor{stringliteral}{"{}SUMMER"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}MONKEY"{}}, \textcolor{stringliteral}{"{}ROCKET"{}}, \textcolor{stringliteral}{"{}GUITAR"{}}, \textcolor{stringliteral}{"{}STREAM"{}}, \textcolor{stringliteral}{"{}LAUNCH"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}BUTTON"{}}, \textcolor{stringliteral}{"{}CANYON"{}}, \textcolor{stringliteral}{"{}BASKET"{}}, \textcolor{stringliteral}{"{}MARKET"{}}, \textcolor{stringliteral}{"{}FAMILY"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}PEOPLE"{}}, \textcolor{stringliteral}{"{}LETTER"{}}, \textcolor{stringliteral}{"{}FLOWER"{}}, \textcolor{stringliteral}{"{}PLANET"{}}, \textcolor{stringliteral}{"{}CIRCLE"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}TURTLE"{}}, \textcolor{stringliteral}{"{}WONDER"{}}, \textcolor{stringliteral}{"{}CLOVER"{}}, \textcolor{stringliteral}{"{}RECORD"{}}, \textcolor{stringliteral}{"{}PENCIL"{}}, }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}BINDER"{}}, \textcolor{stringliteral}{"{}POCKET"{}}, \textcolor{stringliteral}{"{}ACTION"{}}, \textcolor{stringliteral}{"{}WIZARD"{}}, \textcolor{stringliteral}{"{}WEAPON"{}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

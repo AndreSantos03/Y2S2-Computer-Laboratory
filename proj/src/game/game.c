@@ -1,3 +1,10 @@
+/**
+ * @file game.c
+ * @brief Game source file, contains implementations
+ * 
+ * This file contains implementations of all the declarations in game.h
+ */
+
 #include "game.h"
 
 //externs

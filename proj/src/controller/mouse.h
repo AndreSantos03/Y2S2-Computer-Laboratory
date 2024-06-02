@@ -4,6 +4,7 @@
 #include <lcom/lcf.h>
 #include <minix/sysutil.h>
 #include "i8042.h"
+#include "graphics.h"
 
 void (mouse_update_packet)();
 void (sync_mouse)();

@@ -1,0 +1,173 @@
+\hypertarget{sprites_8h}{}\doxysection{src/sprites/sprites.h File Reference}
+\label{sprites_8h}\index{src/sprites/sprites.h@{src/sprites/sprites.h}}
+
+
+Contains function declarations for managing sprites.  
+
+
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../images/mouse.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/a.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/b.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/c.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/d.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/e.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/f.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/g.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/h.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/i.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/j.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/k.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/l.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/m.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/n.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/o.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/p.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/q.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/r.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/s.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/t.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/u.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/v.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/w.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/x.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/y.\+xpm\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../images/letters/z.\+xpm\char`\"{}}\newline
+Include dependency graph for sprites.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structSprite}{Sprite}}
+\begin{DoxyCompactList}\small\item\em Represents a sprite image. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structSprite}{Sprite}} $\ast$ \mbox{\hyperlink{sprites_8h_a5da2876739bf61eed63959e9e144c376}{create\+\_\+sprite}} (xpm\+\_\+map\+\_\+t pic)
+\begin{DoxyCompactList}\small\item\em Creates a sprite from an XPM image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sprites_8h_af16c6befaac9ffb673b9e3c798d542ed}{destroy\+\_\+sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} $\ast$sp)
+\begin{DoxyCompactList}\small\item\em Destroys a sprite. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sprites_8h_a3fc1965bb7f45fd72fff8a402c507186}{draw\+Sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} $\ast$sprite, int x, int y)
+\begin{DoxyCompactList}\small\item\em Draws a sprite at the specified position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sprites_8h_ab5ff3699eca81ef3a5c415ac2eebac3c}{load\+Sprites}} ()
+\begin{DoxyCompactList}\small\item\em Loads all the sprites needed for the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sprites_8h_aff10aec7cc06629594d351d947dbbaa5}{destroy\+Sprites}} ()
+\begin{DoxyCompactList}\small\item\em Destroys all loaded sprites. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sprites_8h_a0824ba67b2fadff0e698a9aa98d3f0eb}{draw\+Text}} (const char $\ast$text, int x, int y)
+\begin{DoxyCompactList}\small\item\em Draws text on the screen using letter sprites. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains function declarations for managing sprites. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{sprites_8h_a5da2876739bf61eed63959e9e144c376}\label{sprites_8h_a5da2876739bf61eed63959e9e144c376}} 
+\index{sprites.h@{sprites.h}!create\_sprite@{create\_sprite}}
+\index{create\_sprite@{create\_sprite}!sprites.h@{sprites.h}}
+\doxysubsubsection{\texorpdfstring{create\_sprite()}{create\_sprite()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structSprite}{Sprite}}$\ast$ create\+\_\+sprite (\begin{DoxyParamCaption}\item[{xpm\+\_\+map\+\_\+t}]{pic }\end{DoxyParamCaption})}
+
+
+
+Creates a sprite from an XPM image. 
+
+This function allocates memory for a sprite structure and loads an XPM image into it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pic} & XPM image of the sprite. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the created sprite, or NULL on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sprites_8h_af16c6befaac9ffb673b9e3c798d542ed}\label{sprites_8h_af16c6befaac9ffb673b9e3c798d542ed}} 
+\index{sprites.h@{sprites.h}!destroy\_sprite@{destroy\_sprite}}
+\index{destroy\_sprite@{destroy\_sprite}!sprites.h@{sprites.h}}
+\doxysubsubsection{\texorpdfstring{destroy\_sprite()}{destroy\_sprite()}}
+{\footnotesize\ttfamily void destroy\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} $\ast$}]{sp }\end{DoxyParamCaption})}
+
+
+
+Destroys a sprite. 
+
+This function frees the memory allocated for a sprite.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sp} & Pointer to the sprite to destroy. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sprites_8h_aff10aec7cc06629594d351d947dbbaa5}\label{sprites_8h_aff10aec7cc06629594d351d947dbbaa5}} 
+\index{sprites.h@{sprites.h}!destroySprites@{destroySprites}}
+\index{destroySprites@{destroySprites}!sprites.h@{sprites.h}}
+\doxysubsubsection{\texorpdfstring{destroySprites()}{destroySprites()}}
+{\footnotesize\ttfamily void destroy\+Sprites (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroys all loaded sprites. 
+
+This function frees the memory allocated for all loaded sprites. \mbox{\Hypertarget{sprites_8h_a3fc1965bb7f45fd72fff8a402c507186}\label{sprites_8h_a3fc1965bb7f45fd72fff8a402c507186}} 
+\index{sprites.h@{sprites.h}!drawSprite@{drawSprite}}
+\index{drawSprite@{drawSprite}!sprites.h@{sprites.h}}
+\doxysubsubsection{\texorpdfstring{drawSprite()}{drawSprite()}}
+{\footnotesize\ttfamily int draw\+Sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} $\ast$}]{sprite,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Draws a sprite at the specified position. 
+
+This function draws a sprite at the specified position on the screen.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite} & Pointer to the sprite to draw. \\
+\hline
+{\em x} & X-\/coordinate of the top-\/left corner of the sprite. \\
+\hline
+{\em y} & Y-\/coordinate of the top-\/left corner of the sprite. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, non-\/zero if an error occurs. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sprites_8h_a0824ba67b2fadff0e698a9aa98d3f0eb}\label{sprites_8h_a0824ba67b2fadff0e698a9aa98d3f0eb}} 
+\index{sprites.h@{sprites.h}!drawText@{drawText}}
+\index{drawText@{drawText}!sprites.h@{sprites.h}}
+\doxysubsubsection{\texorpdfstring{drawText()}{drawText()}}
+{\footnotesize\ttfamily int draw\+Text (\begin{DoxyParamCaption}\item[{const char $\ast$}]{text,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Draws text on the screen using letter sprites. 
+
+This function renders text on the screen using letter sprites. It supports uppercase letters and spaces.
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & The text to render. \\
+\hline
+{\em x} & X-\/coordinate of the top-\/left corner of the text. \\
+\hline
+{\em y} & Y-\/coordinate of the top-\/left corner of the text. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sprites_8h_ab5ff3699eca81ef3a5c415ac2eebac3c}\label{sprites_8h_ab5ff3699eca81ef3a5c415ac2eebac3c}} 
+\index{sprites.h@{sprites.h}!loadSprites@{loadSprites}}
+\index{loadSprites@{loadSprites}!sprites.h@{sprites.h}}
+\doxysubsubsection{\texorpdfstring{loadSprites()}{loadSprites()}}
+{\footnotesize\ttfamily void load\+Sprites (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads all the sprites needed for the game. 
+
+This function loads all the sprites required for the game, including the mouse cursor and letter sprites. 

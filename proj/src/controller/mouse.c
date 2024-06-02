@@ -1,9 +1,4 @@
-#include <lcom/lcf.h>
-#include <minix/sysutil.h>
 #include "mouse.h"
-#include "graphics.h"
-
-
 
 int hook_id_mouse = 4;        
 uint32_t byte;

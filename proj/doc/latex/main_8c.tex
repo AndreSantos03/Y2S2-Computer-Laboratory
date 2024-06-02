@@ -1,0 +1,134 @@
+\hypertarget{main_8c}{}\doxysection{src/main.c File Reference}
+\label{main_8c}\index{src/main.c@{src/main.c}}
+
+
+Main file where the game starts.  
+
+
+{\ttfamily \#include \char`\"{}game/game.\+h\char`\"{}}\newline
+Include dependency graph for main.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8c_af06169b4a85be68809f51eceba6201f9}{handle\+\_\+interrupts}} ()
+\begin{DoxyCompactList}\small\item\em Handles all game interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main entry point of the game. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{main_8c_ad290208c74ef25eb347d1d96a390cd66}{proj\+\_\+main\+\_\+loop}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main game function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8c_a761a0a99bd88e4e143c042db7608aea3}\label{main_8c_a761a0a99bd88e4e143c042db7608aea3}} 
+bool {\bfseries is\+Game\+Running}
+\item 
+\mbox{\Hypertarget{main_8c_adbd2927a32caa3ee992685898bae3b1c}\label{main_8c_adbd2927a32caa3ee992685898bae3b1c}} 
+char {\bfseries word} \mbox{[}MAX\+\_\+\+WORD\+\_\+\+LENGTH\mbox{]}
+\item 
+\mbox{\Hypertarget{main_8c_a2706ed05d331ef3b53c728a6868bda26}\label{main_8c_a2706ed05d331ef3b53c728a6868bda26}} 
+Game\+State {\bfseries game\+State}
+\item 
+\mbox{\Hypertarget{main_8c_a9fcc2243068f8e628648febc0909c509}\label{main_8c_a9fcc2243068f8e628648febc0909c509}} 
+vbe\+\_\+mode\+\_\+info\+\_\+t {\bfseries mode\+\_\+info}
+\item 
+\mbox{\Hypertarget{main_8c_ad2558aa54a4437f36caf6b03bc636a87}\label{main_8c_ad2558aa54a4437f36caf6b03bc636a87}} 
+int {\bfseries bytes\+Per\+Pixel}
+\item 
+\mbox{\Hypertarget{main_8c_ac6eaeb4c0876cf6cd899f41fe3c25ff5}\label{main_8c_ac6eaeb4c0876cf6cd899f41fe3c25ff5}} 
+int {\bfseries x\+Resolution}
+\item 
+\mbox{\Hypertarget{main_8c_aa2f350dd0bda750656d5db5f5e37b2b3}\label{main_8c_aa2f350dd0bda750656d5db5f5e37b2b3}} 
+int {\bfseries y\+Resolution}
+\item 
+\mbox{\Hypertarget{main_8c_a8556d19b129aa550f5b2819ed0320e83}\label{main_8c_a8556d19b129aa550f5b2819ed0320e83}} 
+int {\bfseries buffer\+Size}
+\item 
+\mbox{\Hypertarget{main_8c_aa7eaf5f24918e8addc3f295f7c94dc63}\label{main_8c_aa7eaf5f24918e8addc3f295f7c94dc63}} 
+uint8\+\_\+t $\ast$ {\bfseries main\+Buffer}
+\item 
+\mbox{\Hypertarget{main_8c_aa1de7a5557e9d96b83cf03f73c92163f}\label{main_8c_aa1de7a5557e9d96b83cf03f73c92163f}} 
+uint8\+\_\+t {\bfseries scancode}
+\item 
+\mbox{\Hypertarget{main_8c_ae4610f386ef84d80439f954fd321856d}\label{main_8c_ae4610f386ef84d80439f954fd321856d}} 
+int {\bfseries current\+\_\+x}
+\item 
+\mbox{\Hypertarget{main_8c_ab2be4afa6b51964c04e0a4d13a099324}\label{main_8c_ab2be4afa6b51964c04e0a4d13a099324}} 
+int {\bfseries current\+\_\+y}
+\item 
+\mbox{\Hypertarget{main_8c_a8884dab9d88cd6c24f21afc6c7144a7b}\label{main_8c_a8884dab9d88cd6c24f21afc6c7144a7b}} 
+uint8\+\_\+t {\bfseries byte\+\_\+index}
+\item 
+\mbox{\Hypertarget{main_8c_abdd2eef1d70041de463214f2f9469f4d}\label{main_8c_abdd2eef1d70041de463214f2f9469f4d}} 
+int {\bfseries counter\+\_\+timer}
+\item 
+\mbox{\Hypertarget{main_8c_af78634ea039226af2e24c8208dc18467}\label{main_8c_af78634ea039226af2e24c8208dc18467}} 
+\mbox{\hyperlink{structSprite}{Sprite}} $\ast$ {\bfseries mouse\+Cursor}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main file where the game starts. 
+
+File that contains the main function and also functions that handle interrupts. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8c_af06169b4a85be68809f51eceba6201f9}\label{main_8c_af06169b4a85be68809f51eceba6201f9}} 
+\index{main.c@{main.c}!handle\_interrupts@{handle\_interrupts}}
+\index{handle\_interrupts@{handle\_interrupts}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{handle\_interrupts()}{handle\_interrupts()}}
+{\footnotesize\ttfamily int handle\+\_\+interrupts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles all game interrupts. 
+
+This function initializes the video mode, loads sprites, sets the timer frequency, and subscribes to various interrupts (keyboard, mouse, timer, RTC). It also contains the main game loop, which handles drawing the game screen and responding to hardware interrupts. At the end, it unsubscribes from interrupts and cleans up resources.
+
+\begin{DoxyReturn}{Returns}
+int 0 on success, 1 on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main entry point of the game. 
+
+This function sets up the language for LCF messages, enables tracing of function invocations, redirects printf outputs to a file, and starts the LCF control flow. Finally, it performs cleanup tasks before exiting.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of command-\/line arguments. \\
+\hline
+{\em argv} & Array of command-\/line arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 0 on success, 1 on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8c_ad290208c74ef25eb347d1d96a390cd66}\label{main_8c_ad290208c74ef25eb347d1d96a390cd66}} 
+\index{main.c@{main.c}!proj\_main\_loop@{proj\_main\_loop}}
+\index{proj\_main\_loop@{proj\_main\_loop}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{proj\_main\_loop()}{proj\_main\_loop()}}
+{\footnotesize\ttfamily int() proj\+\_\+main\+\_\+loop (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main game function. 
+
+This function initializes the game state and calls the function to handle interrupts.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of command-\/line arguments. \\
+\hline
+{\em argv} & Array of command-\/line arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 0 on success, 1 on failure. 
+\end{DoxyReturn}
