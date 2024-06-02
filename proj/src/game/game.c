@@ -38,6 +38,8 @@ int words6_count = sizeof(words6) / sizeof(words6[0]);
 char **currentWords;
 int currentWordsCount;
 
+
+
 typedef struct {
     char date[11];
     char word[MAX_LINE_LENGTH];
@@ -50,11 +52,18 @@ GameState gameState = MENU;
 bool gameWon = false;
 bool game2Won = false;
 
-char* menuOptions[MENU_OPTIONS] = {"DAILY WORD", "RANDOM WORD"};
+char* menuOptions[MENU_OPTIONS] = {"GAME MODE I", "GAME MODE II"};
 char* menu2Options[MENU2_OPTIONS] = {"III", "IV", "V", "VI"};
 int selectedOption = -1;
 bool optionSelected = false;
 
+//mouse handler global variables
+bool isDraggingLetter = false;
+int indexDraggedLetter = 0;
+
+bool isDraggingHint = false;
+int hintX, hintY;
+int hintLetterPos = -1;
 
 int initialize_game1(){
 
@@ -221,66 +230,76 @@ void give_guess() {
         gameWon = false;
     } else {
         current_guess++;
+        hintLetterPos = -1;
     }
     current_letter = 0;
 }
 
-int draw_game() {
-    int spaceBetweenWords = ((yResolution * 0.8) / GUESS_ATTEMPTS); // splits the screen between attempts and leaves 0.2 of the bottom empty
+int draw_game(){
+    int spaceBetweenWords = ((yResolution * 0.6)/ GUESS_ATTEMPTS );//splits the screen between attempts and leaves 0.4 of the bottom empty
 
-    // Draw guess attempts
-    for (int row = 0; row < GUESS_ATTEMPTS; row++) {
-        int yPos = spaceBetweenWords * row + 10; // 10 is the offset for the beginning
+    //draw guess attempt
+    for(int row = 0; row < GUESS_ATTEMPTS;row++){
 
-        // Draw line
-        int spaceBetweenLetters = (xResolution / (2 * current_word_length));
+        int yPos = spaceBetweenWords * row + 10; //10 is the offset for the beggining
+
+        //draw line
+        int spaceBetweenLetters = (xResolution/(2 * current_word_length));
         for (int col = 0; col < current_word_length; col++) {
+
             int xPos = (xResolution / 4) + (spaceBetweenLetters * col);
 
             char letter = attempts[row][col];
             char colorResult = results[row][col];
 
-            // Checks to see if result has been given
-            if (colorResult != '\0') {
+            //checks to see if result has been given
+            if(colorResult != '\0'){
                 uint32_t colorHex;
-                switch (colorResult) {
-                    case 'G':
-                        colorHex = 0x00FF00; // Green color
-                        break;
-                    case 'R':
-                        colorHex = 0xFF0000; // Red color
-                        break;
-                    case 'Y':
-                        colorHex = 0xFFFF00; // Yellow color
-                        break;
-                    default:
-                        colorHex = 0x000000; // Black color
-                        break;
+                switch (colorResult)
+                {
+                case 'G':
+                    colorHex = 0x00FF00; // Green color
+                    break;
+                case 'R':
+                    colorHex = 0xFF0000; // Red color
+                    break;
+                case 'Y':
+                    colorHex = 0xFFFF00; // Yellow color
+                    break;
+                default:
+                    colorHex = 0x000000; // Black color
+                    break;
                 }
-                draw_rectangle(xPos - 8, yPos - 2, BORDER_WIDTH, BORDER_HEIGHT, colorHex);
+                draw_rectangle(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,colorHex);
             }
 
-            // Checks to see if the attempts has been written
-            if (letter != '\0') {
+
+
+            //checks to see if the attempts has been written
+            if(letter != '\0'){
                 int index = attempts[row][col] - 'A';
 
                 Sprite *letterSprite = letterSprites[index];
-                // Draw the letter
+                //draw the letter
                 drawSprite(letterSprite, xPos, yPos);
             }
 
-            // Draw the rectangle box
-            draw_border(xPos - 8, yPos - 2, BORDER_WIDTH, BORDER_HEIGHT, 0xFFFFFF, 3);
+            //draw the rectangle box
+            draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);     
+
+
         }
     }
+    //DRAW DRAGGED LETTER
+    if(isDraggingLetter){
+        drawSprite(letterSprites[indexDraggedLetter],current_x,current_y);
+    }
 
-    // Draw the HINT button
-    int hintButtonWidth = 100;
-    int hintButtonHeight = 50;
-    int xPosHintButton = 20;
-    int yPosHintButton = 20;
-    draw_rectangle(xPosHintButton, yPosHintButton, hintButtonWidth, hintButtonHeight, 0xFF00FF); // Pink background for hint button
-    drawText("HINT", xPosHintButton + 10, yPosHintButton + 10);
+
+    //DRAW MOUSE KEYBOARD
+    draw_mouse_keyboard();
+
+    draw_hint_button();
 
     // Draw the win/lose message if the game is over
     if (!gameActive) {
@@ -292,7 +311,7 @@ int draw_game() {
         } else {
             drawText("YOU LOSE", (xResolution - 9 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 300);
             drawText(word, (xResolution - strlen(word) * letterSprites[0]->width) / 2, yResolution - 2 * letterSprites[0]->height - 150);
-        }
+        } //deviamos de mostrar a palavra no game mode 2?
         drawText("PRESS ENTER TO CONTINUE", (xResolution - strlen("PRESS ENTER TO CONTINUE") * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 10);
         return 0;
     }
@@ -301,12 +320,11 @@ int draw_game() {
     int buttonHeight = 50;
     int xPosButton = (xResolution - buttonWidth) / 2;
     int yPosButton = yResolution - buttonHeight - 20;
-    draw_rectangle(xPosButton - 10, yPosButton, buttonWidth + 16, buttonHeight, 0xFF0000); // Red background for button
+    draw_rectangle(xPosButton-10, yPosButton, buttonWidth + 16, buttonHeight, 0xFF0000); // Red background for button
     drawText("RESTART", (xResolution - strlen("RESTART") * letterSprites[0]->width) / 2, yPosButton + (buttonHeight - letterSprites[0]->height) / 2);
 
     return 0;
 }
-
 
 int draw_menu() {
     int spaceBetweenOptions = (yResolution / (MENU_OPTIONS + 2)); // Space between options, with some padding
@@ -387,6 +405,37 @@ int draw_menu2() {
     return 0;
 }
 
+void draw_mouse_keyboard(){
+    int startingX = xResolution * 0.1;
+    int xOffset = xResolution * 0.8 / 13;
+
+    int firstRowY = yResolution * 0.65;
+    int secondRowY = yResolution * 0.75;
+
+    int xPos = startingX;
+    int yPos = firstRowY;
+
+    //draw the alphabet
+    for(int i = 0; i <= 25;i++){   
+
+        Sprite *letterSprite = letterSprites[i];
+
+        drawSprite(letterSprite,xPos,yPos);
+        
+        //L is in the 12th position and is the last letter of the first row
+        if(i == 12){
+            xPos = startingX;
+            yPos = secondRowY;
+        }
+        else{
+            xPos += xOffset;
+        }
+    }
+
+    // draw_border(xPos-8,yPos-2,BORDER_WIDTH,BORDER_HEIGHT,0xFFFFFF,3);     
+
+}
+
 
 void mouse_handler_menu() {
     if (mouse_packet.lb) {
@@ -408,6 +457,14 @@ void mouse_handler_menu() {
 void mouse_handler_game() {
     if (mouse_packet.lb) {
         if (!gameWon) {
+
+            if (!isDraggingHint && current_x >= hintX && current_x <= hintX + 30 && current_y >= hintY && current_y <= hintY + 30) {
+                isDraggingHint = true;
+            }
+
+            if (isDraggingLetter || isDraggingHint) {
+                return;
+            }
             // Check if the mouse click is within the "Restart" button bounds
             int buttonWidth = 200;
             int buttonHeight = 50;
@@ -422,6 +479,64 @@ void mouse_handler_game() {
                     initialize_game2();
                 }
             }
+
+            //check for click in the visual keyboard
+            //check if the mouse position is inbound of the keyboard
+            if(current_y >= yResolution * 0.65 && current_y <= yResolution * 0.8 ){
+                if(current_x >= xResolution * 0.1 && current_x <= xResolution * 0.8){
+                    //spaced used by each letter
+                    float sectionWidth =  xResolution * 0.8 / 13;
+
+                    //calculate the index of the letter we clicked
+                    //the 15 is a small offset to give space before the letter
+                    indexDraggedLetter = (int)floor((current_x + 15- xResolution * 0.1) / sectionWidth);
+                    
+                    //check if we're clicking the second row
+                    if(current_y >= 0.75 * yResolution){
+                        indexDraggedLetter +=13;
+                    }
+
+                    isDraggingLetter = true;
+                     
+                }
+            }
+        }
+    } 
+    //no left click
+    else{
+        if (isDraggingHint) {
+            isDraggingHint = false;
+
+            // Check if the hint is dropped on the current guess
+            int yBottom = ((yResolution * 0.6) / GUESS_ATTEMPTS * current_guess);
+            int yTop = ((yResolution * 0.6) / GUESS_ATTEMPTS * (current_guess + 1));
+            if (current_y >= yBottom && current_y <= yTop) {
+                if (current_x >= xResolution * 0.25 && current_x <= xResolution * 0.75) {
+                    int spaceBetweenLetters = (xResolution / (2 * current_word_length));
+                    hintLetterPos = (current_x - xResolution * 0.25 + 30) / spaceBetweenLetters;
+                    attempts[current_guess][hintLetterPos] = word[hintLetterPos]; // Place the correct letter
+                }
+            }
+        }
+        //check if we dropped the letter
+        if(isDraggingLetter){
+            isDraggingLetter = false;
+            //calculate the click range vertically
+            int yBottom = ((yResolution * 0.6)/ GUESS_ATTEMPTS * current_guess );
+            int yTop = ((yResolution * 0.6)/ GUESS_ATTEMPTS * (current_guess + 1));
+            //check if the drop is a valid y position
+            if(current_y >= yBottom && current_y <=yTop){
+                //cjecl of the drop is in a valid x position
+                if(current_x >= xResolution * 0.25 && current_x <= xResolution * 0.75){
+                    int spaceBetweenLetters = (xResolution/(2 * current_word_length));
+                    //30 is offset to give lee way on the left side
+                    int guessIndex = (current_x - xResolution * 0.25 + 30) / spaceBetweenLetters;
+                    printf("guess index %d\n",guessIndex);
+                    //put letter onto attempt
+                    attempts[current_guess][guessIndex] = 'A' + indexDraggedLetter;
+                }
+            }
+        
         }
     }
 }
@@ -512,5 +627,15 @@ void shuffle_words(char *words[], int count) {
         char *temp = words[i];
         words[i] = words[j];
         words[j] = temp;
+    }
+}
+
+void draw_hint_button() {
+    hintX = xResolution - 50; // Hint button's x position
+    hintY = 20; // Hint button's y position
+    draw_rectangle(hintX, hintY, 30, 30, 0xFFFF00); // Yellow rectangle for hint button
+    drawText("HINT", hintX + 5, hintY + 5);
+    if (isDraggingHint) {
+        drawText("X", current_x, current_y);
     }
 }
