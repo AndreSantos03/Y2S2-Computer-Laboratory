@@ -1,10 +1,12 @@
-#ifndef _SPRITES_H_
-#define _SPRITES_H_
-
 /**
  * @file sprites.h
  * @brief Contains function declarations for managing sprites.
  */
+
+
+#ifndef _SPRITES_H_
+#define _SPRITES_H_
+
 
 
 #include <lcom/lcf.h>
@@ -44,7 +46,7 @@
  */
 
 typedef struct {
-    uint16_t x, y; ///< Position of the sprite.
+    uint16_t x, y;          ///< Position of the sprite.
     uint16_t width, height; ///< Width, Height of the sprite.
     uint32_t *map;          ///< Pixel map of the sprite.
 } Sprite;

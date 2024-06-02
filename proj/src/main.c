@@ -85,27 +85,27 @@ int handle_interrupts(){
               timer_int_handler();
               
               if (previousState != gameState) {
-                            if (gameState == MENU || gameState == SELECT_LETTERS) {
-                                vg_exit();
-                                video_init(0x115);
-                            } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
-                                vg_exit();
-                                video_init(0x14C);
-                            }
-                            previousState = gameState;
-                        }
+                if (gameState == MENU || gameState == SELECT_LETTERS) {
+                  vg_exit();
+                  video_init(0x115);
+                } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
+                  vg_exit();
+                  video_init(0x14C);
+                }
+                previousState = gameState;
+              }
 
-                        clear_screen();
-                        if (gameState == MENU) {
-                            draw_menu();
-                        } else if (gameState == SELECT_LETTERS) {
-                            draw_menu2();
-                        } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
-                            draw_game();
-                        }
+              clear_screen();
+              if (gameState == MENU) {
+                draw_menu();
+              } else if (gameState == SELECT_LETTERS) {
+                draw_menu2();
+              } else if (gameState == GAME_MODE_1 || gameState == GAME_MODE_2) {
+                draw_game();
+              }
 
-                        drawSprite(mouseCursor, current_x, current_y);
-                        swap_buffers();
+              drawSprite(mouseCursor, current_x, current_y);
+              swap_buffers();
             }
             //Keyboard
             if (msg.m_notify.interrupts & irq_keyboard) {
@@ -137,7 +137,7 @@ int handle_interrupts(){
             break;
         }
       }
-  }
+    }
 
   //UNSUBSCRIBES
   if(keyboard_unsubscribe_interrupts()) return 1;
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
 
     // enables to log function invocations that are being "wrapped" by LCF
     // [comment this out if you don't want/need it]
-    lcf_trace_calls("/home/lcom/labs/proj/src/trace.txt");
+    //lcf_trace_calls("/home/lcom/labs/proj/src/trace.txt");
 
     // enables to save the output of printf function calls on a file
     // [comment this out if you don't want/need it]

@@ -78,13 +78,6 @@ int words6_count = sizeof(words6) / sizeof(words6[0]);
 char **currentWords;
 int currentWordsCount;
 
-
-
-typedef struct {
-    char date[11];
-    char word[MAX_LINE_LENGTH];
-} WordEntry;
-
 WordEntry entries[WORDS_AMMOUNT];
 
 bool gameActive = false; //Meaning a game instance
@@ -212,7 +205,6 @@ void initialize_game2() {
 
 
 int get_word(const char *date) {
-    printf("inside\n");
     if (date == NULL) {
         printf("Invalid argument: date is NULL.\n");
         return 1;
@@ -378,7 +370,7 @@ int draw_game(){
         } else {
             drawText("YOU LOSE", (xResolution - 9 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 300);
             drawText(word, (xResolution - strlen(word) * letterSprites[0]->width) / 2, yResolution - 2 * letterSprites[0]->height - 150);
-        } //deviamos de mostrar a palavra no game mode 2?
+        }
         drawText("PRESS ENTER TO CONTINUE", (xResolution - strlen("PRESS ENTER TO CONTINUE") * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 10);
         return 0;
     }

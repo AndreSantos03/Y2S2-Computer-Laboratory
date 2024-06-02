@@ -1,13 +1,12 @@
-
-#ifndef __GAME_H 
-#define __GAME_H 
-
 /**
  * @file game.h
  * @brief Game header file, contains declarations.
  * 
  * This file contains all the declarations and includes necessary for the implementations in game.c
  */
+#ifndef __GAME_H 
+#define __GAME_H 
+
 
 
 #include <lcom/lcf.h>
@@ -43,13 +42,25 @@
  * This enumeration defines the possible states that the game can be in.
  * Each state represents a different phase or mode of the game.
  */
-
 typedef enum {
     MENU,             ///< The game is in the main menu state.
     SELECT_LETTERS,   ///< The game is in the state of selecting letters.
     GAME_MODE_1,      ///< The game is in game mode 1.
     GAME_MODE_2       ///< The game is in game mode 2.
 } GameState;
+
+/**
+ * @struct WordEntry
+ * @brief Struct representing a Word Entry
+ *
+ * This struct represents an Entry of the word of the day.
+ * It contains the date associated to the word, and the word.
+ */
+typedef struct {
+    char date[11];
+    char word[MAX_LINE_LENGTH];
+} WordEntry;
+
 
 /**
  * @brief Initializes the game for Game Mode 1.
@@ -60,7 +71,9 @@ typedef enum {
  *
  * @return 0 on success, 1 on failure.
  */
+
 int initialize_game1();
+
 /**
  * @brief Initializes the game for Game Mode 2.
  *
@@ -102,6 +115,7 @@ void give_guess();
  *
  * @return 0 on success.
  */
+int draw_game();
 
 /**
  * @brief Draws the main menu on the screen.
@@ -156,7 +170,6 @@ void mouse_handler_game();
  * (Escape or Enter after game over).
  */
 void keyboard_handler_game();
-
 
 /**
  * @brief Handles keyboard input in the main menu.

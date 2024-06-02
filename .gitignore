@@ -3,3 +3,5 @@
 **/trace.txt
 **/output.txt
 **/*.o
+**/.gdbinit
+**/.empty

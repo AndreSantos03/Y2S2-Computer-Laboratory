@@ -1,7 +1,6 @@
 #ifndef _MOUSE_H_
 #define _MOUSE_H_
 
-#include <lcom/lcf.h>
 #include <minix/sysutil.h>
 #include "i8042.h"
 #include "graphics.h"
