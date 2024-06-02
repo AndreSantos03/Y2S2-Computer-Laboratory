@@ -25,10 +25,43 @@ int current_word_length = 0;
 int current_letter = 0;
 int currentCount = 0;
 
-char *words3[] = {"CAT", "DOG", "BAT", "HAT", "RAT"};
-char *words4[] = {"TREE", "LION", "BEAR", "FROG", "FISH"};
-char *words5[] = {"HOUSE", "APPLE", "GRAPE", "TABLE", "CHAIR"};
-char *words6[] = {"ORANGE", "BANANA", "CHERRY", "PEACH", "BOTTLE"};
+char *words3[] = {
+    "CAT", "DOG", "BAT", "HAT", "RAT", 
+    "FOX", "PIG", "COW", "OWL", "BUG", 
+    "ANT", "BEE", "FIN", "HEN", "JAM", 
+    "MAP", "NUT", "POT", "SUN", "TUB", 
+    "WEB", "YAK", "ZOO", "RUG", "BOX", 
+    "LOG", "VAN", "JET", "CAB", "BUN"
+};
+
+char *words4[] = {
+    "TREE", "LION", "BEAR", "FROG", "FISH", 
+    "DUCK", "GOAT", "WOLF", "SEAL", "CRAB", 
+    "SWAN", "DEER", "MULE", "CROW", "PIKE", 
+    "DOVE", "HARE", "BASS", "MOLE", "BULL", 
+    "KIWI", "LARK", "PUMA", "TOAD", "TUNA", 
+    "COOK", "WASP", "MINK", "YAKS", "ZEBU"
+};
+
+char *words5[] = {
+    "HOUSE", "APPLE", "GRAPE", "TABLE", "CHAIR", 
+    "HORSE", "MOUSE", "EAGLE", "SNAKE", "CLOUD", 
+    "SHEEP", "PLANT", "STONE", "BREAD", "PEACH", 
+    "LUNCH", "TRUCK", "SWORD", "FRUIT", "WHEEL", 
+    "PLANE", "TIGER", "SHARK", "ZEBRA", "LADLE", 
+    "BRICK", "NURSE", "TRAIN", "CANDY", "GLASS"
+};
+
+char *words6[] = {
+    "ORANGE", "BANANA", "CHERRY", "PEACH", "BOTTLE", 
+    "PURPLE", "YELLOW", "GREENS", "WINTER", "SUMMER", 
+    "MONKEY", "ROCKET", "GUITAR", "STREAM", "LAUNCH", 
+    "BUTTON", "CANYON", "BASKET", "MARKET", "FAMILY", 
+    "PEOPLE", "LETTER", "FLOWER", "PLANET", "CIRCLE", 
+    "TURTLE", "WONDER", "CLOVER", "RECORD", "PENCIL", 
+    "BINDER", "POCKET", "ACTION", "WIZARD", "WEAPON"
+};
+
 
 int words3_count = sizeof(words3) / sizeof(words3[0]);
 int words4_count = sizeof(words4) / sizeof(words4[0]);
