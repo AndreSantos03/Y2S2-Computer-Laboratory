@@ -486,9 +486,6 @@ void mouse_handler_game() {
                 if(current_x >= xResolution * 0.1 && current_x <= xResolution * 0.8){
                     //spaced used by each letter
                     float sectionWidth =  xResolution * 0.8 / 13;
-
-                    //calculate the index of the letter we clicked
-                    //the 15 is a small offset to give space before the letter
                     indexDraggedLetter = (int)floor((current_x + 15- xResolution * 0.1) / sectionWidth);
                     
                     //check if we're clicking the second row
@@ -531,9 +528,13 @@ void mouse_handler_game() {
                     int spaceBetweenLetters = (xResolution/(2 * current_word_length));
                     //30 is offset to give lee way on the left side
                     int guessIndex = (current_x - xResolution * 0.25 + 30) / spaceBetweenLetters;
-                    printf("guess index %d\n",guessIndex);
-                    //put letter onto attempt
-                    attempts[current_guess][guessIndex] = 'A' + indexDraggedLetter;
+                    
+                    if(guessIndex < current_word_length){
+                        attempts[current_guess][guessIndex] = 'A' + indexDraggedLetter;
+                        if(guessIndex == current_letter){
+                            current_letter++;
+                        }
+                    }
                 }
             }
         
@@ -555,10 +556,12 @@ void keyboard_handler_game(){
                 switch (gameState) {
                     case GAME_MODE_1: {
                         gameState = MENU;
+                        
                     }
                     case GAME_MODE_2: {
                         current_word++;
                         initialize_game2();
+                        
                     }
                     default: break;
                 }
@@ -568,10 +571,12 @@ void keyboard_handler_game(){
                 switch (gameState) {
                     case GAME_MODE_1: {
                         gameState = MENU;
+                        
                     }
                     case GAME_MODE_2: {
                         current_word = 0;
                         initialize_game2();
+                        
                     }
                     default: break;
                 }
@@ -582,14 +587,20 @@ void keyboard_handler_game(){
 
     //backspace
     if(scancode == BREAK_BACK){
-        if(current_letter != 0) current_letter--;
-        attempts[current_guess][current_letter] = '\0';
+        if (current_letter > 0) {
+            do {
+                current_letter--;
+            } while (current_letter > 0 && attempts[current_guess][current_letter] == '\0');
+            attempts[current_guess][current_letter] = '\0';
+        }
+
     }
 
     //enter
     if(scancode == BREAK_ENTER){
-        if(current_letter != current_word_length)return;
-        give_guess();
+        if (current_letter == current_word_length) {
+            give_guess();
+        }
     }
 
     if (scancode == BREAK_ESC) {
@@ -599,12 +610,17 @@ void keyboard_handler_game(){
 
     //checks to see if the keyboard input is a letter breakcode
     int letter_index = get_letter_index(scancode);
-    if(letter_index != -1){
-        //check to see if its filled
-        if(current_letter == current_word_length) return;
-        char letter = 'A' + letter_index;
-        attempts[current_guess][current_letter] = letter;
-        current_letter++;
+    if (letter_index != -1) {
+        if (current_letter < current_word_length) {
+            while (attempts[current_guess][current_letter] != '\0' && current_letter < current_word_length) {
+                current_letter++;
+            }
+            if (current_letter < current_word_length) {
+                char letter = 'A' + letter_index;
+                attempts[current_guess][current_letter] = letter;
+                current_letter++;
+            }
+        }
     }
 
 }

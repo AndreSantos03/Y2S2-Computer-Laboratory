@@ -1,7 +1,58 @@
 inside
+ char guess E   and charWord F
+ char guess S   and charWord I
+ char guess F   and charWord N
+ char guess E   and charWord E
+ char guess S   and charWord R
+ char guess S   and charWord F
+ char guess R   and charWord I
+ char guess G   and charWord N
+ char guess S   and charWord E
+ char guess G   and charWord R
+ char guess S   and charWord F
+ char guess G   and charWord I
+ char guess E   and charWord N
+ char guess S   and charWord E
+ char guess G   and charWord R
+ char guess S   and charWord F
+ char guess E   and charWord I
+ char guess G   and charWord N
+ char guess S   and charWord E
+ char guess E   and charWord R
+ char guess S   and charWord F
+ char guess E   and charWord I
+ char guess G   and charWord N
+ char guess S   and charWord E
+ char guess E   and charWord R
+ char guess S   and charWord C
+ char guess E   and charWord A
+ char guess G   and charWord T
+ char guess S   and charWord C
+ char guess E   and charWord A
+ char guess G   and charWord T
+ char guess S   and charWord C
+ char guess E   and charWord A
+ char guess G   and charWord T
+ char guess S   and charWord C
+ char guess E   and charWord A
+ char guess G   and charWord T
+ char guess G   and charWord C
+ char guess E   and charWord A
+ char guess G   and charWord T
+inside
+ char guess A   and charWord F
+ char guess R   and charWord I
+ char guess I   and charWord N
+ char guess S   and charWord E
+ char guess E   and charWord R
  char guess F   and charWord F
  char guess I   and charWord I
  char guess N   and charWord N
  char guess E   and charWord E
  char guess R   and charWord R
 inside
+ char guess A   and charWord F
+ char guess R   and charWord I
+ char guess N   and charWord N
+ char guess I   and charWord E
+ char guess S   and charWord R
