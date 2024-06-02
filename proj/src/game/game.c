@@ -360,6 +360,11 @@ int draw_game(){
 }
 
 int draw_menu() {
+    char *gameName = "WORDGUESSER";
+    int xPosGameName = (xResolution - strlen(gameName) * letterSprites[0]->width) / 2;
+    int yPosGameName = 20; // Adjust the y position as needed
+    drawText(gameName, xPosGameName, yPosGameName);
+
     int spaceBetweenOptions = (yResolution / (MENU_OPTIONS + 2)); // Space between options, with some padding
     int optionWidth, optionHeight;
     optionSelected= false;
