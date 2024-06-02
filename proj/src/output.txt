@@ -4,13 +4,9 @@ inside
  char guess I   and charWord N
  char guess S   and charWord E
  char guess E   and charWord R
- char guess L   and charWord F
- char guess I   and charWord I
- char guess T   and charWord N
- char guess E   and charWord E
- char guess R   and charWord R
  char guess F   and charWord F
  char guess I   and charWord I
  char guess N   and charWord N
  char guess E   and charWord E
  char guess R   and charWord R
+Time taken to win: 0 ms

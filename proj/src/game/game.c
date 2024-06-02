@@ -98,6 +98,14 @@ bool isDraggingHint = false;
 int hintX, hintY;
 int hintLetterPos = -1;
 
+extern int timer_hook_id;
+extern int timer_counter;
+extern int timer_start_value;
+
+int timer_hook_id = 0;
+int timer_counter = 0;
+int timer_start_value = 0;
+
 int initialize_game1(){
     
     memset(attempts, '\0', sizeof(attempts));
@@ -144,6 +152,10 @@ int initialize_game1(){
         return 1;
     }
 
+
+    timer_counter = 0; // Reset timer counter
+    timer_start_value = timer_counter;
+
     gameActive = true;
     return 0;
 }
@@ -183,6 +195,9 @@ void initialize_game2() {
     if (!gameActive) {
         shuffle_words(currentWords, currentWordsCount);
     }
+    
+    timer_counter = 0; // Reset timer counter
+    timer_start_value = timer_counter;
 
     gameActive = true;
     strcpy(word, currentWords[current_word]);
@@ -253,6 +268,9 @@ void give_guess() {
     if(currentCount == current_word_length) {
         gameActive = false;
         gameWon = true;
+        int timer_elapsed = timer_counter - timer_start_value;
+        printf("Time taken to win: %d ms\n", timer_elapsed);
+
         if (gameState == GAME_MODE_2) {
             if (current_word == currentWordsCount) {
                 game2Won = true;
@@ -341,6 +359,15 @@ int draw_game(){
             drawText("YOU WON THIS GAME MODE", (xResolution - strlen("YOU WON THIS GAME MODE") * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 300);
         } else if (gameWon) {
             drawText("YOU WON", (xResolution - 8 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 300);
+
+            int timer_elapsed = timer_counter - timer_start_value;
+            int seconds = timer_elapsed / 1000;
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+            
+            char timeString[50];
+            sprintf(timeString, "Time: %02d:%02d", minutes, seconds);
+            drawText(timeString, (xResolution - strlen(timeString) * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 200);
         } else {
             drawText("YOU LOSE", (xResolution - 9 * letterSprites[0]->width) / 2, yResolution - letterSprites[0]->height - 300);
             drawText(word, (xResolution - strlen(word) * letterSprites[0]->width) / 2, yResolution - 2 * letterSprites[0]->height - 150);

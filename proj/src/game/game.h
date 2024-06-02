@@ -8,6 +8,7 @@
 #include "../controller/keyboard.h"
 #include "../controller/i8042.h"
 #include "../controller/rtc.h"
+#include "../controller/i8254.h"
 
 #include <stdio.h>
 #include <stdlib.h>
